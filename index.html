@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HyperIndex — Hyperliquid Smart Money Positioning</title>
+    <meta name="description" content="Track the aggregate positioning of HyperIndex's proprietary 100-trader Hyperliquid cohort through one HEAT Score, asset tilts, and private shift alerts.">
+    <link rel="canonical" href="https://hyperindex.io/">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hyperindex.io/">
+    <meta property="og:title" content="HyperIndex — Hyperliquid Smart Money Positioning">
+    <meta property="og:description" content="100 traders. One clear read on Hyperliquid positioning.">
+    <meta property="og:image" content="https://hyperindex.io/images/logo-wordmark.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="HyperIndex — Hyperliquid Smart Money Positioning">
+    <meta name="twitter:description" content="100 traders. One clear read on Hyperliquid positioning.">
+    <meta name="twitter:image" content="https://hyperindex.io/images/logo-wordmark.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="images/logo-icon.jpg">
+    <link rel="apple-touch-icon" href="images/logo-icon.jpg">
+    <style>
+        body { margin: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #06090f; }
+        .animate-pulse-slow { animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse-slow { 0%, 100% { opacity: 1; } 50% { opacity: .6; } }
+
+        /* Scrollbar for chart tabs on mobile */
+        .tabs-scroll::-webkit-scrollbar { height: 0; }
+        .tabs-scroll { scrollbar-width: none; }
+
+        /* Data table styling */
+        .data-table th { text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.7rem; }
+        .data-table td { font-variant-numeric: tabular-nums; }
+    </style>
+</head>
+<body class="min-h-screen text-white">
+
+    <!-- Header -->
+    <header class="border-b border-white/5 bg-[#06090f]/90 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+            <a href="#top" class="flex items-center space-x-3" aria-label="HyperIndex home">
+                <div class="relative">
+                    <img src="images/logo-icon.jpg" alt="HyperIndex" class="w-9 h-9 rounded-lg">
+                    <div class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse-slow border-2 border-[#06090f]"></div>
+                </div>
+                <div>
+                    <h1 class="text-lg font-semibold tracking-tight">Hyper<em class="italic text-blue-400">Index</em></h1>
+                </div>
+            </a>
+            <div class="flex items-center space-x-4">
+                <nav class="hidden lg:flex items-center gap-5 text-xs font-medium text-slate-400" aria-label="Primary navigation">
+                    <a href="#dashboard" class="hover:text-white transition-colors">Dashboard</a>
+                    <a href="#how-it-works" class="hover:text-white transition-colors">How it works</a>
+                    <a href="methodology.html" class="hover:text-white transition-colors">Approach</a>
+                    <a href="https://t.me/HyperIndexSignals" target="_blank" rel="noopener" class="hover:text-white transition-colors">Free Signals</a>
+                    <a href="#newsletter" class="hover:text-white transition-colors">HEAT Check</a>
+                </nav>
+                <div class="text-right hidden sm:block">
+                    <div class="text-[11px] text-slate-500 font-mono" id="lastUpdated">Loading...</div>
+                    <div id="liveStatus" class="text-xs font-mono text-emerald-400 flex items-center justify-end space-x-1">
+                        <div class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse-slow"></div>
+                        <span>Hourly</span>
+                    </div>
+                    <div id="staleWarning" class="hidden text-xs font-mono text-amber-400 flex items-center justify-end space-x-1">
+                        <div class="w-1.5 h-1.5 bg-amber-400 rounded-full"></div>
+                        <span id="staleText">Data is stale</span>
+                    </div>
+                </div>
+                <button onclick="showPricing()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-sm font-semibold transition-colors">
+                    Get Core
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="top" class="border-b border-white/5 scroll-mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-16 text-center">
+            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-500/8 border border-blue-500/15 text-blue-400 text-[11px] font-semibold mb-5 tracking-widest uppercase">
+                <div class="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse-slow"></div>
+                <span>Proprietary Cohort · Updated Hourly</span>
+            </div>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-5 leading-tight tracking-tight text-white max-w-4xl mx-auto">
+                100 traders. One clear read.
+            </h1>
+            <p class="text-base md:text-lg text-slate-400 max-w-2xl mx-auto mb-8 leading-relaxed">
+                HyperIndex turns the live positions of a proprietary 100-trader cohort into one <span class="text-white font-medium">HEAT Score</span>, asset tilts, and private alerts when the crowd shifts. No wallet hunting. No noise feed.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+                <button onclick="showPricing()" class="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-lg text-sm font-semibold transition-colors">
+                    Get private HEAT alerts · $14/mo
+                </button>
+                <button onclick="document.getElementById('dashboard').scrollIntoView({behavior:'smooth'})" class="w-full sm:w-auto px-6 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-sm font-semibold transition-colors">
+                    See today's positioning
+                </button>
+            </div>
+            <div class="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] text-slate-600">
+                <span>No wallet connection</span><span>Positioning data only</span><span>7-day founding guarantee</span>
+            </div>
+        </div>
+    </section>
+
+    <div id="dashboard" class="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-5">
+
+        <!-- Hero Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <!-- Index Score -->
+            <div class="col-span-1 md:col-span-2 bg-white/[0.03] rounded-xl p-6 border border-white/[0.06]">
+                <div class="mb-4">
+                    <div class="text-slate-500 text-xs font-semibold uppercase tracking-wider mb-1">HEAT Score</div>
+                    <div class="text-[11px] text-slate-600">Aggregate positioning of <span id="walletCount" class="text-slate-400">--</span> screened traders</div>
+                </div>
+                <div class="flex items-center space-x-3 mb-3">
+                    <div class="text-5xl font-bold font-mono tracking-tight" id="indexScore">--</div>
+                    <svg id="trendIcon" class="w-5 h-5 text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <span class="px-2.5 py-0.5 rounded text-xs font-semibold" id="directionBadge">--</span>
+                    <span class="text-slate-500 text-xs font-mono" id="leverageText">L_cohort_total: --</span>
+                </div>
+            </div>
+
+            <!-- Smart Traders -->
+            <div class="bg-white/[0.03] rounded-xl p-5 border border-white/[0.06]">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="text-slate-500 text-xs font-semibold uppercase tracking-wider">Screened Traders</div>
+                    <span id="rebalanceBadge" class="hidden px-2 py-0.5 rounded text-[10px] font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">Rebalanced</span>
+                </div>
+                <div class="text-3xl font-bold font-mono mb-1" id="activeWallets">--</div>
+                <div class="text-xs text-slate-500">wallets tracked</div>
+                <div class="mt-3 text-[11px] text-slate-600 font-mono" id="totalEquity">$-- total equity</div>
+                <div class="mt-0.5 text-[11px] text-slate-700" id="rebalanceDate"></div>
+            </div>
+
+            <!-- Total Exposure -->
+            <div class="bg-white/[0.03] rounded-xl p-5 border border-white/[0.06]">
+                <div class="text-slate-500 text-xs font-semibold uppercase tracking-wider mb-3">Total Exposure</div>
+                <div class="text-3xl font-bold font-mono mb-1" id="grossNotional">$--</div>
+                <div class="text-xs text-slate-500">combined notional</div>
+                <div class="mt-3 text-[11px] text-slate-600 font-mono" id="netExposure">Net: $-- long</div>
+            </div>
+        </div>
+
+        <!-- Public dashboard banner -->
+        <div class="bg-blue-500/5 border border-blue-500/10 rounded-xl p-4 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:justify-between">
+            <div class="flex items-start sm:items-center space-x-3">
+                <svg class="w-4 h-4 text-blue-400 mt-0.5 sm:mt-0 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <div>
+                    <div class="text-sm font-semibold">Public dashboard</div>
+                    <div class="text-xs text-slate-400">Top 5 assets are free. Core watches all <span id="assetCountBanner">--</span> assets hourly and alerts only when the change is material.</div>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <a href="https://t.me/HyperIndexSignals" target="_blank" rel="noopener" class="px-4 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors">Free Signals</a>
+                <button onclick="showPricing()" class="px-4 py-1.5 bg-blue-600 hover:bg-blue-500 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors">See Core</button>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="bg-white/[0.03] rounded-xl p-4 sm:p-6 border border-white/[0.06]">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
+                <div>
+                    <h2 class="text-base font-semibold mb-0.5">Screened Cohort Positioning</h2>
+                    <p class="text-xs text-slate-500">Hourly positioning snapshots with 90-day context</p>
+                </div>
+                <div class="flex flex-col lg:flex-row gap-2 lg:items-center">
+                    <div class="tabs-scroll flex overflow-x-auto gap-1 bg-white/[0.03] rounded-lg p-1">
+                        <button onclick="setChart('net')" id="btn-net" class="px-3 py-1.5 rounded-md text-xs font-medium bg-blue-600 text-white whitespace-nowrap transition-colors">Net Position</button>
+                        <button onclick="setChart('exposure')" id="btn-exposure" class="px-3 py-1.5 rounded-md text-xs font-medium text-slate-500 hover:text-slate-300 whitespace-nowrap transition-colors">Exposure</button>
+                        <button onclick="setChart('longshort')" id="btn-longshort" class="px-3 py-1.5 rounded-md text-xs font-medium text-slate-500 hover:text-slate-300 whitespace-nowrap transition-colors">Long/Short</button>
+                        <button onclick="setChart('assets')" id="btn-assets" class="px-3 py-1.5 rounded-md text-xs font-medium text-slate-500 hover:text-slate-300 whitespace-nowrap transition-colors">By Asset</button>
+                        <button onclick="setChart('equity')" id="btn-equity" class="px-3 py-1.5 rounded-md text-xs font-medium text-slate-500 hover:text-slate-300 whitespace-nowrap transition-colors">Equity</button>
+                        <button onclick="setChart('leverage')" id="btn-leverage" class="px-3 py-1.5 rounded-md text-xs font-medium text-slate-500 hover:text-slate-300 whitespace-nowrap transition-colors">Leverage</button>
+                    </div>
+                    <div class="flex gap-1 bg-white/[0.03] rounded-lg p-1 w-fit">
+                        <button onclick="setChartRange(30)" id="btn-range-30" class="px-2.5 py-1.5 rounded-md text-xs font-medium bg-blue-600 text-white whitespace-nowrap transition-colors">30D</button>
+                        <button onclick="setChartRange(60)" id="btn-range-60" class="px-2.5 py-1.5 rounded-md text-xs font-medium text-slate-500 hover:text-slate-300 whitespace-nowrap transition-colors">60D</button>
+                        <button onclick="setChartRange(90)" id="btn-range-90" class="px-2.5 py-1.5 rounded-md text-xs font-medium text-slate-500 hover:text-slate-300 whitespace-nowrap transition-colors">90D</button>
+                    </div>
+                </div>
+            </div>
+            <div style="height: 320px;">
+                <canvas id="mainChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Elite Trader Distribution -->
+        <div class="bg-white/[0.03] rounded-xl p-4 sm:p-6 border border-white/[0.06]">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
+                <div>
+                    <h2 class="text-base font-semibold mb-0.5">Screened Cohort Distribution</h2>
+                    <p class="text-xs text-slate-500" id="distributionSubtitle">Per-wallet net notional — sorted by absolute size</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div id="distributionLegend" class="flex items-center space-x-3 text-[11px] font-mono text-slate-500">
+                        <span class="flex items-center space-x-1"><span class="w-2.5 h-2.5 rounded-sm bg-emerald-500 inline-block"></span><span>Long</span></span>
+                        <span class="flex items-center space-x-1"><span class="w-2.5 h-2.5 rounded-sm bg-red-500 inline-block"></span><span>Short</span></span>
+                    </div>
+                    <div class="flex bg-white/[0.03] rounded-lg p-1">
+                        <button onclick="setDistTab('position')" id="btn-dist-position" class="px-3 py-1.5 rounded-md text-xs font-medium bg-blue-600 text-white whitespace-nowrap transition-colors">Position</button>
+                        <button onclick="setDistTab('equity')" id="btn-dist-equity" class="px-3 py-1.5 rounded-md text-xs font-medium text-slate-500 hover:text-slate-300 whitespace-nowrap transition-colors">Equity</button>
+                    </div>
+                    <button onclick="toggleDistLog()" id="btn-dist-log" class="px-2.5 py-1.5 rounded-md text-[11px] font-mono font-medium text-slate-500 hover:text-slate-300 bg-white/[0.03] border border-white/[0.06] whitespace-nowrap transition-colors">Log</button>
+                </div>
+            </div>
+            <div style="height: 280px;">
+                <canvas id="distributionChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Asset Table -->
+        <div class="bg-white/[0.03] rounded-xl p-4 sm:p-6 border border-white/[0.06]">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-base font-semibold">Positioning by Asset</h2>
+                <div class="text-xs text-slate-500 font-mono"><span id="assetCount">--</span> assets</div>
+            </div>
+            <div class="overflow-x-auto -mx-4 sm:-mx-6 px-4 sm:px-6">
+                <table class="w-full data-table min-w-[700px]">
+                    <thead>
+                        <tr class="text-left text-slate-500 border-b border-white/[0.06]">
+                            <th class="pb-3 font-semibold pr-4">Asset</th>
+                            <th class="pb-3 font-semibold pr-4">Net Position</th>
+                            <th class="pb-3 font-semibold pr-4">Tilt</th>
+                            <th class="pb-3 font-semibold pr-4">Net Leverage</th>
+                            <th class="pb-3 font-semibold pr-4">Conviction</th>
+                            <th class="pb-3 font-semibold text-center">Traders</th>
+                        </tr>
+                    </thead>
+                    <tbody id="assetTableBody">
+                        <tr><td colspan="6" class="py-8 text-center text-slate-600 text-sm">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt-4 text-center" id="unlockButton"></div>
+        </div>
+
+        <!-- Signals -->
+        <div class="bg-white/[0.03] rounded-xl p-4 sm:p-6 border border-white/[0.06]">
+            <h2 class="text-base font-semibold mb-4">Signals</h2>
+            <div class="space-y-2" id="signalsContainer">
+                <div class="text-slate-600 text-center py-4 text-sm">Loading signals...</div>
+            </div>
+        </div>
+
+        <!-- Notable Position Changes -->
+        <div class="bg-white/[0.03] rounded-xl p-4 sm:p-6 border border-white/[0.06]">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-base font-semibold">Notable Position Shifts</h2>
+                <span class="text-[11px] text-slate-600 font-mono" id="shiftTimeframe">24h change</span>
+            </div>
+            <div id="positionChangesContainer">
+                <div class="text-slate-600 text-center py-4 text-sm">Loading position data...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How it works -->
+    <section id="how-it-works" class="border-t border-white/5 mt-8 scroll-mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-16">
+            <div class="max-w-2xl mb-8">
+                <div class="text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-400 mb-3">The edge</div>
+                <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mb-3">A cleaner read on Hyperliquid positioning.</h2>
+                <p class="text-sm sm:text-base text-slate-400 leading-relaxed">Other tools make you inspect wallets one by one. HyperIndex answers a narrower question: what is a proprietary cohort built for directional signal doing as a group, and what changed enough to matter?</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-white/[0.03] rounded-xl p-5 border border-white/[0.06]">
+                    <div class="text-blue-400 font-mono text-xs mb-4">01 / CURATE</div>
+                    <h3 class="font-semibold mb-2">Build for signal, not rank</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">A proprietary multi-signal process evaluates accounts across time and rejects activity that would create a misleading picture of directional conviction.</p>
+                </div>
+                <div class="bg-white/[0.03] rounded-xl p-5 border border-white/[0.06]">
+                    <div class="text-blue-400 font-mono text-xs mb-4">02 / DISTILL</div>
+                    <h3 class="font-semibold mb-2">Collapse 100 books into one read</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">The HEAT Score summarizes cohort direction. Asset tilt, net leverage, conviction, and trader counts show where the agreement is concentrated.</p>
+                </div>
+                <div class="bg-white/[0.03] rounded-xl p-5 border border-white/[0.06]">
+                    <div class="text-blue-400 font-mono text-xs mb-4">03 / ALERT</div>
+                    <h3 class="font-semibold mb-2">Interrupt only for material change</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">Core checks the full asset universe after every hourly refresh and sends a private Telegram alert for regime flips, meaningful net shifts, and conviction changes.</p>
+                </div>
+            </div>
+            <div class="mt-5 bg-amber-500/5 border border-amber-500/10 rounded-xl p-4 text-xs text-amber-100/70 leading-relaxed">
+                HyperIndex measures positioning, not future returns. A cohort can be early, wrong, hedged elsewhere, or caught in a squeeze. Use it as context alongside price, funding, liquidity, and your own risk process.
+            </div>
+            <div class="mt-4 text-sm">
+                <a href="methodology.html" class="text-blue-400 hover:text-blue-300 transition-colors">See our approach and latest cohort status →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Real Core alert sample -->
+    <section id="core-sample" class="border-t border-white/5 scroll-mt-20">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12 md:py-16">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-7 lg:gap-10 items-center">
+                <div>
+                    <div class="text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-400 mb-3">A real historical alert replay</div>
+                    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mb-3">See exactly what earns an interruption.</h2>
+                    <p class="text-sm sm:text-base text-slate-400 leading-relaxed mb-4">This is a replay of an actual same-cohort move measured between 11:00 and 12:01 ET on July 14. The values are historical; the format is the concise alert Core uses now.</p>
+                    <div class="space-y-2.5 text-sm text-slate-300 mb-5">
+                        <div class="flex gap-2"><span class="text-emerald-400">✓</span><span>The time window and aggregate change are explicit.</span></div>
+                        <div class="flex gap-2"><span class="text-emerald-400">✓</span><span>Breadth and conviction stay visible beside the headline move.</span></div>
+                        <div class="flex gap-2"><span class="text-emerald-400">✓</span><span>No prediction, trade instruction, or wallet address is included.</span></div>
+                    </div>
+                    <button onclick="showPricing()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 rounded-lg text-sm font-semibold transition-colors">Get alerts like this · $14/mo</button>
+                </div>
+                <div class="bg-[#080d14] rounded-xl border border-blue-500/25 shadow-2xl shadow-blue-950/20 overflow-hidden">
+                    <div class="px-4 py-3 border-b border-white/[0.06] flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 rounded-full bg-blue-400"></div>
+                            <span class="text-xs font-semibold">HyperIndex Core</span>
+                        </div>
+                        <span class="text-[10px] text-slate-600 font-mono">HISTORICAL REPLAY</span>
+                    </div>
+                    <div class="p-5 sm:p-6 font-mono">
+                        <div class="text-xs font-bold tracking-wide text-white mb-4">CORE HEAT ALERT · 1h</div>
+                        <div class="text-sm text-slate-200 mb-5">HEAT -0.1766 <span class="text-red-400">● Net Short</span> <span class="text-slate-500">(-0.0389)</span></div>
+                        <div class="text-sm text-white mb-2">1. BTC moved -$56.2M to -$334.2M net.</div>
+                        <div class="text-xs text-slate-400 leading-relaxed">Tilt -66% → -70% &nbsp;|&nbsp; Conviction -0.65 → -0.68 &nbsp;|&nbsp; 55 traders</div>
+                        <div class="border-t border-white/[0.06] mt-5 pt-4 text-[11px] text-slate-600 leading-relaxed">Material aggregate change across the tracked universe. Positioning data only, not financial advice.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core offer -->
+    <section id="core" class="border-t border-white/5 scroll-mt-20">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12 md:py-16">
+            <div class="bg-gradient-to-br from-blue-600/15 to-white/[0.02] rounded-2xl p-6 sm:p-8 border border-blue-500/25">
+                <div class="flex flex-col lg:flex-row lg:items-center gap-8 lg:justify-between">
+                    <div class="max-w-2xl">
+                        <div class="inline-flex px-2.5 py-1 rounded bg-blue-500/10 text-blue-300 border border-blue-500/20 text-[10px] font-bold uppercase tracking-wider mb-4">Founding Core</div>
+                        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mb-3">Get the change, not another chart.</h2>
+                        <p class="text-sm sm:text-base text-slate-400 leading-relaxed mb-5">Private Telegram alerts across every tracked asset, plus the complete dashboard context. Designed for active Hyperliquid traders who want one useful interruption instead of another feed to monitor.</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-sm text-slate-300">
+                            <div class="flex gap-2"><span class="text-emerald-400">✓</span><span>Hourly material-change detection</span></div>
+                            <div class="flex gap-2"><span class="text-emerald-400">✓</span><span>All tracked assets monitored</span></div>
+                            <div class="flex gap-2"><span class="text-emerald-400">✓</span><span>Regime, net, tilt, and conviction shifts</span></div>
+                            <div class="flex gap-2"><span class="text-emerald-400">✓</span><span>Founding-member feedback access</span></div>
+                        </div>
+                    </div>
+                    <div class="lg:w-72 flex-shrink-0 bg-[#080d14] rounded-xl p-5 border border-white/10">
+                        <div class="text-xs text-slate-500 uppercase font-semibold tracking-wider mb-2">Founding price</div>
+                        <div class="text-4xl font-bold font-mono mb-1">$14<span class="text-sm text-slate-500 font-normal">/mo</span></div>
+                        <div class="text-xs text-slate-500 mb-5">or $119/year. 7-day founding guarantee.</div>
+                        <button onclick="showPricing()" class="w-full py-3 bg-blue-600 hover:bg-blue-500 rounded-lg text-sm font-semibold transition-colors">Choose Core</button>
+                        <p class="text-[11px] text-slate-600 leading-relaxed mt-3">Use an email you check. Private Telegram access is activated manually within 12 hours, usually sooner.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="border-t border-white/5">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+            <h2 class="text-xl font-bold mb-6">Questions serious traders ask</h2>
+            <div class="space-y-5">
+                <div><h3 class="text-sm font-semibold mb-1.5">How is this different from a whale tracker?</h3><p class="text-sm text-slate-500 leading-relaxed">Whale trackers help you inspect individual wallets. HyperIndex maintains one proprietary cohort and measures its aggregate positioning, reducing single-wallet noise and making regime changes easier to see.</p></div>
+                <div><h3 class="text-sm font-semibold mb-1.5">Is the data actually real-time?</h3><p class="text-sm text-slate-500 leading-relaxed">The dashboard refreshes hourly. We say hourly because that is the current production cadence. Core evaluates the full universe immediately after each successful refresh.</p></div>
+                <div><h3 class="text-sm font-semibold mb-1.5">How is Core different from free HyperIndex Signals?</h3><p class="text-sm text-slate-500 leading-relaxed">Signals publishes two scheduled public snapshots per day. Core checks every tracked asset after each hourly refresh and privately interrupts you only when a regime, net exposure, tilt, or conviction change clears a materiality threshold. Same measurement system; much faster monitoring and broader coverage.</p></div>
+                <div><h3 class="text-sm font-semibold mb-1.5">Does HyperIndex tell me what to trade?</h3><p class="text-sm text-slate-500 leading-relaxed">No. It reports aggregated positioning and changes. It does not provide personalized recommendations, execute trades, connect to your wallet, or promise returns.</p></div>
+                <div><h3 class="text-sm font-semibold mb-1.5">What if Core does not earn a place in my workflow?</h3><p class="text-sm text-slate-500 leading-relaxed">Founding subscribers can try Core for seven days. If it is not useful, email support within seven calendar days of the first payment for a refund.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Email Capture Section -->
+    <div id="newsletter" class="max-w-2xl mx-auto px-4 sm:px-6 py-8 scroll-mt-24">
+        <div class="text-center mb-5">
+            <div class="text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-400 mb-2">Free weekly brief</div>
+            <h2 class="text-xl font-bold mb-1">Read the HEAT Check</h2>
+            <p class="text-sm text-slate-500">One weekly explanation of what changed across the cohort and why it matters.</p>
+        </div>
+        <div class="bg-white/[0.03] rounded-xl p-6 sm:p-8 border border-white/[0.06]">
+            <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="1d1ff819-ff11-4947-87b4-0b02c90973b5"></script>
+        </div>
+    </div>
+
+    <!-- Pricing Modal -->
+    <div id="pricingModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4 hidden">
+        <div class="bg-[#0d1117] rounded-xl p-6 sm:p-8 border border-white/[0.06] max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h2 class="text-2xl font-bold mb-1">Get the change, not another chart</h2>
+                    <p class="text-sm text-slate-500">Private, hourly HEAT alerts for active Hyperliquid traders</p>
+                </div>
+                <button onclick="hidePricing()" class="text-slate-500 hover:text-white text-xl w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/5 transition-colors">&times;</button>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-4">
+                <div class="bg-white/[0.03] rounded-xl p-6 border border-white/[0.06] lg:col-span-2">
+                    <div class="mb-5"><h3 class="text-lg font-semibold mb-1">Public</h3><div class="text-3xl font-bold font-mono">$0</div></div>
+                    <ul class="space-y-2.5 mb-6 text-sm text-slate-300">
+                        <li class="flex items-center space-x-2"><span class="text-emerald-400 text-xs">&#10003;</span><span>Top 5 assets visible</span></li>
+                        <li class="flex items-center space-x-2"><span class="text-emerald-400 text-xs">&#10003;</span><span>Hourly dashboard context</span></li>
+                        <li class="flex items-center space-x-2"><span class="text-emerald-400 text-xs">&#10003;</span><span>Two public Signals snapshots daily</span></li>
+                        <li class="flex items-center space-x-2"><span class="text-emerald-400 text-xs">&#10003;</span><span>Weekly newsletter</span></li>
+                    </ul>
+                    <button onclick="hidePricing()" class="w-full py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-sm font-semibold transition-colors">Keep Browsing</button>
+                </div>
+                <div class="bg-white/[0.03] rounded-xl p-6 border-2 border-blue-500/40 relative lg:col-span-3">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 px-3 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">Core</div>
+                    <div class="mb-5 text-center sm:text-left">
+                        <h3 class="text-lg font-semibold mb-1">HyperIndex Core</h3>
+                        <p class="text-sm text-slate-500">Founding access at the launch price.</p>
+                    </div>
+                    <div class="grid grid-cols-2 overflow-hidden rounded-lg border border-white/10 bg-[#080d14] mb-6">
+                        <div class="p-3 sm:p-5 flex flex-col min-h-[205px]">
+                            <div class="text-[11px] sm:text-xs font-semibold uppercase text-slate-500 mb-3">Monthly</div>
+                            <div class="text-2xl sm:text-3xl font-bold font-mono">$14<span class="text-xs sm:text-sm text-slate-500 font-normal">/mo</span></div>
+                            <p class="text-xs text-slate-500 mt-2">Pay month to month. 7-day founding guarantee.</p>
+                            <button onclick="startCoreCheckout('monthly')" class="mt-auto w-full py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-xs sm:text-sm font-semibold transition-colors">Get monthly</button>
+                        </div>
+                        <div class="p-3 sm:p-5 flex flex-col min-h-[205px] border-l border-white/10 bg-blue-600/10">
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
+                                <div class="text-[11px] sm:text-xs font-semibold uppercase text-blue-300">Yearly</div>
+                                <div class="w-fit bg-emerald-400 text-slate-950 px-2.5 py-1 rounded text-[11px] font-bold uppercase">30% off</div>
+                            </div>
+                            <div>
+                                <span class="block text-xs sm:text-sm text-slate-500 line-through font-mono">$168/yr</span>
+                                <span class="block text-2xl sm:text-3xl font-bold font-mono">$119<span class="text-xs sm:text-sm text-slate-400 font-normal">/yr</span></span>
+                            </div>
+                            <p class="text-xs text-slate-400 mt-2">Save $49 at $9.92/mo.</p>
+                            <button onclick="startCoreCheckout('yearly')" class="mt-auto w-full py-2.5 bg-blue-600 hover:bg-blue-500 rounded-lg text-xs sm:text-sm font-semibold transition-colors">Get yearly</button>
+                        </div>
+                    </div>
+                    <ul class="space-y-2.5 text-sm text-slate-300">
+                        <li class="flex items-center space-x-2"><span class="text-emerald-400 text-xs">&#10003;</span><span>Private hourly material-change alerts</span></li>
+                        <li class="flex items-center space-x-2"><span class="text-emerald-400 text-xs">&#10003;</span><span>Every tracked asset monitored</span></li>
+                        <li class="flex items-center space-x-2"><span class="text-emerald-400 text-xs">&#10003;</span><span>Regime, net, tilt, and conviction shifts</span></li>
+                        <li class="flex items-center space-x-2"><span class="text-emerald-400 text-xs">&#10003;</span><span>Founding-member product access</span></li>
+                    </ul>
+                    <p class="mt-4 text-[11px] text-slate-600">Use an email you check. Private Telegram access is activated manually within 12 hours, usually sooner. First-time founding subscriptions include a 7-day refund window.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 mt-8 py-8 text-center text-slate-600 text-xs">
+        <p class="font-semibold text-slate-400 mb-0.5">HyperIndex</p>
+        <p>Hourly proprietary-cohort positioning on Hyperliquid</p>
+        <div class="mt-3 flex flex-wrap items-center justify-center gap-4">
+            <a href="https://t.me/HyperIndexSignals" target="_blank" rel="noopener" class="hover:text-slate-300">Free Signals</a>
+            <a href="methodology.html" class="hover:text-slate-300">Approach</a>
+            <a href="mailto:hyperindexapp@proton.me?subject=HyperIndex%20support" class="hover:text-slate-300">Support</a>
+            <a href="#newsletter" class="hover:text-slate-300">HEAT Check</a>
+            <a href="terms.html" class="hover:text-slate-300">Terms</a>
+            <a href="privacy.html" class="hover:text-slate-300">Privacy</a>
+        </div>
+        <p class="mt-3 text-slate-700">Positioning data only. Not financial advice. Use at your own risk.</p>
+    </footer>
+
+    <script>
+        // State
+        let indexData = null;
+        let historyData = null;
+        let mainChart = null;
+        let currentChartType = 'net';
+        let currentChartRangeDays = 30;
+
+        // Sample to ~4x daily for chart smoothness, always include latest point
+        // Buckets each point into nearest 6h slot and keeps latest per bucket
+        function sampleHistory(hourlyData) {
+            if (!hourlyData || hourlyData.length === 0) return hourlyData;
+            const SLOTS = [0, 6, 12, 18];
+            const lastPoint = hourlyData[hourlyData.length - 1];
+            // Assign each point to nearest 6h slot, keep latest per slot
+            const buckets = {};
+            hourlyData.forEach(d => {
+                const dt = new Date(d.timestamp);
+                const h = dt.getHours() + dt.getMinutes() / 60;
+                // Find nearest slot (with wrap: 21+ maps to 0 next day)
+                let bestSlot = 0, bestDist = 99;
+                SLOTS.forEach(s => {
+                    const dist = Math.min(Math.abs(h - s), Math.abs(h - s - 24), Math.abs(h - s + 24));
+                    if (dist < bestDist) { bestDist = dist; bestSlot = s; }
+                });
+                // Use LOCAL date (not UTC) to match getHours() which returns local time
+                const dayKey = `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,'0')}-${String(dt.getDate()).padStart(2,'0')}`;
+                // If closer to slot 0 and hour >= 21, it's next day's slot 0
+                const nextDay = new Date(dt.getTime() + 86400000);
+                const bucketDay = (bestSlot === 0 && h >= 21) ?
+                    `${nextDay.getFullYear()}-${String(nextDay.getMonth()+1).padStart(2,'0')}-${String(nextDay.getDate()).padStart(2,'0')}` : dayKey;
+                const key = bucketDay + 'T' + String(bestSlot).padStart(2, '0');
+                // Keep latest point per bucket
+                if (!buckets[key] || d.timestamp > buckets[key].timestamp) {
+                    buckets[key] = d;
+                }
+            });
+            const filtered = Object.keys(buckets).sort().map(k => buckets[k]);
+            // Always include the very latest point
+            const lastFiltered = filtered[filtered.length - 1];
+            if (!lastFiltered || lastFiltered.timestamp !== lastPoint.timestamp) {
+                filtered.push(lastPoint);
+            }
+            return filtered;
+        }
+
+        // Helpers
+        const fmt = (n) => {
+            const a = Math.abs(n);
+            if (a >= 1e9) return `$${(n/1e9).toFixed(1)}B`;
+            if (a >= 1e6) return `$${(n/1e6).toFixed(1)}M`;
+            if (a >= 1e3) return `$${(n/1e3).toFixed(1)}K`;
+            return `$${n.toFixed(0)}`;
+        };
+
+        const tiltColor = (t) => {
+            if (t > 0.5) return 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/20';
+            if (t > 0.2) return 'bg-emerald-500/8 text-emerald-300 border border-emerald-500/10';
+            if (t > -0.2) return 'bg-amber-500/8 text-amber-300 border border-amber-500/10';
+            if (t > -0.5) return 'bg-red-500/8 text-red-300 border border-red-500/10';
+            return 'bg-red-500/15 text-red-400 border border-red-500/20';
+        };
+
+        // Modal
+        const CORE_CHECKOUT_LINKS = {
+            monthly: 'https://buy.stripe.com/3cI9ASeoDefL73k4Ht0ZW00?utm_source=hyperindex_site&utm_medium=checkout&utm_campaign=founding_core&utm_content=monthly',
+            yearly: 'https://buy.stripe.com/dRmaEWcgvc7D3R8ddZ0ZW01?utm_source=hyperindex_site&utm_medium=checkout&utm_campaign=founding_core&utm_content=yearly',
+        };
+
+        function showPricing() { document.getElementById('pricingModal').classList.remove('hidden'); }
+        function hidePricing() { document.getElementById('pricingModal').classList.add('hidden'); }
+        function startCoreCheckout(interval) {
+            const url = CORE_CHECKOUT_LINKS[interval];
+            if (url) {
+                window.location.href = url;
+                return;
+            }
+            alert('Core checkout is not configured yet.');
+        }
+        document.getElementById('pricingModal').addEventListener('click', (e) => { if (e.target.id === 'pricingModal') hidePricing(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hidePricing(); });
+
+        // Chart switching
+        function setChart(type) {
+            currentChartType = type;
+            ['net', 'exposure', 'longshort', 'assets', 'equity', 'leverage'].forEach(t => {
+                const btn = document.getElementById(`btn-${t}`);
+                if (t === type) {
+                    btn.classList.add('bg-blue-600', 'text-white');
+                    btn.classList.remove('text-slate-500');
+                } else {
+                    btn.classList.remove('bg-blue-600', 'text-white');
+                    btn.classList.add('text-slate-500');
+                }
+            });
+            renderChart();
+        }
+
+        function setChartRange(days) {
+            currentChartRangeDays = days;
+            [30, 60, 90].forEach(d => {
+                const btn = document.getElementById(`btn-range-${d}`);
+                if (d === days) {
+                    btn.classList.add('bg-blue-600', 'text-white');
+                    btn.classList.remove('text-slate-500');
+                } else {
+                    btn.classList.remove('bg-blue-600', 'text-white');
+                    btn.classList.add('text-slate-500');
+                }
+            });
+            renderChart();
+        }
+
+        function getChartHistoryWindow(hourlyData) {
+            const sampled = sampleHistory(hourlyData);
+            if (!sampled || sampled.length === 0) return [];
+
+            const latest = new Date(sampled[sampled.length - 1].timestamp).getTime();
+            const cutoff = latest - currentChartRangeDays * 24 * 60 * 60 * 1000;
+            return sampled.filter(d => new Date(d.timestamp).getTime() >= cutoff);
+        }
+
+        // Render chart
+        function renderChart() {
+            if (!historyData || !historyData.hourly) return;
+
+            const hourly = getChartHistoryWindow(historyData.hourly);
+            const labels = hourly.map(d => {
+                const dt = new Date(d.timestamp);
+                return dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            });
+
+            const sampledLabels = labels;
+
+            let datasets = [];
+            const chartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                elements: { point: { radius: 0 } },
+                interaction: { intersect: false, mode: 'index' },
+                plugins: {
+                    legend: { labels: { color: '#64748b', font: { family: 'monospace', size: 11 }, filter: item => item.text !== '' } },
+                    tooltip: {
+                        backgroundColor: '#0d1117',
+                        borderColor: '#1e293b',
+                        borderWidth: 1,
+                        titleColor: '#e2e8f0',
+                        bodyColor: '#94a3b8',
+                        titleFont: { family: 'monospace' },
+                        bodyFont: { family: 'monospace' }
+                    }
+                },
+                scales: {
+                    x: { ticks: { color: '#475569', maxTicksLimit: 8, font: { family: 'monospace', size: 10 } }, grid: { color: 'rgba(255,255,255,0.03)' } },
+                    y: { ticks: { color: '#475569', font: { family: 'monospace', size: 10 } }, grid: { color: 'rgba(255,255,255,0.03)' } }
+                }
+            };
+
+            if (currentChartType === 'net') {
+                const netValues = hourly.map(d => parseFloat((d.cohort_net_usd / 1e6).toFixed(1)));
+                datasets = [
+                    {
+                        label: 'Net Position ($M)',
+                        data: netValues,
+                        borderColor: '#10b981',
+                        fill: { target: { value: 0 }, above: 'rgba(16, 185, 129, 0.08)', below: 'transparent' },
+                        segment: { borderColor: ctx => ctx.p1.parsed.y < 0 ? '#ef4444' : '#10b981' },
+                        tension: 0,
+                        pointRadius: 0,
+                        borderWidth: 1.5,
+                    },
+                    {
+                        label: '',
+                        data: netValues,
+                        borderColor: 'transparent',
+                        fill: { target: { value: 0 }, above: 'transparent', below: 'rgba(239, 68, 68, 0.08)' },
+                        tension: 0,
+                        pointRadius: 0,
+                        tooltip: { enabled: false },
+                    }
+                ];
+            } else if (currentChartType === 'exposure') {
+                datasets = [{
+                    label: 'Total Exposure ($M)',
+                    data: hourly.map(d => ((d.gross_long_usd + d.gross_short_usd) / 1e6).toFixed(1)),
+                    borderColor: '#eab308',
+                    backgroundColor: 'rgba(234, 179, 8, 0.06)',
+                    fill: true,
+                    tension: 0,
+                    borderWidth: 1.5,
+                }];
+            } else if (currentChartType === 'longshort') {
+                datasets = [
+                    {
+                        label: 'Gross Long ($M)',
+                        data: hourly.map(d => (d.gross_long_usd / 1e6).toFixed(1)),
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.06)',
+                        fill: true,
+                        tension: 0,
+                        borderWidth: 1.5,
+                    },
+                    {
+                        label: 'Gross Short ($M)',
+                        data: hourly.map(d => -(d.gross_short_usd / 1e6).toFixed(1)),
+                        borderColor: '#ef4444',
+                        backgroundColor: 'rgba(239, 68, 68, 0.06)',
+                        fill: true,
+                        tension: 0,
+                        borderWidth: 1.5,
+                    }
+                ];
+            } else if (currentChartType === 'assets') {
+                datasets = [
+                    { label: 'BTC Net ($M)', data: hourly.map(d => (d.btc_net_usd / 1e6).toFixed(1)), borderColor: '#f7931a', tension: 0, borderWidth: 1.5 },
+                    { label: 'ETH Net ($M)', data: hourly.map(d => (d.eth_net_usd / 1e6).toFixed(1)), borderColor: '#627eea', tension: 0, borderWidth: 1.5 },
+                    { label: 'SOL Net ($M)', data: hourly.map(d => (d.sol_net_usd / 1e6).toFixed(1)), borderColor: '#a855f7', tension: 0, borderWidth: 1.5 },
+                    { label: 'HYPE Net ($M)', data: hourly.map(d => (d.hype_net_usd / 1e6).toFixed(1)), borderColor: '#22d3ee', tension: 0, borderWidth: 1.5 }
+                ];
+            } else if (currentChartType === 'equity') {
+                datasets = [{
+                    label: 'Total Equity ($M)',
+                    data: hourly.map(d => (d.cohort_total_equity / 1e6).toFixed(1)),
+                    borderColor: '#8b5cf6',
+                    backgroundColor: 'rgba(139, 92, 246, 0.06)',
+                    fill: true,
+                    tension: 0,
+                    borderWidth: 1.5,
+                }];
+            } else if (currentChartType === 'leverage') {
+                datasets = [{
+                    label: 'Total Leverage',
+                    data: hourly.map(d => d.L_cohort_total?.toFixed(1) || 0),
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.06)',
+                    fill: true,
+                    tension: 0,
+                    borderWidth: 1.5,
+                }];
+                chartOptions.scales.y.ticks.callback = (v) => parseFloat(v).toFixed(1) + 'x';
+            }
+
+            if (mainChart) mainChart.destroy();
+
+            const ctx = document.getElementById('mainChart').getContext('2d');
+            mainChart = new Chart(ctx, {
+                type: 'line',
+                data: { labels: sampledLabels, datasets },
+                options: chartOptions
+            });
+        }
+
+        // Render Elite Trader distribution histogram
+        let distributionChart = null;
+        let currentDistTab = 'position';
+        let distLogScale = false;
+
+        function toggleDistLog() {
+            distLogScale = !distLogScale;
+            const btn = document.getElementById('btn-dist-log');
+            if (distLogScale) {
+                btn.classList.add('bg-blue-600', 'text-white');
+                btn.classList.remove('text-slate-500');
+            } else {
+                btn.classList.remove('bg-blue-600', 'text-white');
+                btn.classList.add('text-slate-500');
+            }
+            renderDistribution();
+        }
+
+        function setDistTab(tab) {
+            currentDistTab = tab;
+            ['position', 'equity'].forEach(t => {
+                const btn = document.getElementById(`btn-dist-${t}`);
+                if (t === tab) {
+                    btn.classList.add('bg-blue-600', 'text-white');
+                    btn.classList.remove('text-slate-500');
+                } else {
+                    btn.classList.remove('bg-blue-600', 'text-white');
+                    btn.classList.add('text-slate-500');
+                }
+            });
+            const subtitle = document.getElementById('distributionSubtitle');
+            const legend = document.getElementById('distributionLegend');
+            if (tab === 'equity') {
+                subtitle.textContent = 'Per-wallet account equity — same wallet order as Position tab';
+                legend.classList.add('hidden');
+            } else {
+                subtitle.textContent = 'Per-wallet net notional — sorted by absolute size';
+                legend.classList.remove('hidden');
+            }
+            renderDistribution();
+        }
+
+        // Signed log transform: preserves sign, compresses magnitude
+        // sign(v) * log10(1 + |v|) where v is in $M
+        function signedLog(v) { return Math.sign(v) * Math.log10(1 + Math.abs(v)); }
+        function signedLogInv(v) { return Math.sign(v) * (Math.pow(10, Math.abs(v)) - 1); }
+
+        function renderDistribution() {
+            if (!indexData || !indexData.wallet_distribution) return;
+            const wallets = indexData.wallet_distribution;
+            const labels = wallets.map((_, i) => i + 1);
+            const useLog = distLogScale && currentDistTab === 'position';
+
+            let values, colors, tooltipCb, yCallback, yScaleType;
+
+            if (currentDistTab === 'equity') {
+                values = wallets.map(w => w.equity / 1e6);
+                colors = 'rgba(139, 92, 246, 0.8)';
+                tooltipCb = {
+                    title: (items) => `Wallet #${items[0].label}`,
+                    label: (item) => {
+                        const w = wallets[item.dataIndex];
+                        return `Equity: ${fmt(w.equity)}`;
+                    }
+                };
+            } else {
+                const rawM = wallets.map(w => w.net_notional / 1e6);
+                values = useLog ? rawM.map(signedLog) : rawM;
+                colors = wallets.map(w => w.net_notional >= 0 ? 'rgba(16, 185, 129, 0.8)' : 'rgba(239, 68, 68, 0.8)');
+                tooltipCb = {
+                    title: (items) => `Wallet #${items[0].label}`,
+                    label: (item) => {
+                        const w = wallets[item.dataIndex];
+                        const lines = [`Net: ${fmt(w.net_notional)}`];
+                        if (w.long_notional > 0) lines.push(`Long: ${fmt(w.long_notional)}`);
+                        if (w.short_notional > 0) lines.push(`Short: ${fmt(w.short_notional)}`);
+                        return lines;
+                    }
+                };
+            }
+
+            // Log scale: fixed ticks at clean round $M values, evenly spaced in log space
+            const logTicksM = [200, 100, 25, 10, 5, 0, -5, -10, -25, -100];
+            const logTickValues = logTicksM.map(signedLog);
+
+            const fmtLogTick = (real) => {
+                if (real === 0) return '$0';
+                const a = Math.abs(real);
+                const sign = real < 0 ? '-' : '';
+                if (a >= 1000) return `${sign}$${(a/1000).toFixed(0)}B`;
+                return `${sign}$${a}M`;
+            };
+
+            yCallback = useLog
+                ? (v) => {
+                    // Only label our explicit ticks
+                    const idx = logTickValues.findIndex(tv => Math.abs(tv - v) < 0.001);
+                    if (idx === -1) return '';
+                    return fmtLogTick(logTicksM[idx]);
+                }
+                : (v) => {
+                    if (Math.abs(v) >= 1000) return `$${(v/1000).toFixed(0)}B`;
+                    return `$${v.toFixed(0)}M`;
+                };
+
+            if (distributionChart) distributionChart.destroy();
+            const ctx = document.getElementById('distributionChart').getContext('2d');
+            distributionChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: values,
+                        backgroundColor: colors,
+                        borderWidth: 0,
+                        borderRadius: 1,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { intersect: false, mode: 'index' },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#0d1117',
+                            borderColor: '#1e293b',
+                            borderWidth: 1,
+                            titleColor: '#e2e8f0',
+                            bodyColor: '#94a3b8',
+                            titleFont: { family: 'monospace' },
+                            bodyFont: { family: 'monospace' },
+                            callbacks: tooltipCb
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: { color: '#475569', maxTicksLimit: 10, font: { family: 'monospace', size: 10 }, callback: (v) => v + 1 },
+                            grid: { display: false },
+                            title: { display: true, text: 'Wallets (by position size)', color: '#475569', font: { family: 'monospace', size: 10 } }
+                        },
+                        y: {
+                            type: 'linear',
+                            ...(useLog ? {
+                                min: signedLog(-100),
+                                max: signedLog(200),
+                                afterBuildTicks: (axis) => {
+                                    axis.ticks = logTickValues.map(v => ({ value: v }));
+                                }
+                            } : {}),
+                            ticks: { color: '#475569', font: { family: 'monospace', size: 10 }, callback: yCallback },
+                            grid: { color: 'rgba(255,255,255,0.03)' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Render asset table
+        function renderAssetTable() {
+            if (!indexData || !indexData.assets) return;
+
+            const tbody = document.getElementById('assetTableBody');
+            const allAssets = indexData.assets;
+
+            // Pin BTC, ETH, SOL, HYPE as first 4 (matching chart), then top non-core asset by abs net USD
+            const CORE = ['BTC', 'ETH', 'SOL', 'HYPE'];
+            const coreAssets = CORE.map(name => allAssets.find(a => a.asset === name)).filter(Boolean);
+            const nonCore = allAssets
+                .filter(a => !CORE.includes(a.asset))
+                .sort((a, b) => Math.abs(b.net_usd) - Math.abs(a.net_usd));
+            const topNonCore = nonCore.slice(0, 1);   // 5th free row
+            const lockedPreview = nonCore.slice(1, 6); // 5 locked rows
+
+            const freeRows = [...coreAssets, ...topNonCore].map(a => ({ ...a, free: true }));
+            const lockedRows = lockedPreview.map(a => ({ ...a, free: false }));
+            const assets = [...freeRows, ...lockedRows];
+            const remainingCount = allAssets.length - freeRows.length;
+
+            tbody.innerHTML = assets.map((a, i) => {
+                const isLocked = !a.free;
+                const rowClass = isLocked ? 'opacity-40' : 'hover:bg-white/[0.02]';
+                const dataBlur = isLocked ? 'blur-[6px] select-none' : '';
+                const netColor = a.net_usd > 0 ? 'text-emerald-400' : 'text-red-400';
+                const lnetColor = a.L_net_equity > 0 ? 'text-emerald-400' : 'text-red-400';
+                const convWidth = Math.min(Math.abs(a.conv_equity) * 100, 100);
+                const convColor = Math.abs(a.conv_equity) > 0.7 ? 'bg-emerald-400' : Math.abs(a.conv_equity) > 0.4 ? 'bg-amber-400' : 'bg-red-400';
+
+                return `
+                    <tr class="border-b border-white/[0.04] ${rowClass}">
+                        <td class="py-3 pr-4">
+                            <div class="flex items-center space-x-2.5">
+                                <div class="w-7 h-7 bg-white/[0.06] rounded-lg flex items-center justify-center text-[10px] font-bold text-slate-400">${a.asset.substring(0,2)}</div>
+                                <span class="font-medium text-sm">${a.asset}</span>
+                                ${isLocked ? '<svg class="w-3 h-3 text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>' : ''}
+                            </div>
+                        </td>
+                        <td class="py-3 pr-4"><span class="${netColor} font-mono text-sm font-medium ${dataBlur}">${a.net_usd > 0 ? '+' : ''}${fmt(a.net_usd)}</span></td>
+                        <td class="py-3 pr-4"><span class="px-2 py-0.5 rounded text-[11px] font-semibold ${tiltColor(a.tilt)} ${dataBlur}">${a.tilt > 0 ? '+' : ''}${(a.tilt * 100).toFixed(0)}%</span></td>
+                        <td class="py-3 pr-4"><span class="font-mono text-sm ${lnetColor} ${dataBlur}">${a.L_net_equity > 0 ? '+' : ''}${a.L_net_equity.toFixed(4)}</span></td>
+                        <td class="py-3 pr-4">
+                            <div class="flex items-center space-x-2 ${dataBlur}">
+                                <div class="w-16 bg-white/[0.06] rounded-full h-1.5"><div class="h-1.5 rounded-full ${convColor}" style="width:${convWidth}%"></div></div>
+                                <span class="text-[11px] text-slate-500 font-mono">${Math.abs(a.conv_equity).toFixed(2)}</span>
+                            </div>
+                        </td>
+                        <td class="py-3 text-center"><span class="text-xs font-mono text-slate-400 ${dataBlur}">${a.position_count}</span></td>
+                    </tr>
+                `;
+            }).join('');
+
+            if (remainingCount > 0) {
+                document.getElementById('unlockButton').innerHTML = `
+                    <button onclick="showPricing()" class="px-5 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-sm font-semibold transition-colors inline-flex items-center space-x-2">
+                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        <span>Unlock ${remainingCount} More Assets</span>
+                    </button>
+                `;
+            }
+        }
+
+        // Render signals
+        function renderSignals() {
+            if (!indexData || !indexData.assets) return;
+
+            const signals = indexData.assets.slice(0, 5)
+                .filter(a => Math.abs(a.tilt) > 0.4 || Math.abs(a.L_net_equity) > 0.1)
+                .slice(0, 4)
+                .map(a => ({
+                    ...a,
+                    type: a.net_usd > 0 ? 'long' : 'short',
+                    severity: Math.abs(a.L_net_equity) > 0.15 ? 'high' : Math.abs(a.tilt) > 0.7 ? 'medium' : 'low'
+                }));
+
+            const ASSET_COLORS = {
+                'BTC': '#f7931a', 'ETH': '#627eea', 'SOL': '#a855f7', 'HYPE': '#22d3ee',
+                'PAXG': '#e6b800', 'AVAX': '#e84142', 'LINK': '#2a5ada', 'DOGE': '#c2a633',
+                'XRP': '#00aae4', 'ADA': '#0033ad', 'DOT': '#e6007a', 'MATIC': '#8247e5',
+            };
+
+            const container = document.getElementById('signalsContainer');
+            let html = '<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">';
+
+            signals.forEach(s => {
+                const isLong = s.type === 'long';
+                const textClass = isLong ? 'text-emerald-400' : 'text-red-400';
+                const badgeBg = isLong ? 'bg-emerald-500/8' : 'bg-red-500/8';
+                const arrow = isLong
+                    ? '<svg class="w-3.5 h-3.5 inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>'
+                    : '<svg class="w-3.5 h-3.5 inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>';
+                const label = `${s.severity === 'high' ? 'Extreme' : 'Strong'} ${isLong ? 'Long' : 'Short'}`;
+                const dotColor = ASSET_COLORS[s.asset] || '#64748b';
+
+                html += `
+                    <div class="border border-white/[0.06] rounded-lg p-3">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-2 h-2 rounded-full" style="background:${dotColor}"></div>
+                                <span class="font-semibold text-sm">${s.asset}</span>
+                            </div>
+                            <span class="${textClass} ${badgeBg} px-2 py-0.5 rounded text-xs font-semibold font-mono">
+                                ${arrow} ${label}
+                            </span>
+                        </div>
+                        <div class="flex items-center justify-between text-[11px]">
+                            <span class="text-slate-500">Net: <span class="font-mono text-slate-400">${s.net_usd > 0 ? '+' : ''}${fmt(s.net_usd)}</span></span>
+                            <span class="text-slate-500">Tilt: <span class="font-mono ${textClass}">${s.tilt > 0 ? '+' : ''}${(s.tilt * 100).toFixed(0)}%</span></span>
+                        </div>
+                        <div class="flex items-center justify-between text-[11px] mt-1">
+                            <span class="text-slate-500">Leverage: <span class="font-mono text-slate-400">${s.L_net_equity > 0 ? '+' : ''}${s.L_net_equity.toFixed(3)}</span></span>
+                            <span class="text-slate-500"><span class="font-mono text-slate-400">${s.position_count}</span> traders</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += '</div>';
+
+            // Add a truthful Core teaser without fabricating a live value.
+            html += `
+                <div class="mt-3 border border-white/[0.04] rounded-lg p-3 relative">
+                    <div class="blur-sm flex items-center justify-between">
+                        <span class="text-sm text-slate-400">Material shift detected across a Core asset</span>
+                        <span class="text-xs text-amber-400 font-mono">Private alert</span>
+                    </div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="bg-[#06090f]/90 px-3 py-1.5 rounded-lg border border-white/10 flex items-center space-x-1.5">
+                            <svg class="w-3 h-3 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                            <span class="text-xs font-semibold">Core</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        // Render notable position changes (uses history data)
+        function renderPositionChanges() {
+            if (!historyData || !historyData.hourly || historyData.hourly.length < 2) return;
+            if (!indexData || !indexData.assets) return;
+
+            const container = document.getElementById('positionChangesContainer');
+
+            // A weekly cohort refresh changes the measurement population.  Pause
+            // the 24h comparison until a full same-cohort window exists instead
+            // of presenting membership turnover as trader activity.
+            if (indexData.cohort_rebalanced_at) {
+                const rebalancedAt = indexData.cohort_rebalanced_timestamp
+                    ? new Date(indexData.cohort_rebalanced_timestamp)
+                    : new Date(indexData.cohort_rebalanced_at + 'T23:59:59');
+                const generatedAt = new Date(indexData.generated_at);
+                const hoursSinceRebalance = (generatedAt - rebalancedAt) / (60 * 60 * 1000);
+                if (hoursSinceRebalance < 30) {
+                    document.getElementById('shiftTimeframe').textContent = 'resumes after refresh';
+                    container.innerHTML = `
+                        <div class="border border-blue-500/10 bg-blue-500/5 rounded-lg p-4">
+                            <div class="text-sm font-semibold text-blue-200 mb-1">Cohort refreshed today</div>
+                            <p class="text-xs text-slate-500 leading-relaxed">24-hour movement comparisons are paused across the rebalance boundary so a change in cohort membership is never mislabeled as trader activity.</p>
+                        </div>
+                    `;
+                    return;
+                }
+            }
+
+            const hourly = historyData.hourly;
+            const latest = hourly[hourly.length - 1];
+
+            // Find a point ~24h ago (or closest available)
+            const latestTs = new Date(latest.timestamp).getTime();
+            const targetTs = latestTs - (24 * 60 * 60 * 1000);
+            let prevPoint = hourly[0];
+            for (const p of hourly) {
+                if (new Date(p.timestamp).getTime() <= targetTs) {
+                    prevPoint = p;
+                } else {
+                    break;
+                }
+            }
+
+            // Calculate actual hours between points
+            const actualHours = Math.round((latestTs - new Date(prevPoint.timestamp).getTime()) / (60 * 60 * 1000));
+            const timeLabel = actualHours <= 26 ? '24h' : `${Math.round(actualHours / 24)}d`;
+            document.getElementById('shiftTimeframe').textContent = `${timeLabel} change`;
+
+            // Tracked assets with history fields
+            const tracked = [
+                { key: 'btc', label: 'BTC', netField: 'btc_net_usd', color: '#f7931a' },
+                { key: 'eth', label: 'ETH', netField: 'eth_net_usd', color: '#627eea' },
+                { key: 'sol', label: 'SOL', netField: 'sol_net_usd', color: '#a855f7' },
+                { key: 'hype', label: 'HYPE', netField: 'hype_net_usd', color: '#22d3ee' },
+            ];
+
+            // Compute deltas and sort by absolute change magnitude
+            const changes = tracked.map(t => {
+                const nowNet = latest[t.netField] || 0;
+                const prevNet = prevPoint[t.netField] || 0;
+                const delta = nowNet - prevNet;
+                const pctChange = prevNet !== 0 ? ((delta / Math.abs(prevNet)) * 100) : 0;
+
+                // Find current tilt from index data
+                const assetData = indexData.assets.find(a => a.asset === t.label);
+                const tilt = assetData ? assetData.tilt : 0;
+
+                return { ...t, nowNet, delta, pctChange, tilt, absDelta: Math.abs(delta) };
+            }).sort((a, b) => b.absDelta - a.absDelta);
+
+            let html = '<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">';
+
+            changes.forEach((c, i) => {
+                const isPositive = c.delta > 0;
+                const deltaColor = isPositive ? 'text-emerald-400' : 'text-red-400';
+                const deltaBg = isPositive ? 'bg-emerald-500/8' : 'bg-red-500/8';
+                const arrow = isPositive
+                    ? '<svg class="w-3.5 h-3.5 inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>'
+                    : '<svg class="w-3.5 h-3.5 inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>';
+                const tiltPct = (c.tilt * 100).toFixed(0);
+                const tiltColor = c.tilt > 0.2 ? 'text-emerald-400' : c.tilt < -0.2 ? 'text-red-400' : 'text-amber-400';
+
+                html += `
+                    <div class="border border-white/[0.06] rounded-lg p-3">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-2 h-2 rounded-full" style="background:${c.color}"></div>
+                                <span class="font-semibold text-sm">${c.label}</span>
+                            </div>
+                            <span class="${deltaColor} ${deltaBg} px-2 py-0.5 rounded text-xs font-semibold font-mono">
+                                ${arrow} ${isPositive ? '+' : ''}${fmt(c.delta)}
+                            </span>
+                        </div>
+                        <div class="flex items-center justify-between text-[11px]">
+                            <span class="text-slate-500">Net: <span class="font-mono text-slate-400">${fmt(c.nowNet)}</span></span>
+                            <span class="text-slate-500">Tilt: <span class="font-mono ${tiltColor}">${tiltPct > 0 ? '+' : ''}${tiltPct}%</span></span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += '</div>';
+
+            // Add a truthful Core teaser for full-universe monitoring.
+            html += `
+                <div class="mt-3 border border-white/[0.04] rounded-lg p-3 relative">
+                    <div class="blur-sm flex items-center justify-between">
+                        <span class="text-sm text-slate-400">Full-universe material shifts monitored hourly</span>
+                        <span class="text-xs text-emerald-400 font-mono">Core alert</span>
+                    </div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="bg-[#06090f]/90 px-3 py-1.5 rounded-lg border border-white/10 flex items-center space-x-1.5">
+                            <svg class="w-3 h-3 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                            <span class="text-xs font-semibold">Core</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        // Update dashboard with index data
+        function updateDashboard() {
+            if (!indexData) return;
+
+            const score = indexData.index_score;
+            const stats = indexData.cohort_stats;
+
+            // Index score
+            document.getElementById('indexScore').textContent = (score > 0 ? '+' : '') + score.toFixed(4);
+            document.getElementById('indexScore').className = `text-5xl font-bold font-mono mb-3 tracking-tight ${score > 0.05 ? 'text-emerald-400' : score < -0.05 ? 'text-red-400' : 'text-amber-400'}`;
+
+            // Direction badge
+            const badge = document.getElementById('directionBadge');
+            if (score > 0.05) {
+                badge.textContent = 'Net Long';
+                badge.className = 'px-2.5 py-0.5 rounded text-xs font-semibold bg-emerald-500/15 text-emerald-400';
+            } else if (score < -0.05) {
+                badge.textContent = 'Net Short';
+                badge.className = 'px-2.5 py-0.5 rounded text-xs font-semibold bg-red-500/15 text-red-400';
+            } else {
+                badge.textContent = 'Neutral';
+                badge.className = 'px-2.5 py-0.5 rounded text-xs font-semibold bg-amber-500/15 text-amber-400';
+            }
+
+            // Trend icon
+            const trendIcon = document.getElementById('trendIcon');
+            if (score > 0) {
+                trendIcon.innerHTML = '<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>';
+                trendIcon.setAttribute('class', 'w-5 h-5 text-emerald-400');
+            } else {
+                trendIcon.innerHTML = '<polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/>';
+                trendIcon.setAttribute('class', 'w-5 h-5 text-red-400');
+            }
+
+            // Stats
+            document.getElementById('walletCount').textContent = stats.total_wallets;
+            document.getElementById('activeWallets').textContent = stats.active_wallets;
+            document.getElementById('leverageText').textContent = `Total Leverage: ${stats.L_cohort_total.toFixed(2)}x`;
+            document.getElementById('totalEquity').textContent = `${fmt(stats.total_equity)} total equity`;
+            document.getElementById('grossNotional').textContent = fmt(stats.gross_notional_usd);
+            document.getElementById('netExposure').textContent = `Net: ${fmt(stats.net_usd)} ${stats.net_usd > 0 ? 'long' : 'short'}`;
+
+            // Asset counts
+            document.getElementById('assetCount').textContent = indexData.assets.length;
+            document.getElementById('assetCountBanner').textContent = indexData.assets.length;
+
+            // Cohort rebalance info
+            if (indexData.cohort_rebalanced_at) {
+                const rebalDate = indexData.cohort_rebalanced_timestamp
+                    ? new Date(indexData.cohort_rebalanced_timestamp)
+                    : new Date(indexData.cohort_rebalanced_at + 'T12:00:00');
+                const rebalBadge = document.getElementById('rebalanceBadge');
+                const rebalDateEl = document.getElementById('rebalanceDate');
+                // Show badge if rebalanced within last 30 days
+                const daysSinceRebal = (Date.now() - rebalDate) / (1000 * 60 * 60 * 24);
+                if (daysSinceRebal <= 30) {
+                    rebalBadge.classList.remove('hidden');
+                }
+                rebalDateEl.textContent = `Cohort rebalanced ${rebalDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
+            }
+
+            // Last updated + freshness check
+            const generatedAt = new Date(indexData.generated_at);
+            const ageMinutes = (Date.now() - generatedAt) / 60000;
+            document.getElementById('lastUpdated').textContent = `Updated ${generatedAt.toLocaleTimeString()}`;
+
+            // The production cadence is hourly. Warn only after a scheduled run
+            // should have arrived, not for the final 40 minutes of every hour.
+            const liveStatus = document.getElementById('liveStatus');
+            const staleWarning = document.getElementById('staleWarning');
+            const staleText = document.getElementById('staleText');
+
+            if (ageMinutes > 75) {
+                liveStatus.classList.add('hidden');
+                staleWarning.classList.remove('hidden');
+                if (ageMinutes > 60) {
+                    staleText.textContent = `${Math.round(ageMinutes / 60)}h old`;
+                } else {
+                    staleText.textContent = `${Math.round(ageMinutes)}m old`;
+                }
+            } else {
+                liveStatus.classList.remove('hidden');
+                staleWarning.classList.add('hidden');
+            }
+
+            // Render components
+            renderDistribution();
+            renderAssetTable();
+            renderSignals();
+        }
+
+        // Fetch data
+        async function fetchData() {
+            try {
+                const cacheBuster = `?t=${Date.now()}`;
+                const fetchJson = async (path) => {
+                    try {
+                        const relativeRes = await fetch(path + cacheBuster);
+                        if (relativeRes.ok) return relativeRes.json();
+                    } catch (err) {
+                        // Fall back below for hosted previews or older local browser behavior.
+                    }
+
+                    const rootRes = await fetch('/' + path + cacheBuster);
+                    if (!rootRes.ok) throw new Error(`Failed to load ${path}`);
+                    return rootRes.json();
+                };
+
+                const [latestIndexData, latestHistoryData] = await Promise.all([
+                    fetchJson('data/index_latest.json'),
+                    fetchJson('data/history.json')
+                ]);
+
+                indexData = latestIndexData;
+                updateDashboard();
+
+                historyData = latestHistoryData;
+                renderChart();
+                renderPositionChanges();
+            } catch (err) {
+                console.error('Error fetching data:', err);
+            }
+        }
+
+        // Init
+        fetchData();
+        setInterval(fetchData, 60000); // Refresh every minute
+    </script>
+</body>
+</html>

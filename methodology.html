@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approach and Data Integrity — HyperIndex</title>
+    <meta name="description" content="What HyperIndex measures, how its proprietary cohort is maintained, and how to interpret the HEAT Score and alerts.">
+    <link rel="canonical" href="https://hyperindex.io/methodology.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hyperindex.io/methodology.html">
+    <meta property="og:title" content="HyperIndex Approach and Data Integrity">
+    <meta property="og:description" content="How to interpret the proprietary cohort, HEAT Score, alert cadence, and known limitations.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="images/logo-icon.jpg">
+    <link rel="stylesheet" href="legal.css">
+</head>
+<body>
+    <header class="legal-header">
+        <a href="index.html" class="brand"><img src="images/logo-icon.jpg" alt=""><span>Hyper<em>Index</em></span></a>
+    </header>
+    <main class="legal-main">
+        <h1>Approach and data integrity</h1>
+        <div class="legal-meta">Current production approach · July 20, 2026</div>
+
+        <div class="callout">HyperIndex turns the live positioning of a proprietary cohort of 100 Hyperliquid traders into a cleaner market read. It is designed to measure directional positioning—not predict returns or expose individual wallets.</div>
+
+        <h2>1. A proprietary cohort, not a leaderboard</h2>
+        <p>The cohort is selected by a proprietary multi-signal process that evaluates performance context and observed trading behavior across multiple time horizons. Its central job is to distinguish accounts expressing useful directional information from activity that can create a misleading picture of conviction.</p>
+        <p>No single rank, position, or recent win is enough. The process is designed to reward durable signal and reduce the influence of accounts whose visible activity does not represent a consistent directional view.</p>
+        <p><strong>What stays private:</strong> selection inputs, transformations, weights, thresholds, internal scores, and wallet identities. These are core HyperIndex intellectual property. We publish what the product measures, how to interpret it, and its limitations—not a recipe for reproducing the cohort.</p>
+
+        <h2>2. Cohort integrity</h2>
+        <p>The cohort is refreshed weekly and must pass automated checks for data sufficiency, cohort stability, structural integrity, and aggregate sanity. If a proposed refresh does not satisfy those controls, the previous accepted cohort stays live.</p>
+        <p>Accepted changes are deployed atomically. HyperIndex also pauses movement comparisons across a membership change so selection turnover is never presented as trader activity.</p>
+
+        <h2>Latest cohort status</h2>
+        <p id="changeStatus" class="status-line">Loading the latest cohort status…</p>
+        <div class="method-grid" aria-live="polite">
+            <div class="method-stat"><strong id="changeDate">—</strong><span>effective date</span></div>
+            <div class="method-stat"><strong id="cohortSize">—</strong><span>traders tracked</span></div>
+        </div>
+        <p class="fine-print">The public status record confirms the active cohort size and refresh date. Selection diagnostics and wallet-level data remain private.</p>
+
+        <h2>3. Metric definitions</h2>
+        <p class="formula"><strong>Gross exposure</strong> is the sum of the cohort’s absolute long and short notionals. <strong>Net exposure</strong> is long notional minus short notional.</p>
+        <p class="formula"><strong>Asset tilt</strong> is asset net exposure divided by asset gross exposure. +1 is entirely long, −1 is entirely short, and values near zero are balanced.</p>
+        <p class="formula"><strong>Net leverage</strong> places directional exposure in the context of cohort capital. <strong>Conviction</strong> is a normalized measure of directional agreement among active positions.</p>
+        <p class="formula"><strong>HEAT Score</strong> is a normalized summary of aggregate direction and exposure. Positive readings indicate net-long positioning; negative readings indicate net-short positioning. Magnitude reflects positioning intensity—it is not a probability or price forecast. Exact transformations and weighting are proprietary.</p>
+
+        <h2>4. Cadence and alerts</h2>
+        <p>The public dashboard refreshes hourly. Free HyperIndex Signals publishes two scheduled public snapshots per day. Core evaluates the complete tracked asset universe after each successful hourly refresh and sends a private Telegram alert only after a regime, net exposure, tilt, or conviction change clears a materiality threshold.</p>
+        <p>A weekly cohort refresh changes the measurement population. HyperIndex therefore pauses movement comparisons across the membership boundary instead of labeling selection turnover as trader activity.</p>
+
+        <h2>5. Known limitations</h2>
+        <ul>
+            <li>Hyperliquid-visible positions may be hedged on another venue or in spot.</li>
+            <li>A strong historical record does not guarantee useful or persistent future signal.</li>
+            <li>On-chain and API data can be delayed, incomplete, or erroneous.</li>
+            <li>A screened trader or the entire cohort can be early, wrong, squeezed, or liquidated.</li>
+            <li>The methodology and results have not been independently audited.</li>
+        </ul>
+
+        <div class="method-cta">
+            <p><strong>Want the monitoring instead of another dashboard?</strong></p>
+            <p>Core watches every tracked asset hourly and sends only meaningful shift alerts. <a href="index.html#core">See Founding Core at $14/month</a>.</p>
+        </div>
+
+        <div class="legal-note"><p>Questions or data corrections: <a href="mailto:hyperindexapp@proton.me?subject=HyperIndex%20approach">hyperindexapp@proton.me</a>. Return to the <a href="index.html">live dashboard</a>.</p></div>
+    </main>
+    <script>
+        const formatDate = (value) => {
+            const date = new Date(`${value}T12:00:00`);
+            return Number.isNaN(date.getTime()) ? value : date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        };
+
+        fetch('data/cohort_change_latest.json', { cache: 'no-store' })
+            .then((response) => {
+                if (!response.ok) throw new Error('change record unavailable');
+                return response.json();
+            })
+            .then((record) => {
+                document.getElementById('changeStatus').textContent = record.status === 'deployed'
+                    ? 'Latest refresh accepted; this cohort is live.'
+                    : `Latest cohort status: ${record.status}`;
+                document.getElementById('changeDate').textContent = formatDate(record.effective_date);
+                document.getElementById('cohortSize').textContent = Number(record.cohort_size).toLocaleString();
+            })
+            .catch(() => {
+                document.getElementById('changeStatus').textContent = 'The latest public change record is temporarily unavailable; the live dashboard remains on the last accepted cohort.';
+            });
+    </script>
+</body>
+</html>
