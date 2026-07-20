@@ -101,6 +101,34 @@
         </div>
     </section>
 
+    <!-- Signals vs Core -->
+    <section id="signals-vs-core" class="border-b border-white/5 bg-white/[0.01] scroll-mt-20">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 py-8 md:py-10">
+            <div class="text-center mb-6">
+                <div class="text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-400 mb-2">Free Signals vs Core</div>
+                <h2 class="text-xl sm:text-2xl font-bold tracking-tight mb-2">Signals shows the state. Core watches the change.</h2>
+                <p class="text-sm text-slate-500">One measurement system. Two different jobs.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div class="rounded-xl border border-white/[0.07] bg-white/[0.025] p-5">
+                    <div class="flex items-center justify-between gap-3 mb-3">
+                        <h3 class="text-sm font-semibold">Free Signals</h3>
+                        <span class="text-[10px] font-mono text-slate-500">10:00 + 18:00 ET</span>
+                    </div>
+                    <p class="text-sm text-slate-400 leading-relaxed">Two public snapshots per day for seeing what the cohort looks like now.</p>
+                </div>
+                <div class="rounded-xl border border-blue-500/25 bg-blue-500/[0.06] p-5">
+                    <div class="flex items-center justify-between gap-3 mb-3">
+                        <h3 class="text-sm font-semibold text-blue-200">HyperIndex Core</h3>
+                        <span class="text-[10px] font-mono text-blue-400">EVERY HOURLY REFRESH</span>
+                    </div>
+                    <p class="text-sm text-slate-300 leading-relaxed">Private monitoring across every tracked asset, with an alert only when aggregate positioning changes enough to matter.</p>
+                </div>
+            </div>
+            <p class="text-center text-xs text-slate-500 mt-4">Core is the monitor between snapshots—not another wallet feed. Nothing to configure. No list to maintain.</p>
+        </div>
+    </section>
+
     <div id="dashboard" class="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-5">
 
         <!-- Hero Stats -->
@@ -337,7 +365,7 @@
                             <div class="flex gap-2"><span class="text-emerald-400">✓</span><span>Hourly material-change detection</span></div>
                             <div class="flex gap-2"><span class="text-emerald-400">✓</span><span>All tracked assets monitored</span></div>
                             <div class="flex gap-2"><span class="text-emerald-400">✓</span><span>Regime, net, tilt, and conviction shifts</span></div>
-                            <div class="flex gap-2"><span class="text-emerald-400">✓</span><span>Founding-member feedback access</span></div>
+                            <div class="flex gap-2"><span class="text-emerald-400">✓</span><span>No wallet lists or thresholds to configure</span></div>
                         </div>
                     </div>
                     <div class="lg:w-72 flex-shrink-0 bg-[#080d14] rounded-xl p-5 border border-white/10">
@@ -358,6 +386,7 @@
             <h2 class="text-xl font-bold mb-6">Questions serious traders ask</h2>
             <div class="space-y-5">
                 <div><h3 class="text-sm font-semibold mb-1.5">How is this different from a whale tracker?</h3><p class="text-sm text-slate-500 leading-relaxed">Whale trackers help you inspect individual wallets. HyperIndex maintains one proprietary cohort and measures its aggregate positioning, reducing single-wallet noise and making regime changes easier to see.</p></div>
+                <div><h3 class="text-sm font-semibold mb-1.5">Why pay when other Hyperliquid trackers are free?</h3><p class="text-sm text-slate-500 leading-relaxed">Free trackers are useful for lookup, raw activity, and alerts you configure yourself. Core is a maintained monitor for one proprietary directional cohort: no wallet list to build, no rules to tune, and no interruption unless the aggregate state materially changes. It is designed to tell you when it is worth opening the other tools.</p></div>
                 <div><h3 class="text-sm font-semibold mb-1.5">Is the data actually real-time?</h3><p class="text-sm text-slate-500 leading-relaxed">The dashboard refreshes hourly. We say hourly because that is the current production cadence. Core evaluates the full universe immediately after each successful refresh.</p></div>
                 <div><h3 class="text-sm font-semibold mb-1.5">How is Core different from free HyperIndex Signals?</h3><p class="text-sm text-slate-500 leading-relaxed">Signals publishes two scheduled public snapshots per day. Core checks every tracked asset after each hourly refresh and privately interrupts you only when a regime, net exposure, tilt, or conviction change clears a materiality threshold. Same measurement system; much faster monitoring and broader coverage.</p></div>
                 <div><h3 class="text-sm font-semibold mb-1.5">Does HyperIndex tell me what to trade?</h3><p class="text-sm text-slate-500 leading-relaxed">No. It reports aggregated positioning and changes. It does not provide personalized recommendations, execute trades, connect to your wallet, or promise returns.</p></div>
