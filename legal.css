@@ -53,6 +53,22 @@ a { color: #60a5fa; }
     line-height: 1.65;
 }
 .fine-print { margin-top: 36px; font-size: .78rem !important; color: #64748b !important; }
+.hidden { display: none !important; }
+.primary-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 18px;
+    padding: 13px 18px;
+    border-radius: 10px;
+    background: #2563eb;
+    color: #fff;
+    font-size: .92rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+.primary-action:hover { background: #3b82f6; }
+.activation-status { margin: 10px 0 0 !important; font-size: .78rem !important; color: #64748b !important; }
 .method-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));

@@ -19,18 +19,22 @@
     <main class="legal-shell">
         <article class="legal-card">
             <p class="eyebrow">HyperIndex Core</p>
-            <h1>You’re in. We’ll activate your private alerts next.</h1>
-            <p class="lede">Your payment was received. Core access is manually verified during the founding launch and is activated within 12 hours, usually sooner.</p>
+            <h1>You’re in. Activate your private alerts now.</h1>
+            <p class="lede">Your payment was received. The HyperIndex bot verifies this exact Stripe checkout and creates a private one-person Core invite.</p>
+
+            <a id="activateCore" class="primary-action hidden" href="#" rel="noopener">Activate Core in Telegram</a>
+            <p id="activationStatus" class="activation-status"></p>
 
             <h2>What happens now</h2>
             <ol>
-                <li>We match your payment email to the Telegram @username entered at checkout.</li>
-                <li>We send your invitation to the private HyperIndex Core channel.</li>
-                <li>Core begins monitoring every tracked asset after each hourly data refresh.</li>
+                <li>Open the bot using the button above from the Telegram account entered at checkout.</li>
+                <li>The bot verifies the paid session and matches your Telegram @username.</li>
+                <li>You receive a one-person invite that expires after one hour.</li>
+                <li>Once you join, the bot confirms that Core access is active.</li>
             </ol>
 
             <div class="callout">
-                If checkout did not ask for your Telegram @username, keep your Stripe receipt and email <a href="mailto:hyperindexapp@proton.me?subject=HyperIndex%20Core%20activation">hyperindexapp@proton.me</a> with the @username you want invited.
+                If the activation button is missing, your username does not match, or Telegram cannot create the invite, keep your Stripe receipt and email <a href="mailto:hyperindexapp@proton.me?subject=HyperIndex%20Core%20activation">hyperindexapp@proton.me</a>. Manual fallback remains available within 12 hours.
             </div>
 
             <h2>While you wait</h2>
@@ -41,5 +45,25 @@
             <p class="fine-print">Activation help: <a href="mailto:hyperindexapp@proton.me?subject=HyperIndex%20Core%20support">hyperindexapp@proton.me</a></p>
         </article>
     </main>
+    <script>
+        (() => {
+            const button = document.getElementById('activateCore');
+            const status = document.getElementById('activationStatus');
+            const sessionId = new URLSearchParams(window.location.search).get('session_id') || '';
+            const match = sessionId.match(/^cs_(live|test)_([A-Za-z0-9]+)$/);
+            if (!match) {
+                status.textContent = 'The secure activation reference is missing. Use the support fallback above.';
+                return;
+            }
+            const payload = `${match[1] === 'live' ? 'l' : 't'}_${match[2]}`;
+            if (payload.length > 64) {
+                status.textContent = 'This checkout reference needs manual activation. Use the support fallback above.';
+                return;
+            }
+            button.href = `https://t.me/HyperIndexSignalsBot?start=${encodeURIComponent(payload)}`;
+            button.classList.remove('hidden');
+            status.textContent = 'Use the same Telegram @username you entered during checkout.';
+        })();
+    </script>
 </body>
 </html>
