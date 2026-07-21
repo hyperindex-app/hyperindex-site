@@ -220,7 +220,7 @@
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
                 <div>
                     <h2 class="text-base font-semibold mb-0.5">The 100: Distribution</h2>
-                    <p class="text-xs text-slate-500" id="distributionSubtitle">Per-wallet net notional — sorted by absolute size</p>
+                    <p class="text-xs text-slate-500" id="distributionSubtitle">Anonymous net-notional ranges — exact wallet values withheld</p>
                 </div>
                 <div class="flex items-center gap-3">
                     <div id="distributionLegend" class="flex items-center space-x-3 text-[11px] font-mono text-slate-500">
@@ -231,7 +231,6 @@
                         <button onclick="setDistTab('position')" id="btn-dist-position" class="px-3 py-1.5 rounded-md text-xs font-medium bg-blue-600 text-white whitespace-nowrap transition-colors">Position</button>
                         <button onclick="setDistTab('equity')" id="btn-dist-equity" class="px-3 py-1.5 rounded-md text-xs font-medium text-slate-500 hover:text-slate-300 whitespace-nowrap transition-colors">Equity</button>
                     </div>
-                    <button onclick="toggleDistLog()" id="btn-dist-log" class="px-2.5 py-1.5 rounded-md text-[11px] font-mono font-medium text-slate-500 hover:text-slate-300 bg-white/[0.03] border border-white/[0.06] whitespace-nowrap transition-colors">Log</button>
                 </div>
             </div>
             <div style="height: 280px;">
@@ -743,20 +742,6 @@
         // Render Elite Trader distribution histogram
         let distributionChart = null;
         let currentDistTab = 'position';
-        let distLogScale = false;
-
-        function toggleDistLog() {
-            distLogScale = !distLogScale;
-            const btn = document.getElementById('btn-dist-log');
-            if (distLogScale) {
-                btn.classList.add('bg-blue-600', 'text-white');
-                btn.classList.remove('text-slate-500');
-            } else {
-                btn.classList.remove('bg-blue-600', 'text-white');
-                btn.classList.add('text-slate-500');
-            }
-            renderDistribution();
-        }
 
         function setDistTab(tab) {
             currentDistTab = tab;
@@ -773,77 +758,30 @@
             const subtitle = document.getElementById('distributionSubtitle');
             const legend = document.getElementById('distributionLegend');
             if (tab === 'equity') {
-                subtitle.textContent = 'Per-wallet account equity — same wallet order as Position tab';
+                subtitle.textContent = 'Anonymous account-equity ranges — exact wallet values withheld';
                 legend.classList.add('hidden');
             } else {
-                subtitle.textContent = 'Per-wallet net notional — sorted by absolute size';
+                subtitle.textContent = 'Anonymous net-notional ranges — exact wallet values withheld';
                 legend.classList.remove('hidden');
             }
             renderDistribution();
         }
 
-        // Signed log transform: preserves sign, compresses magnitude
-        // sign(v) * log10(1 + |v|) where v is in $M
-        function signedLog(v) { return Math.sign(v) * Math.log10(1 + Math.abs(v)); }
-        function signedLogInv(v) { return Math.sign(v) * (Math.pow(10, Math.abs(v)) - 1); }
-
         function renderDistribution() {
             if (!indexData || !indexData.wallet_distribution) return;
-            const wallets = indexData.wallet_distribution;
-            const labels = wallets.map((_, i) => i + 1);
-            const useLog = distLogScale && currentDistTab === 'position';
-
-            let values, colors, tooltipCb, yCallback, yScaleType;
-
-            if (currentDistTab === 'equity') {
-                values = wallets.map(w => w.equity / 1e6);
-                colors = 'rgba(139, 92, 246, 0.8)';
-                tooltipCb = {
-                    title: (items) => `Wallet #${items[0].label}`,
-                    label: (item) => {
-                        const w = wallets[item.dataIndex];
-                        return `Equity: ${fmt(w.equity)}`;
-                    }
-                };
-            } else {
-                const rawM = wallets.map(w => w.net_notional / 1e6);
-                values = useLog ? rawM.map(signedLog) : rawM;
-                colors = wallets.map(w => w.net_notional >= 0 ? 'rgba(16, 185, 129, 0.8)' : 'rgba(239, 68, 68, 0.8)');
-                tooltipCb = {
-                    title: (items) => `Wallet #${items[0].label}`,
-                    label: (item) => {
-                        const w = wallets[item.dataIndex];
-                        const lines = [`Net: ${fmt(w.net_notional)}`];
-                        if (w.long_notional > 0) lines.push(`Long: ${fmt(w.long_notional)}`);
-                        if (w.short_notional > 0) lines.push(`Short: ${fmt(w.short_notional)}`);
-                        return lines;
-                    }
-                };
-            }
-
-            // Log scale: fixed ticks at clean round $M values, evenly spaced in log space
-            const logTicksM = [200, 100, 25, 10, 5, 0, -5, -10, -25, -100];
-            const logTickValues = logTicksM.map(signedLog);
-
-            const fmtLogTick = (real) => {
-                if (real === 0) return '$0';
-                const a = Math.abs(real);
-                const sign = real < 0 ? '-' : '';
-                if (a >= 1000) return `${sign}$${(a/1000).toFixed(0)}B`;
-                return `${sign}$${a}M`;
-            };
-
-            yCallback = useLog
-                ? (v) => {
-                    // Only label our explicit ticks
-                    const idx = logTickValues.findIndex(tv => Math.abs(tv - v) < 0.001);
-                    if (idx === -1) return '';
-                    return fmtLogTick(logTicksM[idx]);
-                }
-                : (v) => {
-                    if (Math.abs(v) >= 1000) return `$${(v/1000).toFixed(0)}B`;
-                    return `$${v.toFixed(0)}M`;
-                };
+            const distribution = indexData.wallet_distribution;
+            if (Array.isArray(distribution)) return;
+            const buckets = currentDistTab === 'equity'
+                ? distribution.equity
+                : distribution.position;
+            if (!Array.isArray(buckets)) return;
+            const labels = buckets.map(bucket => bucket.label);
+            const values = buckets.map(bucket => bucket.count);
+            const colors = currentDistTab === 'equity'
+                ? buckets.map(() => 'rgba(139, 92, 246, 0.8)')
+                : buckets.map(bucket => bucket.direction === 'short'
+                    ? 'rgba(239, 68, 68, 0.8)'
+                    : 'rgba(16, 185, 129, 0.8)');
 
             if (distributionChart) distributionChart.destroy();
             const ctx = document.getElementById('distributionChart').getContext('2d');
@@ -872,26 +810,23 @@
                             bodyColor: '#94a3b8',
                             titleFont: { family: 'monospace' },
                             bodyFont: { family: 'monospace' },
-                            callbacks: tooltipCb
+                            callbacks: {
+                                title: (items) => items[0].label,
+                                label: (item) => `${item.raw} trader${item.raw === 1 ? '' : 's'}`,
+                            }
                         }
                     },
                     scales: {
                         x: {
-                            ticks: { color: '#475569', maxTicksLimit: 10, font: { family: 'monospace', size: 10 }, callback: (v) => v + 1 },
+                            ticks: { color: '#64748b', maxRotation: 45, minRotation: 25, font: { family: 'monospace', size: 9 } },
                             grid: { display: false },
-                            title: { display: true, text: 'Wallets (by position size)', color: '#475569', font: { family: 'monospace', size: 10 } }
+                            title: { display: true, text: currentDistTab === 'equity' ? 'Account equity range' : 'Net notional range', color: '#475569', font: { family: 'monospace', size: 10 } }
                         },
                         y: {
-                            type: 'linear',
-                            ...(useLog ? {
-                                min: signedLog(-100),
-                                max: signedLog(200),
-                                afterBuildTicks: (axis) => {
-                                    axis.ticks = logTickValues.map(v => ({ value: v }));
-                                }
-                            } : {}),
-                            ticks: { color: '#475569', font: { family: 'monospace', size: 10 }, callback: yCallback },
-                            grid: { color: 'rgba(255,255,255,0.03)' }
+                            beginAtZero: true,
+                            ticks: { color: '#475569', precision: 0, font: { family: 'monospace', size: 10 } },
+                            grid: { color: 'rgba(255,255,255,0.03)' },
+                            title: { display: true, text: 'Trader count', color: '#475569', font: { family: 'monospace', size: 10 } }
                         }
                     }
                 }
@@ -933,7 +868,9 @@
                         <td class="py-3 pr-4">
                             <div class="flex items-center space-x-2.5">
                                 <div class="w-7 h-7 bg-white/[0.06] rounded-lg flex items-center justify-center text-[10px] font-bold text-slate-400">${a.asset.substring(0,2)}</div>
-                                <span class="font-medium text-sm">${a.asset}</span>
+                                ${a.asset === 'BTC'
+                                    ? '<a href="assets/btc.html" class="font-medium text-sm hover:text-blue-300 transition-colors">BTC</a>'
+                                    : `<span class="font-medium text-sm">${a.asset}</span>`}
                                 ${isLocked ? '<svg class="w-3 h-3 text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>' : ''}
                             </div>
                         </td>
