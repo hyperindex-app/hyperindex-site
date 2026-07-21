@@ -9,11 +9,11 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://hyperindex.io/">
     <meta property="og:title" content="HyperIndex — Hyperliquid Smart Money Positioning">
-    <meta property="og:description" content="100 traders. One clear read on Hyperliquid positioning.">
+    <meta property="og:description" content="Hourly aggregate Hyperliquid positioning from 100 screened traders, with private alerts for material changes.">
     <meta property="og:image" content="https://hyperindex.io/images/logo-wordmark.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="HyperIndex — Hyperliquid Smart Money Positioning">
-    <meta name="twitter:description" content="100 traders. One clear read on Hyperliquid positioning.">
+    <meta name="twitter:description" content="Hourly aggregate Hyperliquid positioning from 100 screened traders, with private alerts for material changes.">
     <meta name="twitter:image" content="https://hyperindex.io/images/logo-wordmark.jpg">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -86,7 +86,7 @@
                 100 traders. One clear read.
             </h1>
             <p class="text-base md:text-lg text-slate-400 max-w-2xl mx-auto mb-8 leading-relaxed">
-                HyperIndex turns the live positions of 100 screened Hyperliquid traders into one <span class="text-white font-medium">HEAT Score</span>, asset tilts, and private alerts when the 100 shift. No wallet hunting. No noise feed.
+                HyperIndex combines the live positions of 100 screened Hyperliquid traders into one <span class="text-white font-medium">HEAT Score</span> and a set of asset-level reads. The dashboard replaces manual wallet hunting, and Core alerts when aggregate positioning materially changes.
             </p>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
                 <button onclick="showPricing()" class="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-lg text-sm font-semibold transition-colors">
@@ -108,8 +108,8 @@
         <div class="max-w-5xl mx-auto px-4 sm:px-6 py-8 md:py-10">
             <div class="text-center mb-6">
                 <div class="text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-400 mb-2">Free Signals vs Core</div>
-                <h2 class="text-xl sm:text-2xl font-bold tracking-tight mb-2">Signals shows the state. Core watches the change.</h2>
-                <p class="text-sm text-slate-500">One measurement system. Two different jobs.</p>
+                <h2 class="text-xl sm:text-2xl font-bold tracking-tight mb-2">Free Signals publishes scheduled snapshots, while Core monitors every hourly refresh.</h2>
+                <p class="text-sm text-slate-500">Both use the same measurement system for different jobs.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div class="rounded-xl border border-white/[0.07] bg-white/[0.025] p-5">
@@ -127,7 +127,7 @@
                     <p class="text-sm text-slate-300 leading-relaxed">Private monitoring across every tracked asset, with an alert only when aggregate positioning changes enough to matter.</p>
                 </div>
             </div>
-            <p class="text-center text-xs text-slate-500 mt-4">Core is the monitor between snapshots—not another wallet feed. Nothing to configure. No list to maintain.</p>
+            <p class="text-center text-xs text-slate-500 mt-4">Core monitors the hours between public snapshots across every tracked asset, without requiring you to configure wallets or alert thresholds.</p>
         </div>
     </section>
 
@@ -220,7 +220,7 @@
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
                 <div>
                     <h2 class="text-base font-semibold mb-0.5">The 100: Distribution</h2>
-                    <p class="text-xs text-slate-500" id="distributionSubtitle">Anonymous net-notional ranges — exact wallet values withheld</p>
+                    <p class="text-xs text-slate-500" id="distributionSubtitle">100 anonymous trader bars — ordered by approximate net size</p>
                 </div>
                 <div class="flex items-center gap-3">
                     <div id="distributionLegend" class="flex items-center space-x-3 text-[11px] font-mono text-slate-500">
@@ -231,6 +231,7 @@
                         <button onclick="setDistTab('position')" id="btn-dist-position" class="px-3 py-1.5 rounded-md text-xs font-medium bg-blue-600 text-white whitespace-nowrap transition-colors">Position</button>
                         <button onclick="setDistTab('equity')" id="btn-dist-equity" class="px-3 py-1.5 rounded-md text-xs font-medium text-slate-500 hover:text-slate-300 whitespace-nowrap transition-colors">Equity</button>
                     </div>
+                    <button onclick="toggleDistLog()" id="btn-dist-log" class="px-2.5 py-1.5 rounded-md text-[11px] font-mono font-medium text-slate-500 hover:text-slate-300 bg-white/[0.03] border border-white/[0.06] whitespace-nowrap transition-colors">Log</button>
                 </div>
             </div>
             <div style="height: 280px;">
@@ -289,23 +290,23 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-16">
             <div class="max-w-2xl mb-8">
                 <div class="text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-400 mb-3">The edge</div>
-                <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mb-3">A cleaner read on Hyperliquid positioning.</h2>
+                <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mb-3">What the dashboard is designed to answer</h2>
                 <p class="text-sm sm:text-base text-slate-400 leading-relaxed">Other tools make you inspect wallets one by one. HyperIndex answers a narrower question: what are 100 screened directional traders doing as a group, and what changed enough to matter?</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="bg-white/[0.03] rounded-xl p-5 border border-white/[0.06]">
                     <div class="text-blue-400 font-mono text-xs mb-4">01 / CURATE</div>
-                    <h3 class="font-semibold mb-2">Build for signal, not rank</h3>
+                    <h3 class="font-semibold mb-2">A deliberately screened set</h3>
                     <p class="text-sm text-slate-500 leading-relaxed">A proprietary multi-signal process evaluates accounts across time and rejects activity that would create a misleading picture of directional conviction.</p>
                 </div>
                 <div class="bg-white/[0.03] rounded-xl p-5 border border-white/[0.06]">
                     <div class="text-blue-400 font-mono text-xs mb-4">02 / DISTILL</div>
-                    <h3 class="font-semibold mb-2">Collapse 100 books into one read</h3>
+                    <h3 class="font-semibold mb-2">The aggregate read</h3>
                     <p class="text-sm text-slate-500 leading-relaxed">The HEAT Score summarizes the aggregate direction. Asset tilt, net leverage, conviction, and trader counts show where the agreement is concentrated.</p>
                 </div>
                 <div class="bg-white/[0.03] rounded-xl p-5 border border-white/[0.06]">
                     <div class="text-blue-400 font-mono text-xs mb-4">03 / ALERT</div>
-                    <h3 class="font-semibold mb-2">Interrupt only for material change</h3>
+                    <h3 class="font-semibold mb-2">Material-change monitoring</h3>
                     <p class="text-sm text-slate-500 leading-relaxed">Core checks the full asset universe after every hourly refresh and sends a private Telegram alert for regime flips, meaningful net shifts, and conviction changes.</p>
                 </div>
             </div>
@@ -324,7 +325,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-7 lg:gap-10 items-center">
                 <div>
                     <div class="text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-400 mb-3">A real historical alert replay</div>
-                    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mb-3">See exactly what earns an interruption.</h2>
+                    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mb-3">What a Core alert includes</h2>
                     <p class="text-sm sm:text-base text-slate-400 leading-relaxed mb-4">This is a replay of an actual move measured with the same 100-trader set between 11:00 and 12:01 ET on July 14. The values are historical; the format is the concise alert Core uses now.</p>
                     <div class="space-y-2.5 text-sm text-slate-300 mb-5">
                         <div class="flex gap-2"><span class="text-emerald-400">✓</span><span>The time window and aggregate change are explicit.</span></div>
@@ -364,8 +365,8 @@
                 <div class="flex flex-col lg:flex-row lg:items-center gap-8 lg:justify-between">
                     <div class="max-w-2xl">
                         <div class="inline-flex px-2.5 py-1 rounded bg-blue-500/10 text-blue-300 border border-blue-500/20 text-[10px] font-bold uppercase tracking-wider mb-4">Founding Core</div>
-                        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mb-3">Get the change, not another chart.</h2>
-                        <p class="text-sm sm:text-base text-slate-400 leading-relaxed mb-5">Private Telegram alerts across every tracked asset, plus the complete dashboard context. Designed for active Hyperliquid traders who want one useful interruption instead of another feed to monitor.</p>
+                        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mb-3">Hourly monitoring for every asset on the dashboard</h2>
+                        <p class="text-sm sm:text-base text-slate-400 leading-relaxed mb-5">Core sends a Telegram alert only when a regime, net exposure, tilt, or conviction change clears its materiality threshold. It is intended for active Hyperliquid traders who want meaningful changes delivered without monitoring another feed.</p>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-sm text-slate-300">
                             <div class="flex gap-2"><span class="text-emerald-400">✓</span><span>Hourly material-change detection</span></div>
                             <div class="flex gap-2"><span class="text-emerald-400">✓</span><span>All tracked assets monitored</span></div>
@@ -417,7 +418,7 @@
         <div class="bg-[#0d1117] rounded-xl p-6 sm:p-8 border border-white/[0.06] max-w-4xl w-full max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-center mb-6">
                 <div>
-                    <h2 class="text-2xl font-bold mb-1">Get the change, not another chart</h2>
+                    <h2 class="text-2xl font-bold mb-1">Core monitors every tracked asset between public snapshots</h2>
                     <p class="text-sm text-slate-500">Private, hourly HEAT alerts for active Hyperliquid traders</p>
                 </div>
                 <button onclick="hidePricing()" class="text-slate-500 hover:text-white text-xl w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/5 transition-colors">&times;</button>
@@ -743,6 +744,20 @@
         // Render Elite Trader distribution histogram
         let distributionChart = null;
         let currentDistTab = 'position';
+        let distLogScale = false;
+
+        function toggleDistLog() {
+            distLogScale = !distLogScale;
+            const btn = document.getElementById('btn-dist-log');
+            if (distLogScale) {
+                btn.classList.add('bg-blue-600', 'text-white');
+                btn.classList.remove('text-slate-500');
+            } else {
+                btn.classList.remove('bg-blue-600', 'text-white');
+                btn.classList.add('text-slate-500');
+            }
+            renderDistribution();
+        }
 
         function setDistTab(tab) {
             currentDistTab = tab;
@@ -759,13 +774,54 @@
             const subtitle = document.getElementById('distributionSubtitle');
             const legend = document.getElementById('distributionLegend');
             if (tab === 'equity') {
-                subtitle.textContent = 'Anonymous account-equity ranges — exact wallet values withheld';
+                subtitle.textContent = '100 anonymous trader bars — ordered by approximate account equity';
                 legend.classList.add('hidden');
             } else {
-                subtitle.textContent = 'Anonymous net-notional ranges — exact wallet values withheld';
+                subtitle.textContent = '100 anonymous trader bars — ordered by approximate net size';
                 legend.classList.remove('hidden');
             }
             renderDistribution();
+        }
+
+        // Expand the broad public buckets into a stable 100-bar silhouette.
+        // Values are deterministic representatives of each range, not exact
+        // account values. This preserves the old chart experience without
+        // reintroducing wallet-level fingerprints at the public boundary.
+        const distributionRangesM = {
+            position: [
+                [-200, -100], [-100, -50], [-50, -25], [-25, -10],
+                [-10, -5], [-5, 0], [0, 5], [5, 10], [10, 25],
+                [25, 50], [50, 100], [100, 200],
+            ],
+            equity: [
+                [0.05, 0.5], [0.5, 1], [1, 2.5], [2.5, 5],
+                [5, 10], [10, 25], [25, 50], [50, 100], [100, 200],
+            ],
+        };
+
+        function expandDistributionBuckets(buckets, tab) {
+            const ranges = distributionRangesM[tab];
+            const expanded = [];
+            buckets.forEach((bucket, bucketIndex) => {
+                const range = ranges[bucketIndex];
+                if (!range) return;
+                const count = Number(bucket.count);
+                for (let index = 0; index < count; index += 1) {
+                    const fraction = (index + 1) / (count + 1);
+                    expanded.push({
+                        value: range[0] + (range[1] - range[0]) * fraction,
+                        publicRange: bucket.label,
+                        direction: bucket.direction,
+                    });
+                }
+            });
+            return expanded.sort(tab === 'position'
+                ? (a, b) => Math.abs(b.value) - Math.abs(a.value)
+                : (a, b) => b.value - a.value);
+        }
+
+        function signedLog(value) {
+            return Math.sign(value) * Math.log10(1 + Math.abs(value));
         }
 
         function renderDistribution() {
@@ -776,13 +832,32 @@
                 ? distribution.equity
                 : distribution.position;
             if (!Array.isArray(buckets)) return;
-            const labels = buckets.map(bucket => bucket.label);
-            const values = buckets.map(bucket => bucket.count);
+            const points = expandDistributionBuckets(buckets, currentDistTab);
+            const labels = points.map((_, index) => index + 1);
+            const rawValues = points.map(point => point.value);
+            const useLog = distLogScale && currentDistTab === 'position';
+            const values = useLog ? rawValues.map(signedLog) : rawValues;
             const colors = currentDistTab === 'equity'
-                ? buckets.map(() => 'rgba(139, 92, 246, 0.8)')
-                : buckets.map(bucket => bucket.direction === 'short'
+                ? points.map(() => 'rgba(139, 92, 246, 0.8)')
+                : points.map(point => point.direction === 'short'
                     ? 'rgba(239, 68, 68, 0.8)'
                     : 'rgba(16, 185, 129, 0.8)');
+
+            const logTicksM = [200, 100, 25, 10, 5, 0, -5, -10, -25, -100, -200];
+            const logTickValues = logTicksM.map(signedLog);
+            const formatAxisValue = (value) => {
+                const absolute = Math.abs(value);
+                const sign = value < 0 ? '-' : '';
+                if (absolute >= 1000) return `${sign}$${(absolute / 1000).toFixed(0)}B`;
+                if (absolute < 1 && absolute !== 0) return `${sign}$${absolute.toFixed(1)}M`;
+                return `${sign}$${absolute.toFixed(0)}M`;
+            };
+            const yCallback = useLog
+                ? (value) => {
+                    const index = logTickValues.findIndex((tick) => Math.abs(tick - value) < 0.001);
+                    return index === -1 ? '' : formatAxisValue(logTicksM[index]);
+                }
+                : formatAxisValue;
 
             if (distributionChart) distributionChart.destroy();
             const ctx = document.getElementById('distributionChart').getContext('2d');
@@ -812,22 +887,28 @@
                             titleFont: { family: 'monospace' },
                             bodyFont: { family: 'monospace' },
                             callbacks: {
-                                title: (items) => items[0].label,
-                                label: (item) => `${item.raw} trader${item.raw === 1 ? '' : 's'}`,
+                                title: (items) => `Trader #${items[0].label}`,
+                                label: (item) => `Public range: ${points[item.dataIndex].publicRange}`,
                             }
                         }
                     },
                     scales: {
                         x: {
-                            ticks: { color: '#64748b', maxRotation: 45, minRotation: 25, font: { family: 'monospace', size: 9 } },
+                            ticks: { color: '#475569', maxTicksLimit: 10, font: { family: 'monospace', size: 10 }, callback: (value) => value + 1 },
                             grid: { display: false },
-                            title: { display: true, text: currentDistTab === 'equity' ? 'Account equity range' : 'Net notional range', color: '#475569', font: { family: 'monospace', size: 10 } }
+                            title: { display: true, text: currentDistTab === 'equity' ? 'Traders (by approximate equity)' : 'Traders (by approximate position size)', color: '#475569', font: { family: 'monospace', size: 10 } }
                         },
                         y: {
-                            beginAtZero: true,
-                            ticks: { color: '#475569', precision: 0, font: { family: 'monospace', size: 10 } },
-                            grid: { color: 'rgba(255,255,255,0.03)' },
-                            title: { display: true, text: 'Trader count', color: '#475569', font: { family: 'monospace', size: 10 } }
+                            type: 'linear',
+                            ...(useLog ? {
+                                min: signedLog(-200),
+                                max: signedLog(200),
+                                afterBuildTicks: (axis) => {
+                                    axis.ticks = logTickValues.map((value) => ({ value }));
+                                }
+                            } : {}),
+                            ticks: { color: '#475569', font: { family: 'monospace', size: 10 }, callback: yCallback },
+                            grid: { color: 'rgba(255,255,255,0.03)' }
                         }
                     }
                 }

@@ -66,7 +66,7 @@
             <span id="shortShare">— gross short</span>
         </div>
         <footer>
-            <p class="updated" id="updated">Fetching the current read…<br>Positioning, not prediction.</p>
+            <p class="updated" id="updated">Fetching the current read…<br>Descriptive positioning data.</p>
             <nav class="links" aria-label="HyperIndex links">
                 <a href="https://t.me/HyperIndexSignalsBot?start=sample_site" target="_blank" rel="noopener">Core sample</a>
                 <a href="https://hyperindex.io/?utm_source=embed&amp;utm_medium=referral&amp;utm_campaign=current_read&amp;utm_content=card" target="_blank" rel="noopener">View dashboard →</a>
@@ -106,12 +106,12 @@
                     byId('net').textContent = formatUSD(read.net_usd);
                     byId('traderContext').textContent = `${Number(read.screened_traders)} screened Hyperliquid traders`;
                     byId('shortShare').textContent = `${Math.round(share * 100)}% gross short`;
-                    byId('updated').innerHTML = `Updated ${formatTime(read.generated_at)}<br>Positioning, not prediction.`;
+                    byId('updated').innerHTML = `Updated ${formatTime(read.generated_at)}<br>Descriptive positioning data.`;
                 })
                 .catch(() => {
                     byId('regime').textContent = 'Temporarily unavailable';
                     byId('shortShare').textContent = 'Refresh shortly';
-                    byId('updated').innerHTML = 'Current read unavailable.<br>Positioning, not prediction.';
+                    byId('updated').innerHTML = 'Current read unavailable.<br>Please try again shortly.';
                 });
         })();
     </script>
