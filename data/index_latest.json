@@ -1,1269 +1,1275 @@
 {
-  "generated_at": "2026-07-20T23:00:50-04:00",
+  "generated_at": "2026-07-21T00:01:41-04:00",
   "cohort_rebalanced_at": "2026-07-20",
   "cohort_rebalanced_timestamp": "2026-07-20T01:26:32-04:00",
-  "index_score": -0.246826,
+  "index_score": -0.251039,
   "leverage_dampening": false,
   "cohort_stats": {
-    "total_equity": 411629750.64,
+    "total_equity": 411188831.51,
     "total_wallets": 100,
     "active_wallets": 100,
-    "gross_long_usd": 729450635.19,
-    "gross_short_usd": 1232330374.49,
-    "net_usd": -502879739.3,
-    "gross_notional_usd": 1961781009.69,
-    "L_cohort_total": 4.7659
+    "gross_long_usd": 731097770.61,
+    "gross_short_usd": 1231286182.32,
+    "net_usd": -500188411.71,
+    "gross_notional_usd": 1962383952.93,
+    "L_cohort_total": 4.7725
   },
   "assets": [
     {
       "asset": "BTC",
-      "long_usd": 188513474.81,
-      "short_usd": 358287682.26,
-      "net_usd": -169774207.46,
-      "tilt": -0.3105,
-      "position_count": 56,
+      "long_usd": 187634901.42,
+      "short_usd": 359571521.04,
+      "net_usd": -171936619.62,
+      "tilt": -0.3142,
+      "position_count": 57,
       "long_count": 22,
-      "short_count": 34,
-      "L_net_margin": -2.835802,
-      "L_net_equity": -0.412444,
-      "conv_equity": -0.3267,
+      "short_count": 35,
+      "L_net_margin": -2.88201,
+      "L_net_equity": -0.418145,
+      "conv_equity": -0.3429,
       "free": true
     },
     {
       "asset": "HYPE",
-      "long_usd": 124409131.9,
-      "short_usd": 289116526.56,
-      "net_usd": -164707394.67,
-      "tilt": -0.3983,
-      "position_count": 52,
+      "long_usd": 124763378.42,
+      "short_usd": 290226333.97,
+      "net_usd": -165462955.56,
+      "tilt": -0.3987,
+      "position_count": 53,
       "long_count": 10,
-      "short_count": 42,
-      "L_net_margin": -2.154862,
-      "L_net_equity": -0.400135,
-      "conv_equity": -0.592,
-      "free": true
-    },
-    {
-      "asset": "SOL",
-      "long_usd": 19472505.64,
-      "short_usd": 64934786.35,
-      "net_usd": -45462280.72,
-      "tilt": -0.5386,
-      "position_count": 32,
-      "long_count": 13,
-      "short_count": 19,
-      "L_net_margin": -2.736217,
-      "L_net_equity": -0.110445,
-      "conv_equity": -0.4102,
+      "short_count": 43,
+      "L_net_margin": -2.157371,
+      "L_net_equity": -0.402401,
+      "conv_equity": -0.5969,
       "free": true
     },
     {
       "asset": "ETH",
-      "long_usd": 353661506.0,
-      "short_usd": 397879417.75,
-      "net_usd": -44217911.75,
-      "tilt": -0.0588,
+      "long_usd": 355290398.87,
+      "short_usd": 402009344.6,
+      "net_usd": -46718945.73,
+      "tilt": -0.0617,
       "position_count": 50,
       "long_count": 16,
       "short_count": 34,
-      "L_net_margin": -0.436361,
-      "L_net_equity": -0.107422,
-      "conv_equity": -0.1611,
+      "L_net_margin": -0.45684,
+      "L_net_equity": -0.113619,
+      "conv_equity": -0.1703,
+      "free": true
+    },
+    {
+      "asset": "SOL",
+      "long_usd": 19471319.74,
+      "short_usd": 59833978.16,
+      "net_usd": -40362658.42,
+      "tilt": -0.509,
+      "position_count": 31,
+      "long_count": 13,
+      "short_count": 18,
+      "L_net_margin": -2.502979,
+      "L_net_equity": -0.098161,
+      "conv_equity": -0.3552,
       "free": true
     },
     {
       "asset": "LIT",
       "long_usd": 0.0,
-      "short_usd": 17038754.63,
-      "net_usd": -17038754.63,
+      "short_usd": 16962233.68,
+      "net_usd": -16962233.68,
       "tilt": -1.0,
       "position_count": 17,
       "long_count": 0,
       "short_count": 17,
-      "L_net_margin": -3.069493,
-      "L_net_equity": -0.041393,
+      "L_net_margin": -3.069764,
+      "L_net_equity": -0.041252,
       "conv_equity": -1.0,
       "free": true
     },
     {
       "asset": "NEAR",
-      "long_usd": 1247748.82,
-      "short_usd": 12471375.54,
-      "net_usd": -11223626.73,
+      "long_usd": 1261483.44,
+      "short_usd": 12608300.07,
+      "net_usd": -11346816.63,
       "tilt": -0.8181,
       "position_count": 17,
       "long_count": 5,
       "short_count": 12,
-      "L_net_margin": -5.942923,
-      "L_net_equity": -0.027266,
-      "conv_equity": -0.5626,
-      "free": false
-    },
-    {
-      "asset": "ZEC",
-      "long_usd": 9153254.52,
-      "short_usd": 15776840.38,
-      "net_usd": -6623585.86,
-      "tilt": -0.2657,
-      "position_count": 17,
-      "long_count": 4,
-      "short_count": 13,
-      "L_net_margin": -1.759004,
-      "L_net_equity": -0.016091,
-      "conv_equity": -0.4451,
+      "L_net_margin": -5.942922,
+      "L_net_equity": -0.027595,
+      "conv_equity": -0.5775,
       "free": false
     },
     {
       "asset": "WLD",
-      "long_usd": 3264.24,
-      "short_usd": 5857057.6,
-      "net_usd": -5853793.36,
+      "long_usd": 3276.13,
+      "short_usd": 5879470.64,
+      "net_usd": -5876194.5,
       "tilt": -0.9989,
       "position_count": 9,
       "long_count": 1,
       "short_count": 8,
-      "L_net_margin": -9.98886,
-      "L_net_equity": -0.014221,
-      "conv_equity": -0.9897,
+      "L_net_margin": -9.988862,
+      "L_net_equity": -0.014291,
+      "conv_equity": -0.9902,
       "free": false
     },
     {
       "asset": "FARTCOIN",
-      "long_usd": 1632.87,
-      "short_usd": 5713910.86,
-      "net_usd": -5712277.99,
+      "long_usd": 1658.58,
+      "short_usd": 5818116.13,
+      "net_usd": -5816457.55,
       "tilt": -0.9994,
       "position_count": 13,
       "long_count": 2,
       "short_count": 11,
-      "L_net_margin": -4.247691,
-      "L_net_equity": -0.013877,
+      "L_net_margin": -4.252716,
+      "L_net_equity": -0.014145,
       "conv_equity": -0.9983,
       "free": false
     },
     {
       "asset": "PUMP",
-      "long_usd": 305550.95,
-      "short_usd": 4954130.55,
-      "net_usd": -4648579.59,
-      "tilt": -0.8838,
+      "long_usd": 310114.73,
+      "short_usd": 4840830.01,
+      "net_usd": -4530715.28,
+      "tilt": -0.8796,
       "position_count": 13,
       "long_count": 4,
       "short_count": 9,
-      "L_net_margin": -6.636732,
-      "L_net_equity": -0.011293,
-      "conv_equity": -0.9034,
+      "L_net_margin": -6.559331,
+      "L_net_equity": -0.011019,
+      "conv_equity": -0.8913,
       "free": false
     },
     {
       "asset": "AAVE",
-      "long_usd": 6906261.38,
-      "short_usd": 11051171.97,
-      "net_usd": -4144910.59,
+      "long_usd": 7038841.11,
+      "short_usd": 11262442.08,
+      "net_usd": -4223600.96,
       "tilt": -0.2308,
       "position_count": 10,
       "long_count": 3,
       "short_count": 7,
-      "L_net_margin": -2.308187,
-      "L_net_equity": -0.01007,
-      "conv_equity": -0.2279,
+      "L_net_margin": -2.307817,
+      "L_net_equity": -0.010272,
+      "conv_equity": -0.2873,
+      "free": false
+    },
+    {
+      "asset": "ZEC",
+      "long_usd": 9256195.09,
+      "short_usd": 12834750.47,
+      "net_usd": -3578555.37,
+      "tilt": -0.162,
+      "position_count": 16,
+      "long_count": 4,
+      "short_count": 12,
+      "L_net_margin": -1.023607,
+      "L_net_equity": -0.008703,
+      "conv_equity": -0.3754,
       "free": false
     },
     {
       "asset": "GRAM",
-      "long_usd": 50445.29,
-      "short_usd": 3615304.2,
-      "net_usd": -3564858.91,
+      "long_usd": 50501.28,
+      "short_usd": 3618866.85,
+      "net_usd": -3568365.56,
       "tilt": -0.9725,
       "position_count": 3,
       "long_count": 1,
       "short_count": 2,
-      "L_net_margin": -4.862388,
-      "L_net_equity": -0.00866,
-      "conv_equity": -0.968,
+      "L_net_margin": -4.862371,
+      "L_net_equity": -0.008678,
+      "conv_equity": -0.9678,
       "free": false
     },
     {
       "asset": "PAXG",
-      "long_usd": 853655.17,
-      "short_usd": 4236514.0,
-      "net_usd": -3382858.83,
+      "long_usd": 855599.71,
+      "short_usd": 4246070.1,
+      "net_usd": -3390470.4,
       "tilt": -0.6646,
       "position_count": 10,
       "long_count": 3,
       "short_count": 7,
-      "L_net_margin": -2.190056,
-      "L_net_equity": -0.008218,
-      "conv_equity": -0.8467,
+      "L_net_margin": -2.190813,
+      "L_net_equity": -0.008246,
+      "conv_equity": -0.8457,
       "free": false
     },
     {
       "asset": "ASTER",
       "long_usd": 0.0,
-      "short_usd": 3032143.16,
-      "net_usd": -3032143.16,
+      "short_usd": 3024093.47,
+      "net_usd": -3024093.47,
       "tilt": -1.0,
       "position_count": 12,
       "long_count": 0,
       "short_count": 12,
-      "L_net_margin": -4.379388,
-      "L_net_equity": -0.007366,
+      "L_net_margin": -4.379758,
+      "L_net_equity": -0.007355,
       "conv_equity": -1.0,
       "free": false
     },
     {
       "asset": "MON",
       "long_usd": 0.0,
-      "short_usd": 2127117.06,
-      "net_usd": -2127117.06,
+      "short_usd": 2131986.6,
+      "net_usd": -2131986.6,
       "tilt": -1.0,
       "position_count": 7,
       "long_count": 0,
       "short_count": 7,
-      "L_net_margin": -4.530859,
-      "L_net_equity": -0.005168,
+      "L_net_margin": -4.530889,
+      "L_net_equity": -0.005185,
       "conv_equity": -1.0,
       "free": false
     },
     {
       "asset": "XRP",
-      "long_usd": 5454017.16,
-      "short_usd": 7368356.76,
-      "net_usd": -1914339.61,
-      "tilt": -0.1493,
+      "long_usd": 5483657.85,
+      "short_usd": 7457642.61,
+      "net_usd": -1973984.75,
+      "tilt": -0.1525,
       "position_count": 12,
       "long_count": 5,
       "short_count": 7,
-      "L_net_margin": -0.389873,
-      "L_net_equity": -0.004651,
-      "conv_equity": -0.1092,
+      "L_net_margin": -0.399642,
+      "L_net_equity": -0.004801,
+      "conv_equity": -0.1162,
       "free": false
     },
     {
       "asset": "SUI",
-      "long_usd": 1858353.13,
-      "short_usd": 211802.4,
-      "net_usd": 1646550.74,
-      "tilt": 0.7954,
+      "long_usd": 1864984.46,
+      "short_usd": 212617.48,
+      "net_usd": 1652366.98,
+      "tilt": 0.7953,
       "position_count": 8,
       "long_count": 4,
       "short_count": 4,
-      "L_net_margin": 7.953754,
-      "L_net_equity": 0.004,
-      "conv_equity": 0.713,
+      "L_net_margin": 7.953241,
+      "L_net_equity": 0.004019,
+      "conv_equity": 0.709,
       "free": false
     },
     {
       "asset": "LINK",
-      "long_usd": 4449222.7,
-      "short_usd": 2856654.94,
-      "net_usd": 1592567.77,
-      "tilt": 0.218,
+      "long_usd": 4471159.19,
+      "short_usd": 2876071.21,
+      "net_usd": 1595087.98,
+      "tilt": 0.2171,
       "position_count": 11,
       "long_count": 3,
       "short_count": 8,
-      "L_net_margin": 0.74697,
-      "L_net_equity": 0.003869,
-      "conv_equity": -0.3118,
+      "L_net_margin": 0.743999,
+      "L_net_equity": 0.003879,
+      "conv_equity": -0.3219,
       "free": false
     },
     {
       "asset": "KPEPE",
-      "long_usd": 29290.0,
-      "short_usd": 1447819.91,
-      "net_usd": -1418529.91,
-      "tilt": -0.9603,
+      "long_usd": 29440.0,
+      "short_usd": 1455754.87,
+      "net_usd": -1426314.87,
+      "tilt": -0.9604,
       "position_count": 4,
       "long_count": 1,
       "short_count": 3,
-      "L_net_margin": -9.603415,
-      "L_net_equity": -0.003446,
-      "conv_equity": -0.9266,
+      "L_net_margin": -9.603554,
+      "L_net_equity": -0.003469,
+      "conv_equity": -0.9264,
       "free": false
     },
     {
       "asset": "CASHCAT",
-      "long_usd": 629674.36,
-      "short_usd": 2006409.35,
-      "net_usd": -1376734.99,
+      "long_usd": 613336.99,
+      "short_usd": 1954457.82,
+      "net_usd": -1341120.83,
       "tilt": -0.5223,
       "position_count": 12,
       "long_count": 2,
       "short_count": 10,
-      "L_net_margin": -0.279002,
-      "L_net_equity": -0.003345,
-      "conv_equity": -0.6181,
+      "L_net_margin": -0.26982,
+      "L_net_equity": -0.003262,
+      "conv_equity": -0.6203,
       "free": false
     },
     {
       "asset": "TAO",
-      "long_usd": 28605.33,
-      "short_usd": 1336766.59,
-      "net_usd": -1308161.26,
+      "long_usd": 28737.95,
+      "short_usd": 1343339.49,
+      "net_usd": -1314601.54,
       "tilt": -0.9581,
       "position_count": 8,
       "long_count": 1,
       "short_count": 7,
-      "L_net_margin": -4.790494,
-      "L_net_equity": -0.003178,
-      "conv_equity": -0.9504,
+      "L_net_margin": -4.790552,
+      "L_net_equity": -0.003197,
+      "conv_equity": -0.9502,
       "free": false
     },
     {
       "asset": "ZRO",
       "long_usd": 0.0,
-      "short_usd": 1119759.66,
-      "net_usd": -1119759.66,
+      "short_usd": 1117147.56,
+      "net_usd": -1117147.56,
       "tilt": -1.0,
       "position_count": 8,
       "long_count": 0,
       "short_count": 8,
       "L_net_margin": -5.0,
-      "L_net_equity": -0.00272,
+      "L_net_equity": -0.002717,
       "conv_equity": -1.0,
       "free": false
     },
     {
       "asset": "KBONK",
       "long_usd": 0.0,
-      "short_usd": 950280.09,
-      "net_usd": -950280.09,
+      "short_usd": 935628.19,
+      "net_usd": -935628.19,
       "tilt": -1.0,
       "position_count": 3,
       "long_count": 0,
       "short_count": 3,
       "L_net_margin": -10.0,
-      "L_net_equity": -0.002309,
+      "L_net_equity": -0.002275,
       "conv_equity": -1.0,
       "free": false
     },
     {
       "asset": "ADA",
-      "long_usd": 839646.28,
+      "long_usd": 848306.37,
       "short_usd": 0.0,
-      "net_usd": 839646.28,
+      "net_usd": 848306.37,
       "tilt": 1.0,
       "position_count": 4,
       "long_count": 4,
       "short_count": 0,
       "L_net_margin": 10.0,
-      "L_net_equity": 0.00204,
+      "L_net_equity": 0.002063,
       "conv_equity": 1.0,
       "free": false
     },
     {
       "asset": "LTC",
       "long_usd": 0.0,
-      "short_usd": 805726.18,
-      "net_usd": -805726.18,
+      "short_usd": 805562.26,
+      "net_usd": -805562.26,
       "tilt": -1.0,
       "position_count": 5,
       "long_count": 0,
       "short_count": 5,
       "L_net_margin": -10.0,
-      "L_net_equity": -0.001957,
+      "L_net_equity": -0.001959,
       "conv_equity": -1.0,
       "free": false
     },
     {
       "asset": "UNI",
-      "long_usd": 248002.2,
-      "short_usd": 1035595.52,
-      "net_usd": -787593.31,
-      "tilt": -0.6136,
+      "long_usd": 248732.61,
+      "short_usd": 1039104.79,
+      "net_usd": -790372.17,
+      "tilt": -0.6137,
       "position_count": 9,
       "long_count": 2,
       "short_count": 7,
-      "L_net_margin": -6.135827,
-      "L_net_equity": -0.001913,
-      "conv_equity": -0.6488,
+      "L_net_margin": -6.137205,
+      "L_net_equity": -0.001922,
+      "conv_equity": -0.6572,
       "free": false
     },
     {
       "asset": "BNB",
-      "long_usd": 660916.55,
-      "short_usd": 1437378.44,
-      "net_usd": -776461.89,
-      "tilt": -0.37,
+      "long_usd": 662211.11,
+      "short_usd": 1442347.96,
+      "net_usd": -780136.85,
+      "tilt": -0.3707,
       "position_count": 13,
       "long_count": 2,
       "short_count": 11,
-      "L_net_margin": -3.437217,
-      "L_net_equity": -0.001886,
-      "conv_equity": -0.6222,
+      "L_net_margin": -3.443139,
+      "L_net_equity": -0.001897,
+      "conv_equity": -0.6201,
       "free": false
     },
     {
       "asset": "MEGA",
       "long_usd": 0.0,
-      "short_usd": 617112.09,
-      "net_usd": -617112.09,
+      "short_usd": 622793.22,
+      "net_usd": -622793.22,
       "tilt": -1.0,
       "position_count": 6,
       "long_count": 0,
       "short_count": 6,
-      "L_net_margin": -2.966951,
-      "L_net_equity": -0.001499,
+      "L_net_margin": -2.970384,
+      "L_net_equity": -0.001515,
       "conv_equity": -1.0,
       "free": false
     },
     {
       "asset": "XMR",
-      "long_usd": 153926.56,
-      "short_usd": 756921.32,
-      "net_usd": -602994.76,
-      "tilt": -0.662,
+      "long_usd": 156661.01,
+      "short_usd": 769670.56,
+      "net_usd": -613009.55,
+      "tilt": -0.6618,
       "position_count": 5,
       "long_count": 1,
       "short_count": 4,
-      "L_net_margin": -3.310074,
-      "L_net_equity": -0.001465,
-      "conv_equity": -0.6735,
+      "L_net_margin": -3.308802,
+      "L_net_equity": -0.001491,
+      "conv_equity": -0.6761,
       "free": false
     },
     {
       "asset": "DOT",
-      "long_usd": 500770.53,
-      "short_usd": 9674.83,
-      "net_usd": 491095.7,
+      "long_usd": 504462.27,
+      "short_usd": 9747.53,
+      "net_usd": 494714.74,
       "tilt": 0.9621,
       "position_count": 3,
       "long_count": 2,
       "short_count": 1,
-      "L_net_margin": 9.620926,
-      "L_net_equity": 0.001193,
-      "conv_equity": 0.904,
+      "L_net_margin": 9.620874,
+      "L_net_equity": 0.001203,
+      "conv_equity": 0.9048,
       "free": false
     },
     {
       "asset": "AVAX",
-      "long_usd": 656127.33,
-      "short_usd": 167618.28,
-      "net_usd": 488509.05,
-      "tilt": 0.593,
+      "long_usd": 659991.39,
+      "short_usd": 167958.38,
+      "net_usd": 492033.01,
+      "tilt": 0.5943,
       "position_count": 8,
       "long_count": 3,
       "short_count": 5,
-      "L_net_margin": 5.930339,
-      "L_net_equity": 0.001187,
-      "conv_equity": 0.5298,
+      "L_net_margin": 5.942788,
+      "L_net_equity": 0.001197,
+      "conv_equity": 0.5312,
       "free": false
     },
     {
       "asset": "VIRTUAL",
       "long_usd": 0.0,
-      "short_usd": 475900.74,
-      "net_usd": -475900.74,
+      "short_usd": 482255.43,
+      "net_usd": -482255.43,
       "tilt": -1.0,
       "position_count": 5,
       "long_count": 0,
       "short_count": 5,
       "L_net_margin": -5.0,
-      "L_net_equity": -0.001156,
+      "L_net_equity": -0.001173,
       "conv_equity": -1.0,
       "free": false
     },
     {
       "asset": "DOGE",
-      "long_usd": 391043.38,
-      "short_usd": 818480.74,
-      "net_usd": -427437.35,
-      "tilt": -0.3534,
+      "long_usd": 392364.66,
+      "short_usd": 821409.42,
+      "net_usd": -429044.76,
+      "tilt": -0.3535,
       "position_count": 7,
       "long_count": 2,
       "short_count": 5,
-      "L_net_margin": -3.53393,
-      "L_net_equity": -0.001038,
-      "conv_equity": -0.4741,
+      "L_net_margin": -3.534799,
+      "L_net_equity": -0.001043,
+      "conv_equity": -0.478,
       "free": false
     },
     {
       "asset": "ONDO",
-      "long_usd": 664070.27,
-      "short_usd": 262804.31,
-      "net_usd": 401265.95,
-      "tilt": 0.4329,
+      "long_usd": 670349.49,
+      "short_usd": 265264.75,
+      "net_usd": 405084.75,
+      "tilt": 0.433,
       "position_count": 6,
       "long_count": 2,
       "short_count": 4,
-      "L_net_margin": 0.609862,
-      "L_net_equity": 0.000975,
-      "conv_equity": 0.2208,
+      "L_net_margin": 0.609897,
+      "L_net_equity": 0.000985,
+      "conv_equity": 0.2193,
       "free": false
     },
     {
       "asset": "APEX",
       "long_usd": 0.0,
-      "short_usd": 397925.11,
-      "net_usd": -397925.11,
+      "short_usd": 399013.63,
+      "net_usd": -399013.63,
       "tilt": -1.0,
       "position_count": 4,
       "long_count": 0,
       "short_count": 4,
       "L_net_margin": -3.0,
-      "L_net_equity": -0.000967,
+      "L_net_equity": -0.00097,
       "conv_equity": -1.0,
       "free": false
     },
     {
       "asset": "XPL",
-      "long_usd": 1358584.84,
-      "short_usd": 1744347.69,
-      "net_usd": -385762.85,
-      "tilt": -0.1243,
+      "long_usd": 1360825.76,
+      "short_usd": 1748459.89,
+      "net_usd": -387634.13,
+      "tilt": -0.1247,
       "position_count": 10,
       "long_count": 2,
       "short_count": 8,
-      "L_net_margin": -0.685218,
-      "L_net_equity": -0.000937,
-      "conv_equity": -0.1628,
+      "L_net_margin": -0.687122,
+      "L_net_equity": -0.000943,
+      "conv_equity": -0.176,
       "free": false
     },
     {
       "asset": "BCH",
-      "long_usd": 65828.77,
-      "short_usd": 416885.34,
-      "net_usd": -351056.56,
+      "long_usd": 66303.21,
+      "short_usd": 419996.96,
+      "net_usd": -353693.75,
       "tilt": -0.7273,
       "position_count": 4,
       "long_count": 1,
       "short_count": 3,
-      "L_net_margin": -7.272557,
-      "L_net_equity": -0.000853,
-      "conv_equity": -0.8978,
+      "L_net_margin": -7.273157,
+      "L_net_equity": -0.00086,
+      "conv_equity": -0.8977,
       "free": false
     },
     {
       "asset": "MORPHO",
       "long_usd": 0.0,
-      "short_usd": 298373.01,
-      "net_usd": -298373.01,
+      "short_usd": 299011.76,
+      "net_usd": -299011.76,
       "tilt": -1.0,
       "position_count": 1,
       "long_count": 0,
       "short_count": 1,
       "L_net_margin": -5.0,
-      "L_net_equity": -0.000725,
+      "L_net_equity": -0.000727,
       "conv_equity": -1.0,
       "free": false
     },
     {
       "asset": "JUP",
       "long_usd": 0.0,
-      "short_usd": 284437.61,
-      "net_usd": -284437.61,
+      "short_usd": 287710.8,
+      "net_usd": -287710.8,
       "tilt": -1.0,
       "position_count": 1,
       "long_count": 0,
       "short_count": 1,
       "L_net_margin": -10.0,
-      "L_net_equity": -0.000691,
+      "L_net_equity": -0.0007,
       "conv_equity": -1.0,
       "free": false
     },
     {
       "asset": "MNT",
       "long_usd": 0.0,
-      "short_usd": 271698.28,
-      "net_usd": -271698.28,
+      "short_usd": 272955.47,
+      "net_usd": -272955.47,
       "tilt": -1.0,
       "position_count": 3,
       "long_count": 0,
       "short_count": 3,
       "L_net_margin": -5.0,
-      "L_net_equity": -0.00066,
+      "L_net_equity": -0.000664,
       "conv_equity": -1.0,
       "free": false
     },
     {
+      "asset": "ENA",
+      "long_usd": 943298.24,
+      "short_usd": 671155.63,
+      "net_usd": 272142.61,
+      "tilt": 0.1686,
+      "position_count": 11,
+      "long_count": 4,
+      "short_count": 7,
+      "L_net_margin": 0.44172,
+      "L_net_equity": 0.000662,
+      "conv_equity": 0.2502,
+      "free": false
+    },
+    {
       "asset": "XLM",
-      "long_usd": 78679.24,
-      "short_usd": 291020.33,
-      "net_usd": -212341.09,
-      "tilt": -0.5744,
+      "long_usd": 79191.62,
+      "short_usd": 293068.36,
+      "net_usd": -213876.74,
+      "tilt": -0.5745,
       "position_count": 3,
       "long_count": 1,
       "short_count": 2,
-      "L_net_margin": -2.871806,
-      "L_net_equity": -0.000516,
-      "conv_equity": -0.6538,
+      "L_net_margin": -2.87268,
+      "L_net_equity": -0.00052,
+      "conv_equity": -0.6515,
       "free": false
     },
     {
       "asset": "PURR",
-      "long_usd": 954789.84,
-      "short_usd": 1160212.28,
-      "net_usd": -205422.44,
-      "tilt": -0.0971,
+      "long_usd": 958544.87,
+      "short_usd": 1163685.46,
+      "net_usd": -205140.59,
+      "tilt": -0.0967,
       "position_count": 4,
       "long_count": 1,
       "short_count": 3,
-      "L_net_margin": -0.291379,
+      "L_net_margin": -0.289988,
       "L_net_equity": -0.000499,
-      "conv_equity": -0.3947,
+      "conv_equity": -0.4013,
       "free": false
     },
     {
       "asset": "WLFI",
-      "long_usd": 996560.75,
-      "short_usd": 818765.17,
-      "net_usd": 177795.58,
-      "tilt": 0.0979,
+      "long_usd": 994007.9,
+      "short_usd": 818513.46,
+      "net_usd": 175494.44,
+      "tilt": 0.0968,
       "position_count": 6,
       "long_count": 3,
       "short_count": 3,
-      "L_net_margin": 0.239011,
-      "L_net_equity": 0.000432,
-      "conv_equity": -0.025,
+      "L_net_margin": 0.236155,
+      "L_net_equity": 0.000427,
+      "conv_equity": -0.0248,
       "free": false
     },
     {
       "asset": "CHIP",
-      "long_usd": 139080.96,
-      "short_usd": 262619.49,
-      "net_usd": -123538.52,
-      "tilt": -0.3075,
+      "long_usd": 138915.65,
+      "short_usd": 262372.24,
+      "net_usd": -123456.59,
+      "tilt": -0.3077,
       "position_count": 5,
       "long_count": 1,
       "short_count": 4,
-      "L_net_margin": -0.922258,
+      "L_net_margin": -0.922586,
       "L_net_equity": -0.0003,
-      "conv_equity": -0.4222,
-      "free": false
-    },
-    {
-      "asset": "ENA",
-      "long_usd": 782779.43,
-      "short_usd": 662816.39,
-      "net_usd": 119963.03,
-      "tilt": 0.083,
-      "position_count": 10,
-      "long_count": 3,
-      "short_count": 7,
-      "L_net_margin": 0.202005,
-      "L_net_equity": 0.000291,
-      "conv_equity": 0.0828,
+      "conv_equity": -0.4272,
       "free": false
     },
     {
       "asset": "APT",
-      "long_usd": 314586.19,
-      "short_usd": 383320.96,
-      "net_usd": -68734.77,
+      "long_usd": 317788.63,
+      "short_usd": 387216.11,
+      "net_usd": -69427.47,
       "tilt": -0.0985,
       "position_count": 4,
       "long_count": 2,
       "short_count": 2,
-      "L_net_margin": -0.98487,
-      "L_net_equity": -0.000167,
-      "conv_equity": 0.6247,
+      "L_net_margin": -0.98478,
+      "L_net_equity": -0.000169,
+      "conv_equity": 0.616,
       "free": false
     },
     {
       "asset": "LDO",
-      "long_usd": 696371.27,
-      "short_usd": 632143.76,
-      "net_usd": 64227.51,
-      "tilt": 0.0483,
+      "long_usd": 707068.97,
+      "short_usd": 642269.3,
+      "net_usd": 64799.67,
+      "tilt": 0.048,
       "position_count": 3,
       "long_count": 1,
       "short_count": 2,
-      "L_net_margin": 0.07806,
-      "L_net_equity": 0.000156,
-      "conv_equity": -0.1329,
+      "L_net_margin": 0.077556,
+      "L_net_equity": 0.000158,
+      "conv_equity": -0.1337,
       "free": false
     },
     {
       "asset": "VVV",
-      "long_usd": 1662382.76,
-      "short_usd": 1630425.05,
-      "net_usd": 31957.71,
-      "tilt": 0.0097,
+      "long_usd": 1694474.0,
+      "short_usd": 1662147.62,
+      "net_usd": 32326.39,
+      "tilt": 0.0096,
       "position_count": 10,
       "long_count": 2,
       "short_count": 8,
-      "L_net_margin": 0.029116,
-      "L_net_equity": 7.8e-05,
-      "conv_equity": -0.3776,
+      "L_net_margin": 0.028892,
+      "L_net_equity": 7.9e-05,
+      "conv_equity": -0.3905,
       "free": false
     }
   ],
   "wallet_distribution": [
     {
-      "net_notional": -206895296.2,
-      "long_notional": 12819.18,
-      "short_notional": 206908115.38,
-      "equity": 41389043.96
+      "net_notional": -207651567.93,
+      "long_notional": 12890.8,
+      "short_notional": 207664458.73,
+      "equity": 40634866.73
     },
     {
-      "net_notional": -148141844.2,
+      "net_notional": -149661742.55,
       "long_notional": 0.0,
-      "short_notional": 148141844.2,
-      "equity": 56837936.7
+      "short_notional": 149661742.55,
+      "equity": 56365641.48
     },
     {
-      "net_notional": -103416612.73,
+      "net_notional": -103803868.45,
       "long_notional": 0.0,
-      "short_notional": 103416612.73,
-      "equity": 12406234.8
+      "short_notional": 103803868.45,
+      "equity": 13122551.62
     },
     {
-      "net_notional": -95895000.0,
+      "net_notional": -96335000.0,
       "long_notional": 0.0,
-      "short_notional": 95895000.0,
-      "equity": 8213422.22
+      "short_notional": 96335000.0,
+      "equity": 7774626.47
     },
     {
-      "net_notional": 86237209.77,
-      "long_notional": 86237209.77,
+      "net_notional": 86484513.42,
+      "long_notional": 86484513.42,
       "short_notional": 0.0,
-      "equity": 15748484.85
+      "equity": 15994707.99
     },
     {
-      "net_notional": 84569900.0,
-      "long_notional": 84569900.0,
+      "net_notional": 84774600.0,
+      "long_notional": 84774600.0,
       "short_notional": 0.0,
-      "equity": 8276081.94
+      "equity": 8480333.67
     },
     {
-      "net_notional": 76720000.0,
-      "long_notional": 76720000.0,
+      "net_notional": 77068000.0,
+      "long_notional": 77068000.0,
       "short_notional": 0.0,
-      "equity": 19873323.21
+      "equity": 20220359.8
     },
     {
-      "net_notional": 76689109.68,
-      "long_notional": 76689109.68,
+      "net_notional": 77065115.12,
+      "long_notional": 77065115.12,
       "short_notional": 0.0,
-      "equity": 18883996.46
+      "equity": 19259038.47
     },
     {
-      "net_notional": -59283957.95,
+      "net_notional": -59489856.67,
       "long_notional": 0.0,
-      "short_notional": 59283957.95,
-      "equity": 5031895.57
+      "short_notional": 59489856.67,
+      "equity": 4826600.62
     },
     {
-      "net_notional": 57540000.0,
-      "long_notional": 57540000.0,
+      "net_notional": 57801000.0,
+      "long_notional": 57801000.0,
       "short_notional": 0.0,
-      "equity": 14195755.88
+      "equity": 14456033.32
     },
     {
-      "net_notional": 48479947.44,
-      "long_notional": 48479947.44,
+      "net_notional": 48670025.62,
+      "long_notional": 48670025.62,
       "short_notional": 0.0,
-      "equity": 17084195.54
+      "equity": 17273665.52
     },
     {
-      "net_notional": -39297166.3,
+      "net_notional": -39366702.0,
       "long_notional": 0.0,
-      "short_notional": 39297166.3,
-      "equity": 3190397.73
+      "short_notional": 39366702.0,
+      "equity": 3120986.69
     },
     {
-      "net_notional": -39190957.71,
-      "long_notional": 851738.76,
-      "short_notional": 40042696.47,
-      "equity": 21106480.63
+      "net_notional": -39218188.38,
+      "long_notional": 853679.14,
+      "short_notional": 40071867.51,
+      "equity": 20961879.69
     },
     {
-      "net_notional": 38624255.1,
-      "long_notional": 38624255.1,
+      "net_notional": 38797430.95,
+      "long_notional": 38797430.95,
       "short_notional": 0.0,
-      "equity": 5090428.84
+      "equity": 5263119.69
     },
     {
-      "net_notional": 33093387.17,
-      "long_notional": 33093387.17,
+      "net_notional": 33301656.1,
+      "long_notional": 33301656.1,
       "short_notional": 0.0,
-      "equity": 7007929.27
+      "equity": 7215780.06
     },
     {
-      "net_notional": -33063841.05,
-      "long_notional": 0.0,
-      "short_notional": 33063841.05,
-      "equity": 3151193.25
-    },
-    {
-      "net_notional": 32693150.0,
-      "long_notional": 32693150.0,
+      "net_notional": 32751000.0,
+      "long_notional": 32751000.0,
       "short_notional": 0.0,
-      "equity": 4474275.81
+      "equity": 4532022.1
     },
     {
-      "net_notional": -30195228.0,
+      "net_notional": -30290277.0,
       "long_notional": 0.0,
-      "short_notional": 30195228.0,
-      "equity": 2905130.5
+      "short_notional": 30290277.0,
+      "equity": 2810346.08
     },
     {
-      "net_notional": -29634391.17,
-      "long_notional": 1230187.24,
-      "short_notional": 30864578.41,
-      "equity": 5232491.11
+      "net_notional": -29493543.15,
+      "long_notional": 1227334.68,
+      "short_notional": 30720877.83,
+      "equity": 5092942.74
     },
     {
-      "net_notional": -28192212.33,
+      "net_notional": -28258155.88,
       "long_notional": 0.0,
-      "short_notional": 28192212.33,
-      "equity": 3570253.33
+      "short_notional": 28258155.88,
+      "equity": 3504450.76
     },
     {
-      "net_notional": -24186755.95,
-      "long_notional": 50637.37,
-      "short_notional": 24237393.32,
-      "equity": 4832900.89
+      "net_notional": -25077979.15,
+      "long_notional": 0.0,
+      "short_notional": 25077979.15,
+      "equity": 2401763.15
     },
     {
-      "net_notional": 23992787.27,
-      "long_notional": 23992787.27,
+      "net_notional": -24255726.86,
+      "long_notional": 50734.49,
+      "short_notional": 24306461.35,
+      "equity": 4764233.43
+    },
+    {
+      "net_notional": 24143579.36,
+      "long_notional": 24143579.36,
       "short_notional": 0.0,
-      "equity": 3296078.44
+      "equity": 3446617.58
     },
     {
-      "net_notional": -22975680.89,
+      "net_notional": -23036553.97,
       "long_notional": 0.0,
-      "short_notional": 22975680.89,
-      "equity": 2470998.79
+      "short_notional": 23036553.97,
+      "equity": 2410335.68
     },
     {
-      "net_notional": -21623027.88,
+      "net_notional": -21437070.24,
       "long_notional": 0.0,
-      "short_notional": 21623027.88,
-      "equity": 2162302.79
+      "short_notional": 21437070.24,
+      "equity": 2144272.46
     },
     {
-      "net_notional": 20325319.82,
-      "long_notional": 20325319.82,
+      "net_notional": 20390860.78,
+      "long_notional": 20390860.78,
       "short_notional": 0.0,
-      "equity": 12469273.66
+      "equity": 12534608.51
     },
     {
-      "net_notional": -19884772.35,
-      "long_notional": 50445.29,
-      "short_notional": 19935217.64,
-      "equity": 2873931.13
+      "net_notional": -19961794.97,
+      "long_notional": 50501.28,
+      "short_notional": 20012296.25,
+      "equity": 2797195.36
     },
     {
-      "net_notional": 19615890.0,
-      "long_notional": 19615890.0,
+      "net_notional": 19650600.0,
+      "long_notional": 19650600.0,
       "short_notional": 0.0,
-      "equity": 2652235.75
+      "equity": 2686883.52
     },
     {
-      "net_notional": -19407336.51,
-      "long_notional": 20076.89,
-      "short_notional": 19427413.4,
-      "equity": 5447823.34
+      "net_notional": -19552068.78,
+      "long_notional": 20115.89,
+      "short_notional": 19572184.66,
+      "equity": 5303338.37
     },
     {
-      "net_notional": 17569029.43,
-      "long_notional": 17569029.43,
+      "net_notional": 17643160.39,
+      "long_notional": 17643160.39,
       "short_notional": 0.0,
-      "equity": 3313843.73
+      "equity": 3387773.29
     },
     {
-      "net_notional": -16974518.05,
+      "net_notional": -17005738.84,
       "long_notional": 0.0,
-      "short_notional": 16974518.05,
-      "equity": 1935245.54
+      "short_notional": 17005738.84,
+      "equity": 1939904.72
     },
     {
-      "net_notional": -16740052.19,
+      "net_notional": -16769492.11,
       "long_notional": 0.0,
-      "short_notional": 16740052.19,
-      "equity": 1057770.38
+      "short_notional": 16769492.11,
+      "equity": 1028383.56
     },
     {
-      "net_notional": -16507165.49,
-      "long_notional": 280520.65,
-      "short_notional": 16787686.14,
-      "equity": 2563984.12
+      "net_notional": -16562837.66,
+      "long_notional": 282770.99,
+      "short_notional": 16845608.65,
+      "equity": 2508601.3
     },
     {
-      "net_notional": -16375015.3,
+      "net_notional": -16440186.96,
       "long_notional": 0.0,
-      "short_notional": 16375015.3,
-      "equity": 3630331.14
+      "short_notional": 16440186.96,
+      "equity": 3565364.82
     },
     {
-      "net_notional": 15747346.01,
-      "long_notional": 15747346.01,
+      "net_notional": 15800723.89,
+      "long_notional": 15800723.89,
       "short_notional": 0.0,
-      "equity": 4093147.11
+      "equity": 4146390.09
     },
     {
-      "net_notional": -15399784.71,
+      "net_notional": -15447988.1,
       "long_notional": 0.0,
-      "short_notional": 15399784.71,
-      "equity": 2673067.3
+      "short_notional": 15447988.1,
+      "equity": 2625057.55
     },
     {
-      "net_notional": -14951290.53,
+      "net_notional": -15017499.56,
       "long_notional": 0.0,
-      "short_notional": 14951290.53,
-      "equity": 3652265.61
+      "short_notional": 15017499.56,
+      "equity": 3753248.73
     },
     {
-      "net_notional": 13077260.0,
-      "long_notional": 13077260.0,
+      "net_notional": 13100400.0,
+      "long_notional": 13100400.0,
       "short_notional": 0.0,
-      "equity": 2319721.68
+      "equity": 2342820.19
     },
     {
-      "net_notional": 13077260.0,
-      "long_notional": 13077260.0,
+      "net_notional": 13100400.0,
+      "long_notional": 13100400.0,
       "short_notional": 0.0,
-      "equity": 2333401.68
+      "equity": 2356500.19
     },
     {
-      "net_notional": -12892162.45,
-      "long_notional": 2432971.27,
-      "short_notional": 15325133.72,
-      "equity": 1922928.66
+      "net_notional": -12878282.72,
+      "long_notional": 2446147.37,
+      "short_notional": 15324430.09,
+      "equity": 1925143.6
     },
     {
-      "net_notional": 11812887.83,
-      "long_notional": 11812887.83,
+      "net_notional": 11906764.02,
+      "long_notional": 11906764.02,
       "short_notional": 0.0,
-      "equity": 2134402.28
+      "equity": 2228028.43
     },
     {
-      "net_notional": -11585084.82,
-      "long_notional": 2553521.25,
-      "short_notional": 14138606.07,
-      "equity": 1914660.71
+      "net_notional": -11611570.57,
+      "long_notional": 2560589.4,
+      "short_notional": 14172159.97,
+      "equity": 1888216.17
     },
     {
-      "net_notional": -11528616.11,
-      "long_notional": 4460755.79,
-      "short_notional": 15989371.9,
-      "equity": 3140013.28
+      "net_notional": -11575495.56,
+      "long_notional": 4469420.77,
+      "short_notional": 16044916.33,
+      "equity": 3093320.09
     },
     {
-      "net_notional": 11186430.49,
-      "long_notional": 11186569.46,
-      "short_notional": 138.97,
-      "equity": 2618947.99
+      "net_notional": 11219321.06,
+      "long_notional": 11219459.48,
+      "short_notional": 138.43,
+      "equity": 2651761.3
     },
     {
-      "net_notional": -10437406.29,
+      "net_notional": -10474098.51,
       "long_notional": 0.0,
-      "short_notional": 10437406.29,
-      "equity": 984377.63
+      "short_notional": 10474098.51,
+      "equity": 947755.2
     },
     {
-      "net_notional": -10239999.14,
+      "net_notional": -10258948.47,
       "long_notional": 0.0,
-      "short_notional": 10239999.14,
-      "equity": 2013002.08
+      "short_notional": 10258948.47,
+      "equity": 1994085.23
     },
     {
-      "net_notional": -9274001.36,
-      "long_notional": 261237.0,
-      "short_notional": 9535238.35,
-      "equity": 917687.84
+      "net_notional": -9325650.36,
+      "long_notional": 264667.67,
+      "short_notional": 9590318.03,
+      "equity": 1014788.35
     },
     {
-      "net_notional": -8884707.46,
+      "net_notional": -8903658.84,
       "long_notional": 0.0,
-      "short_notional": 8884707.46,
-      "equity": 777430.55
+      "short_notional": 8903658.84,
+      "equity": 758515.67
     },
     {
-      "net_notional": -8821507.74,
-      "long_notional": 145.26,
-      "short_notional": 8821653.01,
-      "equity": 1048779.09
+      "net_notional": -8874208.37,
+      "long_notional": 145.61,
+      "short_notional": 8874353.98,
+      "equity": 1052624.46
     },
     {
-      "net_notional": -7991651.29,
-      "long_notional": 120997.71,
-      "short_notional": 8112649.0,
-      "equity": 1117306.64
+      "net_notional": -8020836.77,
+      "long_notional": 122418.52,
+      "short_notional": 8143255.28,
+      "equity": 1088200.6
     },
     {
-      "net_notional": 7447282.62,
-      "long_notional": 7447282.62,
+      "net_notional": 7461904.67,
+      "long_notional": 7461904.67,
       "short_notional": 0.0,
-      "equity": 904558.17
+      "equity": 919141.97
     },
     {
-      "net_notional": -7412884.73,
+      "net_notional": -7438638.33,
       "long_notional": 0.0,
-      "short_notional": 7412884.73,
-      "equity": 1268828.73
+      "short_notional": 7438638.33,
+      "equity": 1243168.04
     },
     {
-      "net_notional": -7037571.44,
+      "net_notional": -7079715.61,
       "long_notional": 0.0,
-      "short_notional": 7037571.44,
-      "equity": 1060602.25
+      "short_notional": 7079715.61,
+      "equity": 1018547.67
     },
     {
-      "net_notional": 6582624.53,
-      "long_notional": 7158024.53,
-      "short_notional": 575400.0,
-      "equity": 2565728.27
+      "net_notional": -6535758.13,
+      "long_notional": 142590.12,
+      "short_notional": 6678348.25,
+      "equity": 810962.8
     },
     {
-      "net_notional": -6519726.14,
-      "long_notional": 146388.28,
-      "short_notional": 6666114.42,
-      "equity": 827006.1
-    },
-    {
-      "net_notional": 6411040.96,
-      "long_notional": 6411040.96,
+      "net_notional": 6428744.69,
+      "long_notional": 6428744.69,
       "short_notional": 0.0,
-      "equity": 1465468.02
+      "equity": 1483091.4
     },
     {
-      "net_notional": 6086184.0,
-      "long_notional": 6086184.0,
+      "net_notional": 6097338.0,
+      "long_notional": 6097338.0,
       "short_notional": 0.0,
-      "equity": 3312918.91
+      "equity": 3323996.67
     },
     {
-      "net_notional": -5994303.78,
+      "net_notional": -5970234.57,
       "long_notional": 0.0,
-      "short_notional": 5994303.78,
-      "equity": 1838204.32
+      "short_notional": 5970234.57,
+      "equity": 1862348.09
     },
     {
-      "net_notional": -5790654.39,
-      "long_notional": 2034.87,
-      "short_notional": 5792689.27,
-      "equity": 1489400.52
+      "net_notional": 5969878.46,
+      "long_notional": 6547888.46,
+      "short_notional": 578010.0,
+      "equity": 2366356.67
     },
     {
-      "net_notional": -5078767.23,
+      "net_notional": -5806782.52,
+      "long_notional": 2038.55,
+      "short_notional": 5808821.07,
+      "equity": 1473344.96
+    },
+    {
+      "net_notional": -5092858.04,
       "long_notional": 0.0,
-      "short_notional": 5078767.23,
-      "equity": 938616.09
+      "short_notional": 5092858.04,
+      "equity": 924605.74
     },
     {
-      "net_notional": -4623668.0,
+      "net_notional": -4638616.0,
       "long_notional": 0.0,
-      "short_notional": 4623668.0,
-      "equity": 716298.23
+      "short_notional": 4638616.0,
+      "equity": 701408.16
     },
     {
-      "net_notional": -4499400.67,
-      "long_notional": 593323.97,
-      "short_notional": 5092724.64,
-      "equity": 1166937.61
+      "net_notional": -4521936.8,
+      "long_notional": 598626.76,
+      "short_notional": 5120563.56,
+      "equity": 1188596.93
     },
     {
-      "net_notional": -4414150.61,
-      "long_notional": 598996.18,
-      "short_notional": 5013146.79,
-      "equity": 736399.48
+      "net_notional": -4426786.78,
+      "long_notional": 600731.57,
+      "short_notional": 5027518.35,
+      "equity": 723815.91
     },
     {
-      "net_notional": -4300737.7,
+      "net_notional": -4332405.29,
       "long_notional": 0.0,
-      "short_notional": 4300737.7,
-      "equity": 430752.79
+      "short_notional": 4332405.29,
+      "equity": 520565.82
     },
     {
-      "net_notional": -4297568.77,
+      "net_notional": -4314779.8,
       "long_notional": 0.0,
-      "short_notional": 4297568.77,
-      "equity": 516367.01
+      "short_notional": 4314779.8,
+      "equity": 416764.59
     },
     {
-      "net_notional": -3820852.5,
+      "net_notional": -3829890.5,
       "long_notional": 0.0,
-      "short_notional": 3820852.5,
-      "equity": 334714.42
+      "short_notional": 3829890.5,
+      "equity": 325702.57
     },
     {
-      "net_notional": -3720741.11,
+      "net_notional": -3805401.47,
       "long_notional": 0.0,
-      "short_notional": 3720741.11,
-      "equity": 375677.99
+      "short_notional": 3805401.47,
+      "equity": 382296.62
     },
     {
-      "net_notional": -3402673.32,
-      "long_notional": 772812.83,
-      "short_notional": 4175486.16,
-      "equity": 1342898.84
+      "net_notional": -3464246.34,
+      "long_notional": 151250.41,
+      "short_notional": 3615496.75,
+      "equity": 466530.4
     },
     {
-      "net_notional": -3192432.28,
+      "net_notional": -3386620.3,
+      "long_notional": 774516.16,
+      "short_notional": 4161136.46,
+      "equity": 1327944.84
+    },
+    {
+      "net_notional": -3204690.89,
       "long_notional": 0.0,
-      "short_notional": 3192432.28,
-      "equity": 444306.73
+      "short_notional": 3204690.89,
+      "equity": 432087.5
     },
     {
-      "net_notional": -3132772.5,
+      "net_notional": -3144910.42,
       "long_notional": 0.0,
-      "short_notional": 3132772.5,
-      "equity": 402852.54
+      "short_notional": 3144910.42,
+      "equity": 404885.35
     },
     {
-      "net_notional": -3109097.75,
+      "net_notional": -3116338.61,
       "long_notional": 0.0,
-      "short_notional": 3109097.75,
-      "equity": 311478.77
+      "short_notional": 3116338.61,
+      "equity": 318768.79
     },
     {
-      "net_notional": -2893721.36,
+      "net_notional": -2901172.4,
       "long_notional": 0.0,
-      "short_notional": 2893721.36,
-      "equity": 232484.07
+      "short_notional": 2901172.4,
+      "equity": 225053.34
     },
     {
-      "net_notional": -2744075.51,
+      "net_notional": -2839902.85,
+      "long_notional": 227734.31,
+      "short_notional": 3067637.16,
+      "equity": 11692575.28
+    },
+    {
+      "net_notional": -2749142.94,
       "long_notional": 0.0,
-      "short_notional": 2744075.51,
-      "equity": 261623.0
+      "short_notional": 2749142.94,
+      "equity": 256564.69
     },
     {
-      "net_notional": -2284956.4,
+      "net_notional": -2285407.5,
       "long_notional": 0.0,
-      "short_notional": 2284956.4,
-      "equity": 351249.35
+      "short_notional": 2285407.5,
+      "equity": 350821.89
     },
     {
-      "net_notional": 2209881.91,
-      "long_notional": 2355237.83,
-      "short_notional": 145355.92,
-      "equity": 8971290.89
+      "net_notional": 2218613.17,
+      "long_notional": 2363876.93,
+      "short_notional": 145263.77,
+      "equity": 8984831.93
     },
     {
-      "net_notional": -2167499.45,
-      "long_notional": 0.0,
-      "short_notional": 2167499.45,
-      "equity": 306878.79
-    },
-    {
-      "net_notional": 2157839.3,
-      "long_notional": 2157839.3,
+      "net_notional": 2179827.7,
+      "long_notional": 2179827.7,
       "short_notional": 0.0,
-      "equity": 2239931.58
+      "equity": 2261892.75
     },
     {
-      "net_notional": -2074149.97,
+      "net_notional": -2083666.9,
       "long_notional": 0.0,
-      "short_notional": 2074149.97,
-      "equity": 257717.42
+      "short_notional": 2083666.9,
+      "equity": 248226.54
     },
     {
-      "net_notional": -1875186.48,
+      "net_notional": -1858667.6,
       "long_notional": 0.0,
-      "short_notional": 1875186.48,
-      "equity": 1236006.38
+      "short_notional": 1858667.6,
+      "equity": 1261409.56
     },
     {
-      "net_notional": -1702654.77,
+      "net_notional": -1708231.09,
       "long_notional": 0.0,
-      "short_notional": 1702654.77,
-      "equity": 282492.06
+      "short_notional": 1708231.09,
+      "equity": 276937.08
     },
     {
-      "net_notional": -1424580.64,
+      "net_notional": -1431191.39,
       "long_notional": 0.0,
-      "short_notional": 1424580.64,
-      "equity": 93510.83
+      "short_notional": 1431191.39,
+      "equity": 86917.97
     },
     {
-      "net_notional": -1237264.39,
-      "long_notional": 861879.89,
-      "short_notional": 2099144.28,
-      "equity": 11699797.01
-    },
-    {
-      "net_notional": -1059575.15,
+      "net_notional": -1061272.51,
       "long_notional": 0.0,
-      "short_notional": 1059575.15,
-      "equity": 1974987.11
+      "short_notional": 1061272.51,
+      "equity": 1973303.02
     },
     {
-      "net_notional": -1042735.75,
-      "long_notional": 82997.45,
-      "short_notional": 1125733.19,
-      "equity": 518665.3
+      "net_notional": -1046119.86,
+      "long_notional": 83144.31,
+      "short_notional": 1129264.17,
+      "equity": 515295.03
     },
     {
-      "net_notional": -1009444.38,
+      "net_notional": -1014465.3,
       "long_notional": 0.0,
-      "short_notional": 1009444.38,
-      "equity": 273950.31
+      "short_notional": 1014465.3,
+      "equity": 268942.07
     },
     {
-      "net_notional": -839880.89,
+      "net_notional": -839491.81,
       "long_notional": 0.0,
-      "short_notional": 839880.89,
-      "equity": 786829.57
+      "short_notional": 839491.81,
+      "equity": 787245.35
     },
     {
-      "net_notional": 753049.62,
-      "long_notional": 874692.0,
-      "short_notional": 121642.38,
-      "equity": 600231.21
+      "net_notional": 759075.72,
+      "long_notional": 877562.0,
+      "short_notional": 118486.28,
+      "equity": 606273.32
     },
     {
-      "net_notional": -712858.85,
+      "net_notional": -715174.92,
       "long_notional": 0.0,
-      "short_notional": 712858.85,
-      "equity": 343028.73
+      "short_notional": 715174.92,
+      "equity": 340721.59
     },
     {
-      "net_notional": -625000.0,
+      "net_notional": -626730.0,
       "long_notional": 0.0,
-      "short_notional": 625000.0,
-      "equity": 96617.17
+      "short_notional": 626730.0,
+      "equity": 94895.0
     },
     {
-      "net_notional": -612578.09,
+      "net_notional": -613662.97,
       "long_notional": 0.0,
-      "short_notional": 612578.09,
-      "equity": 183441.6
+      "short_notional": 613662.97,
+      "equity": 182358.66
     },
     {
-      "net_notional": -554346.17,
+      "net_notional": -556680.18,
       "long_notional": 0.0,
-      "short_notional": 554346.17,
-      "equity": 618806.9
+      "short_notional": 556680.18,
+      "equity": 616479.87
     },
     {
-      "net_notional": -529624.77,
+      "net_notional": -529500.42,
       "long_notional": 0.0,
-      "short_notional": 529624.77,
-      "equity": 358181.0
+      "short_notional": 529500.42,
+      "equity": 358324.73
     },
     {
-      "net_notional": 356489.53,
-      "long_notional": 356489.53,
+      "net_notional": 359477.65,
+      "long_notional": 359477.65,
       "short_notional": 0.0,
-      "equity": 36766.87
+      "equity": 39751.21
     },
     {
-      "net_notional": -324607.55,
+      "net_notional": -316306.55,
       "long_notional": 0.0,
-      "short_notional": 324607.55,
-      "equity": 506370.46
+      "short_notional": 316306.55,
+      "equity": 514743.43
     },
     {
-      "net_notional": 166408.8,
-      "long_notional": 166408.88,
+      "net_notional": 168164.2,
+      "long_notional": 168164.28,
       "short_notional": 0.08,
-      "equity": 19396.86
+      "equity": 21150.17
     },
     {
-      "net_notional": -153562.4,
+      "net_notional": -152789.83,
       "long_notional": 0.0,
-      "short_notional": 153562.4,
-      "equity": 274396.2
+      "short_notional": 152789.83,
+      "equity": 275210.65
     },
     {
-      "net_notional": 1639.45,
-      "long_notional": 1639.45,
+      "net_notional": -5458.19,
+      "long_notional": 0.0,
+      "short_notional": 5458.19,
+      "equity": 575487.08
+    },
+    {
+      "net_notional": 1648.31,
+      "long_notional": 1648.31,
       "short_notional": 0.0,
-      "equity": 225.67
+      "equity": 234.52
     },
     {
       "net_notional": 0.0,
@@ -1276,12 +1282,6 @@
       "long_notional": 0.0,
       "short_notional": 0.0,
       "equity": 0.0
-    },
-    {
-      "net_notional": 0.0,
-      "long_notional": 0.0,
-      "short_notional": 0.0,
-      "equity": 575478.91
     },
     {
       "net_notional": 0.0,
