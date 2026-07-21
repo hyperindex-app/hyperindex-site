@@ -153,13 +153,13 @@
         byId('netRegime').textContent = netLabel;
         setSigned('tilt', tilt, (value) => `${value > 0 ? '+' : ''}${(value * 100).toFixed(0)}%`);
         byId('traderBalance').textContent = `${longCount}L / ${shortCount}S`;
-        byId('traderCount').textContent = `${totalCount} traders with open BTC positions`;
+        byId('traderCount').textContent = `${totalCount} traders with open ${asset} positions`;
         setSigned('conviction', conviction, (value) => `${value > 0 ? '+' : ''}${value.toFixed(2)}`);
         byId('grossLong').textContent = fmtUsd(current.long_usd);
         byId('grossShort').textContent = fmtUsd(current.short_usd);
         byId('longCount').textContent = String(longCount);
         byId('shortCount').textContent = String(shortCount);
-        byId('currentSummary').textContent = `The 100 currently hold ${fmtUsd(currentNet, true)} net in BTC. ${shortCount} of ${totalCount} traders with open BTC positions are short, and the aggregate tilt is ${(Math.abs(tilt) * 100).toFixed(0)}% ${tilt < 0 ? 'short' : tilt > 0 ? 'long' : 'balanced'}. This describes positioning—not expected BTC direction.`;
+        byId('currentSummary').textContent = `The 100 currently hold ${fmtUsd(currentNet, true)} net in ${asset}. ${shortCount} of ${totalCount} traders with open ${asset} positions are short, and the aggregate tilt is ${(Math.abs(tilt) * 100).toFixed(0)}% ${tilt < 0 ? 'short' : tilt > 0 ? 'long' : 'balanced'}. This describes positioning rather than an expected price direction.`;
 
         setSigned('change24h', netChange(1, currentNet), (value) => value === null ? '--' : fmtUsd(value, true));
         setSigned('change7d', netChange(7, currentNet), (value) => value === null ? '--' : fmtUsd(value, true));

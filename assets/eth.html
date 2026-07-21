@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETH Smart-Money Positioning on Hyperliquid | HyperIndex</title>
+    <meta name="description" content="Live ETH positioning from 100 screened Hyperliquid traders: aggregate net exposure, long-short balance, conviction, and 90-day history. Updated hourly.">
+    <link rel="canonical" href="https://hyperindex.io/assets/eth.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hyperindex.io/assets/eth.html">
+    <meta property="og:title" content="The current ETH positioning of the HyperIndex 100">
+    <meta property="og:description" content="One live aggregate ETH read from 100 screened Hyperliquid traders, with 90-day context.">
+    <meta property="og:image" content="https://hyperindex.io/images/logo-wordmark.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ETH positioning on Hyperliquid | HyperIndex">
+    <meta name="twitter:description" content="Review the hourly ETH positioning of 100 screened Hyperliquid traders with 90 days of context.">
+    <meta name="twitter:image" content="https://hyperindex.io/images/logo-wordmark.jpg">
+    <link rel="icon" type="image/jpeg" href="../images/logo-icon.jpg">
+    <link rel="apple-touch-icon" href="../images/logo-icon.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Dataset",
+      "name": "HyperIndex ETH Aggregate Positioning",
+      "description": "Hourly aggregate ETH positioning from 100 screened Hyperliquid traders, including net exposure, directional tilt, conviction, and 90-day history.",
+      "url": "https://hyperindex.io/assets/eth.html",
+      "creator": {"@type": "Organization", "name": "HyperIndex", "url": "https://hyperindex.io/"},
+      "temporalCoverage": "2026-04-22/..",
+      "isAccessibleForFree": true,
+      "measurementTechnique": "Aggregate directional positioning"
+    }
+    </script>
+    <style>
+        body { margin: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #06090f; }
+        .mono { font-variant-numeric: tabular-nums; }
+        .range-button[aria-pressed="true"] { background: #2563eb; border-color: #3b82f6; color: white; }
+    </style>
+</head>
+<body class="min-h-screen text-white" data-asset="ETH">
+    <header class="border-b border-white/5 bg-[#06090f]/95 backdrop-blur-md sticky top-0 z-40">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
+            <a href="../" class="flex items-center gap-3" aria-label="HyperIndex home">
+                <img src="../images/logo-icon.jpg" alt="" class="w-9 h-9 rounded-lg">
+                <span class="text-lg font-semibold tracking-tight">Hyper<em class="italic text-blue-400">Index</em></span>
+            </a>
+            <nav class="hidden md:flex items-center gap-5 text-xs font-medium text-slate-400" aria-label="Primary navigation">
+                <a href="../" class="hover:text-white transition-colors">Dashboard</a>
+                <a href="../proof.html" class="hover:text-white transition-colors">Proof</a>
+                <a href="../methodology.html" class="hover:text-white transition-colors">Approach</a>
+                <a href="https://t.me/HyperIndexSignals" target="_blank" rel="noopener" class="hover:text-white transition-colors">Free Signals</a>
+            </nav>
+            <a href="https://t.me/HyperIndexSignalsBot?start=sample_eth" target="_blank" rel="noopener" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-sm font-semibold transition-colors">Get one sample</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="border-b border-white/5">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12 md:py-16 text-center">
+                <div class="inline-flex items-center gap-2 rounded-full border border-violet-400/20 bg-violet-400/[.08] px-3 py-1 text-[11px] font-semibold uppercase tracking-[.16em] text-violet-300 mb-5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-violet-400"></span>
+                    ETH · Updated hourly
+                </div>
+                <h1 class="text-3xl sm:text-5xl font-bold tracking-tight leading-tight">The current ETH positioning of the HyperIndex 100</h1>
+                <p class="mt-5 max-w-3xl mx-auto text-base sm:text-lg text-slate-400 leading-relaxed">
+                    One live aggregate read of how 100 screened Hyperliquid traders are positioned in ETH—net exposure, long/short balance, conviction, and 90 days of context.
+                </p>
+                <div class="mt-7 flex flex-col sm:flex-row items-center justify-center gap-3">
+                    <a href="#current-read" class="w-full sm:w-auto px-5 py-2.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-sm font-semibold text-center transition-colors">See the current read</a>
+                    <a href="https://t.me/HyperIndexSignalsBot?start=sample_eth" target="_blank" rel="noopener" class="w-full sm:w-auto px-5 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-sm font-semibold text-center transition-colors">Get a Core alert sample</a>
+                </div>
+                <p class="mt-4 text-[11px] text-slate-600">Descriptive positioning data—not an ETH price forecast or trading recommendation.</p>
+            </div>
+        </section>
+
+        <section id="current-read" class="max-w-6xl mx-auto px-4 sm:px-6 py-7 space-y-5 scroll-mt-20">
+            <div id="loadError" class="hidden rounded-xl border border-rose-500/25 bg-rose-500/10 px-4 py-3 text-sm text-rose-200" role="alert">
+                ETH positioning could not be loaded. The <a href="../" class="underline">live dashboard</a> remains available.
+            </div>
+
+            <div id="pageContent" class="hidden space-y-5">
+                <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+                    <div>
+                        <div class="text-[10px] uppercase tracking-[.16em] font-semibold text-blue-300">The 100 on ETH</div>
+                        <h2 class="mt-1 text-xl sm:text-2xl font-bold">Current aggregate positioning</h2>
+                    </div>
+                    <div class="text-xs text-slate-500 font-mono mono" id="updatedAt">Loading…</div>
+                </div>
+
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                    <article class="rounded-xl border border-white/[.07] bg-white/[.025] p-4 sm:p-5">
+                        <div class="text-[10px] uppercase tracking-[.14em] text-slate-500 font-semibold">Net ETH position</div>
+                        <div id="netPosition" class="mt-2 text-2xl sm:text-3xl font-bold font-mono mono">--</div>
+                        <div id="netRegime" class="mt-1 text-xs text-slate-500">--</div>
+                    </article>
+                    <article class="rounded-xl border border-white/[.07] bg-white/[.025] p-4 sm:p-5">
+                        <div class="text-[10px] uppercase tracking-[.14em] text-slate-500 font-semibold">Directional tilt</div>
+                        <div id="tilt" class="mt-2 text-2xl sm:text-3xl font-bold font-mono mono">--</div>
+                        <div class="mt-1 text-xs text-slate-500">Net ÷ gross ETH exposure</div>
+                    </article>
+                    <article class="rounded-xl border border-white/[.07] bg-white/[.025] p-4 sm:p-5">
+                        <div class="text-[10px] uppercase tracking-[.14em] text-slate-500 font-semibold">Trader balance</div>
+                        <div id="traderBalance" class="mt-2 text-2xl sm:text-3xl font-bold font-mono mono">--</div>
+                        <div id="traderCount" class="mt-1 text-xs text-slate-500">--</div>
+                    </article>
+                    <article class="rounded-xl border border-white/[.07] bg-white/[.025] p-4 sm:p-5">
+                        <div class="text-[10px] uppercase tracking-[.14em] text-slate-500 font-semibold">Conviction</div>
+                        <div id="conviction" class="mt-2 text-2xl sm:text-3xl font-bold font-mono mono">--</div>
+                        <div class="mt-1 text-xs text-slate-500">Equity-normalized direction</div>
+                    </article>
+                </div>
+
+                <div class="rounded-xl border border-white/[.07] bg-white/[.02] p-5 sm:p-6">
+                    <p id="currentSummary" class="text-sm sm:text-base text-slate-300 leading-relaxed">Loading the current ETH read…</p>
+                    <div class="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                        <div><span class="text-slate-600">Gross long</span><div id="grossLong" class="font-mono mono text-emerald-400 mt-1">--</div></div>
+                        <div><span class="text-slate-600">Gross short</span><div id="grossShort" class="font-mono mono text-rose-400 mt-1">--</div></div>
+                        <div><span class="text-slate-600">Long traders</span><div id="longCount" class="font-mono mono text-slate-300 mt-1">--</div></div>
+                        <div><span class="text-slate-600">Short traders</span><div id="shortCount" class="font-mono mono text-slate-300 mt-1">--</div></div>
+                    </div>
+                </div>
+
+                <section aria-labelledby="historyHeading" class="rounded-xl border border-white/[.07] bg-white/[.02] p-4 sm:p-6">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-5">
+                        <div>
+                            <h2 id="historyHeading" class="text-lg font-semibold">ETH net positioning history</h2>
+                            <p class="text-xs text-slate-500 mt-1">Hourly aggregate notional. Positive is net long; negative is net short.</p>
+                        </div>
+                        <div class="flex items-center gap-1 rounded-lg bg-white/[.03] p-1" aria-label="History range">
+                            <button type="button" class="range-button rounded-md border border-transparent px-3 py-1.5 text-xs text-slate-400" data-days="30" aria-pressed="false">30D</button>
+                            <button type="button" class="range-button rounded-md border border-transparent px-3 py-1.5 text-xs text-slate-400" data-days="60" aria-pressed="false">60D</button>
+                            <button type="button" class="range-button rounded-md border border-transparent px-3 py-1.5 text-xs text-slate-400" data-days="90" aria-pressed="true">90D</button>
+                        </div>
+                    </div>
+                    <div class="h-[300px] sm:h-[360px]"><canvas id="assetChart"></canvas></div>
+                    <p class="mt-3 text-[11px] text-slate-600 leading-relaxed">Tracked-set refreshes can create step changes unrelated to trader movement. Read this as aggregate state history; Core pauses change claims around refresh boundaries.</p>
+                </section>
+
+                <section aria-labelledby="changeHeading">
+                    <div class="mb-3">
+                        <h2 id="changeHeading" class="text-lg font-semibold">What changed?</h2>
+                        <p class="text-xs text-slate-500 mt-1">Net-position changes measured from the nearest saved hourly observation.</p>
+                    </div>
+                    <div class="grid grid-cols-2 lg:grid-cols-5 gap-3">
+                        <article class="rounded-xl border border-white/[.07] bg-white/[.025] p-4"><div class="text-[10px] uppercase tracking-[.12em] text-slate-500">24 hours</div><div id="change24h" class="mt-2 text-lg font-bold font-mono mono">--</div></article>
+                        <article class="rounded-xl border border-white/[.07] bg-white/[.025] p-4"><div class="text-[10px] uppercase tracking-[.12em] text-slate-500">7 days</div><div id="change7d" class="mt-2 text-lg font-bold font-mono mono">--</div></article>
+                        <article class="rounded-xl border border-white/[.07] bg-white/[.025] p-4"><div class="text-[10px] uppercase tracking-[.12em] text-slate-500">30 days</div><div id="change30d" class="mt-2 text-lg font-bold font-mono mono">--</div></article>
+                        <article class="rounded-xl border border-white/[.07] bg-white/[.025] p-4"><div class="text-[10px] uppercase tracking-[.12em] text-slate-500">90D most long</div><div id="mostLong" class="mt-2 text-lg font-bold font-mono mono text-emerald-400">--</div></article>
+                        <article class="rounded-xl border border-white/[.07] bg-white/[.025] p-4"><div class="text-[10px] uppercase tracking-[.12em] text-slate-500">90D most short</div><div id="mostShort" class="mt-2 text-lg font-bold font-mono mono text-rose-400">--</div></article>
+                    </div>
+                </section>
+
+                <section class="grid md:grid-cols-3 gap-3" aria-labelledby="readingHeading">
+                    <div class="md:col-span-3 mb-1">
+                        <h2 id="readingHeading" class="text-lg font-semibold">How to read this page</h2>
+                    </div>
+                    <article class="rounded-xl border border-white/[.07] bg-white/[.02] p-5">
+                        <h3 class="text-sm font-semibold">Net position</h3>
+                        <p class="mt-2 text-xs text-slate-500 leading-relaxed">Aggregate ETH longs minus aggregate ETH shorts across currently open positions. It describes exposure—not intent.</p>
+                    </article>
+                    <article class="rounded-xl border border-white/[.07] bg-white/[.02] p-5">
+                        <h3 class="text-sm font-semibold">Directional tilt</h3>
+                        <p class="mt-2 text-xs text-slate-500 leading-relaxed">Net exposure divided by gross exposure. It shows direction while reducing the distortion of changing position size.</p>
+                    </article>
+                    <article class="rounded-xl border border-white/[.07] bg-white/[.02] p-5">
+                        <h3 class="text-sm font-semibold">Conviction</h3>
+                        <p class="mt-2 text-xs text-slate-500 leading-relaxed">A normalized directional measure. Larger absolute values indicate a stronger aggregate lean; they do not imply better odds.</p>
+                    </article>
+                </section>
+
+                <section class="rounded-xl border border-blue-500/20 bg-blue-500/[.06] p-6 sm:p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+                    <div>
+                        <div class="text-[10px] uppercase tracking-[.16em] font-semibold text-blue-300">ETH between scheduled snapshots</div>
+                        <h2 class="text-xl sm:text-2xl font-bold mt-2">Get notified when the ETH read materially changes</h2>
+                        <p class="text-sm text-slate-400 mt-2 max-w-2xl">Core checks ETH and every tracked asset after each hourly refresh, then stays quiet unless aggregate positioning changes enough to matter.</p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-2 flex-shrink-0">
+                        <a href="https://t.me/HyperIndexSignalsBot?start=sample_eth" target="_blank" rel="noopener" class="px-4 py-2.5 rounded-lg border border-blue-500/25 bg-blue-500/10 hover:bg-blue-500/15 text-sm font-semibold text-center text-blue-100">Get one sample</a>
+                        <a href="../?utm_source=asset_eth&utm_medium=organic&utm_campaign=founding_core&utm_content=bottom_cta#core" class="px-4 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-sm font-semibold text-center">See Core · $14/mo</a>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-white/5 mt-6 py-8 text-center text-slate-600 text-xs">
+        <p class="font-semibold text-slate-400">HyperIndex</p>
+        <p class="mt-1">Aggregate Hyperliquid positioning, updated hourly.</p>
+        <div class="mt-3 flex flex-wrap items-center justify-center gap-4">
+            <a href="../" class="hover:text-slate-300">Dashboard</a>
+            <a href="../proof.html" class="hover:text-slate-300">Proof ledger</a>
+            <a href="../methodology.html" class="hover:text-slate-300">Approach</a>
+            <a href="https://t.me/HyperIndexSignals" target="_blank" rel="noopener" class="hover:text-slate-300">Free Signals</a>
+            <a href="mailto:hyperindexapp@proton.me?subject=HyperIndex%20support" class="hover:text-slate-300">Support</a>
+        </div>
+        <p class="mt-3 text-slate-700">Positioning data only. Not financial advice. Use at your own risk.</p>
+    </footer>
+
+    <script src="asset-page.js" defer></script>
+</body>
+</html>
