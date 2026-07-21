@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, follow">
+    <title>HyperIndex current read</title>
+    <style>
+        :root { color-scheme: dark; font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+        * { box-sizing: border-box; }
+        html, body { width: 100%; height: 100%; margin: 0; }
+        body { min-width: 300px; display: flex; align-items: stretch; background: #06090f; color: #f8fafc; }
+        .card {
+            width: 100%; max-width: 420px; min-height: 200px; height: 100%; max-height: 210px; padding: 16px;
+            display: flex; flex-direction: column; justify-content: space-between;
+            border: 1px solid rgba(148, 163, 184, .16); border-radius: 14px;
+            background: radial-gradient(circle at 78% 5%, rgba(37, 99, 235, .18), transparent 42%), #080c13;
+            overflow: hidden;
+        }
+        header, .links, .read, .context { display: flex; align-items: center; }
+        header { justify-content: space-between; gap: 12px; }
+        .brand { color: #fff; text-decoration: none; font-size: 15px; font-weight: 760; letter-spacing: -.02em; }
+        .brand span { color: #60a5fa; }
+        .cadence { color: #64748b; font-size: 9px; font-weight: 750; letter-spacing: .14em; text-transform: uppercase; }
+        .read { justify-content: space-between; gap: 16px; margin: 12px 0 9px; }
+        .label { margin: 0 0 3px; color: #64748b; font-size: 9px; font-weight: 750; letter-spacing: .13em; text-transform: uppercase; }
+        .heat { margin: 0; font: 760 28px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: -.04em; }
+        .regime { display: inline-block; margin-top: 7px; padding: 3px 7px; border-radius: 999px; font-size: 10px; font-weight: 750; }
+        .net { text-align: right; }
+        .net strong { display: block; font: 700 18px/1.1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: -.03em; }
+        .context { justify-content: space-between; gap: 12px; color: #94a3b8; font-size: 10px; }
+        .context span:last-child { white-space: nowrap; }
+        footer { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; padding-top: 10px; border-top: 1px solid rgba(148, 163, 184, .11); }
+        .updated { margin: 0; color: #475569; font-size: 9px; line-height: 1.3; }
+        .links { justify-content: flex-end; gap: 10px; white-space: nowrap; }
+        .links a { color: #93c5fd; font-size: 10px; font-weight: 700; text-decoration: none; }
+        .links a:hover, .links a:focus { color: #dbeafe; text-decoration: underline; }
+        body[data-tone="short"] .heat { color: #fb7185; }
+        body[data-tone="short"] .regime { color: #fecdd3; background: rgba(244, 63, 94, .14); }
+        body[data-tone="long"] .heat { color: #34d399; }
+        body[data-tone="long"] .regime { color: #a7f3d0; background: rgba(16, 185, 129, .14); }
+        body[data-tone="neutral"] .heat { color: #fcd34d; }
+        body[data-tone="neutral"] .regime { color: #fde68a; background: rgba(245, 158, 11, .14); }
+        @media (max-width: 330px) { .context span:first-child { max-width: 160px; } .links { gap: 7px; } }
+    </style>
+</head>
+<body data-tone="neutral">
+    <main class="card" aria-live="polite">
+        <header>
+            <a class="brand" href="https://hyperindex.io/?utm_source=embed&amp;utm_medium=referral&amp;utm_campaign=current_read&amp;utm_content=brand" target="_blank" rel="noopener">Hyper<span>Index</span></a>
+            <span class="cadence">Hourly positioning read</span>
+        </header>
+        <section class="read" aria-label="Current HyperIndex reading">
+            <div>
+                <p class="label">HEAT score</p>
+                <p class="heat" id="heat">—</p>
+                <span class="regime" id="regime">Loading</span>
+            </div>
+            <div class="net">
+                <p class="label">Net exposure</p>
+                <strong id="net">—</strong>
+            </div>
+        </section>
+        <div class="context">
+            <span id="traderContext">100 screened Hyperliquid traders</span>
+            <span id="shortShare">— gross short</span>
+        </div>
+        <footer>
+            <p class="updated" id="updated">Fetching the current read…<br>Positioning, not prediction.</p>
+            <nav class="links" aria-label="HyperIndex links">
+                <a href="https://t.me/HyperIndexSignalsBot?start=sample_embed" target="_blank" rel="noopener">Core sample</a>
+                <a href="https://hyperindex.io/?utm_source=embed&amp;utm_medium=referral&amp;utm_campaign=current_read&amp;utm_content=card" target="_blank" rel="noopener">View dashboard →</a>
+            </nav>
+        </footer>
+    </main>
+    <script>
+        (() => {
+            'use strict';
+            const byId = (id) => document.getElementById(id);
+            const formatUSD = (raw) => {
+                const value = Number(raw);
+                if (!Number.isFinite(value)) return '—';
+                const sign = value < 0 ? '-' : value > 0 ? '+' : '';
+                const absolute = Math.abs(value);
+                if (absolute >= 1e9) return `${sign}$${(absolute / 1e9).toFixed(2)}B`;
+                if (absolute >= 1e6) return `${sign}$${(absolute / 1e6).toFixed(1)}M`;
+                return `${sign}$${absolute.toFixed(0)}`;
+            };
+            const formatTime = (raw) => new Intl.DateTimeFormat('en-US', {
+                timeZone: 'America/New_York', month: 'short', day: 'numeric',
+                hour: 'numeric', minute: '2-digit', timeZoneName: 'short'
+            }).format(new Date(raw));
+
+            fetch('../data/current_read.json', { cache: 'no-store' })
+                .then((response) => {
+                    if (!response.ok) throw new Error('current_read_unavailable');
+                    return response.json();
+                })
+                .then((read) => {
+                    const score = Number(read.heat_score);
+                    const share = Number(read.short_share);
+                    if (!Number.isFinite(score) || !Number.isFinite(share)) throw new Error('invalid_current_read');
+                    document.body.dataset.tone = score > .05 ? 'long' : score < -.05 ? 'short' : 'neutral';
+                    byId('heat').textContent = `${score > 0 ? '+' : ''}${score.toFixed(4)}`;
+                    byId('regime').textContent = read.regime;
+                    byId('net').textContent = formatUSD(read.net_usd);
+                    byId('traderContext').textContent = `${Number(read.screened_traders)} screened Hyperliquid traders`;
+                    byId('shortShare').textContent = `${Math.round(share * 100)}% gross short`;
+                    byId('updated').innerHTML = `Updated ${formatTime(read.generated_at)}<br>Positioning, not prediction.`;
+                })
+                .catch(() => {
+                    byId('regime').textContent = 'Temporarily unavailable';
+                    byId('shortShare').textContent = 'Refresh shortly';
+                    byId('updated').innerHTML = 'Current read unavailable.<br>Positioning, not prediction.';
+                });
+        })();
+    </script>
+</body>
+</html>

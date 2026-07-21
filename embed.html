@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embed the Current HyperIndex Read</title>
+    <meta name="description" content="Add the hourly HyperIndex positioning read to a newsletter, research page, or community site with a privacy-safe embed or aggregate JSON endpoint.">
+    <link rel="canonical" href="https://hyperindex.io/embed.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hyperindex.io/embed.html">
+    <meta property="og:title" content="Embed the Current HyperIndex Read">
+    <meta property="og:description" content="A compact, hourly-updating read from 100 screened Hyperliquid traders.">
+    <link rel="icon" type="image/jpeg" href="images/logo-icon.jpg">
+    <link rel="stylesheet" href="legal.css">
+    <style>
+        .embed-preview { width: 100%; max-width: 420px; height: 210px; border: 0; border-radius: 14px; background: #080c13; }
+        .code-shell { position: relative; margin: 14px 0; padding: 18px; border: 1px solid rgba(255,255,255,.08); border-radius: 12px; background: #03060a; overflow: auto; }
+        .code-shell code { color: #bfdbfe; font: .78rem/1.65 ui-monospace, SFMono-Regular, Menlo, monospace; white-space: pre-wrap; word-break: break-word; }
+        .copy-button { margin-top: 8px; padding: 9px 13px; border: 1px solid rgba(96,165,250,.3); border-radius: 8px; background: rgba(37,99,235,.12); color: #dbeafe; cursor: pointer; font-weight: 700; }
+        .copy-button:hover { background: rgba(37,99,235,.2); }
+        .endpoint { display: block; padding: 13px 15px; border: 1px solid rgba(255,255,255,.08); border-radius: 10px; background: rgba(255,255,255,.025); font: .78rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; }
+    </style>
+</head>
+<body>
+    <header class="legal-header">
+        <a href="index.html" class="brand"><img src="images/logo-icon.jpg" alt=""><span>Hyper<em>Index</em></span></a>
+    </header>
+    <main class="legal-main">
+        <p class="eyebrow">Free syndication</p>
+        <h1>Put the current read on your site</h1>
+        <div class="legal-meta">Hourly aggregate data · built-in attribution · no wallet identities</div>
+
+        <div class="callout">The card shows the current HEAT regime and aggregate exposure across 100 screened Hyperliquid traders. It updates from a deliberately narrow public record and reveals no wallet-level values, selection diagnostics, or screening logic.</div>
+
+        <h2>Preview</h2>
+        <iframe class="embed-preview" src="embed/heat.html" title="HyperIndex current read" loading="lazy"></iframe>
+
+        <h2>Embed the card</h2>
+        <p>Paste this iframe into any page that accepts HTML. The built-in HyperIndex attribution must remain visible.</p>
+        <div class="code-shell"><code id="embedCode">&lt;iframe src=&quot;https://hyperindex.io/embed/heat.html&quot; width=&quot;360&quot; height=&quot;210&quot; style=&quot;border:0;border-radius:14px&quot; title=&quot;HyperIndex current read&quot; loading=&quot;lazy&quot;&gt;&lt;/iframe&gt;</code></div>
+        <button class="copy-button" id="copyButton" type="button">Copy embed code</button>
+
+        <h2>Use the aggregate JSON</h2>
+        <p>The stable version-one record contains the timestamp, HEAT score and regime, aggregate net and gross exposure, short share, and BTC/ETH/SOL/HYPE aggregate reads. It contains no individual trader or wallet data.</p>
+        <a class="endpoint" href="data/current_read.json">https://hyperindex.io/data/current_read.json</a>
+
+        <h2>Usage terms</h2>
+        <ul>
+            <li>Keep the built-in “HyperIndex” attribution and dashboard link intact.</li>
+            <li>Describe the data as aggregate positioning—not a price prediction or trading recommendation.</li>
+            <li>Do not use the endpoint to imply endorsement, partnership, or independently audited results.</li>
+        </ul>
+
+        <div class="method-cta">
+            <p><strong>Want a weekly section or a custom format?</strong></p>
+            <p>Email <a href="mailto:hyperindexapp@proton.me?subject=HyperIndex%20syndication">hyperindexapp@proton.me</a>. We can provide an attributed positioning block for Hyperliquid newsletters and research pages.</p>
+        </div>
+
+        <div class="legal-note"><p>Return to the <a href="index.html">live dashboard</a>, inspect the <a href="proof.html">proof ledger</a>, or read the <a href="methodology.html">approach and limitations</a>.</p></div>
+    </main>
+    <script>
+        document.getElementById('copyButton').addEventListener('click', async () => {
+            const button = document.getElementById('copyButton');
+            const code = document.getElementById('embedCode');
+            const value = code.textContent.trim();
+            let copied = false;
+            try {
+                if (navigator.clipboard) {
+                    await navigator.clipboard.writeText(value);
+                    copied = true;
+                }
+            } catch (_error) {}
+            if (!copied) {
+                const range = document.createRange();
+                range.selectNodeContents(code);
+                const selection = window.getSelection();
+                selection.removeAllRanges();
+                selection.addRange(range);
+                copied = document.execCommand('copy');
+                selection.removeAllRanges();
+            }
+            button.textContent = copied ? 'Copied' : 'Select and copy the code above';
+            window.setTimeout(() => { button.textContent = 'Copy embed code'; }, 2200);
+        });
+    </script>
+</body>
+</html>
