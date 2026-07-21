@@ -19,6 +19,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://hyperindex.io/proof.html</loc>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://hyperindex.io/privacy.html</loc>
     <lastmod>2026-07-20</lastmod>
     <changefreq>monthly</changefreq>

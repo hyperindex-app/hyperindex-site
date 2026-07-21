@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HyperIndex — Hyperliquid Smart Money Positioning</title>
-    <meta name="description" content="Track the aggregate positioning of HyperIndex's proprietary 100-trader Hyperliquid cohort through one HEAT Score, asset tilts, and private shift alerts.">
+    <meta name="description" content="Track the aggregate positioning of 100 screened Hyperliquid traders through one HEAT Score, asset tilts, and private shift alerts.">
     <link rel="canonical" href="https://hyperindex.io/">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://hyperindex.io/">
@@ -51,6 +51,7 @@
             <div class="flex items-center space-x-4">
                 <nav class="hidden lg:flex items-center gap-5 text-xs font-medium text-slate-400" aria-label="Primary navigation">
                     <a href="#dashboard" class="hover:text-white transition-colors">Dashboard</a>
+                    <a href="proof.html" class="hover:text-white transition-colors">Proof</a>
                     <a href="#how-it-works" class="hover:text-white transition-colors">How it works</a>
                     <a href="methodology.html" class="hover:text-white transition-colors">Approach</a>
                     <a href="https://t.me/HyperIndexSignals" target="_blank" rel="noopener" class="hover:text-white transition-colors">Free Signals</a>
@@ -79,13 +80,13 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-16 text-center">
             <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-500/8 border border-blue-500/15 text-blue-400 text-[11px] font-semibold mb-5 tracking-widest uppercase">
                 <div class="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse-slow"></div>
-                <span>Proprietary Cohort · Updated Hourly</span>
+                <span>100 Screened Traders · Updated Hourly</span>
             </div>
             <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-5 leading-tight tracking-tight text-white max-w-4xl mx-auto">
                 100 traders. One clear read.
             </h1>
             <p class="text-base md:text-lg text-slate-400 max-w-2xl mx-auto mb-8 leading-relaxed">
-                HyperIndex turns the live positions of a proprietary 100-trader cohort into one <span class="text-white font-medium">HEAT Score</span>, asset tilts, and private alerts when the crowd shifts. No wallet hunting. No noise feed.
+                HyperIndex turns the live positions of 100 screened Hyperliquid traders into one <span class="text-white font-medium">HEAT Score</span>, asset tilts, and private alerts when the 100 shift. No wallet hunting. No noise feed.
             </p>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
                 <button onclick="showPricing()" class="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-lg text-sm font-semibold transition-colors">
@@ -115,7 +116,7 @@
                         <h3 class="text-sm font-semibold">Free Signals</h3>
                         <span class="text-[10px] font-mono text-slate-500">10:00 + 18:00 ET</span>
                     </div>
-                    <p class="text-sm text-slate-400 leading-relaxed">Two public snapshots per day for seeing what the cohort looks like now.</p>
+                    <p class="text-sm text-slate-400 leading-relaxed">Two public snapshots per day for seeing how the 100 are positioned now.</p>
                 </div>
                 <div class="rounded-xl border border-blue-500/25 bg-blue-500/[0.06] p-5">
                     <div class="flex items-center justify-between gap-3 mb-3">
@@ -145,7 +146,7 @@
                 </div>
                 <div class="flex items-center space-x-3">
                     <span class="px-2.5 py-0.5 rounded text-xs font-semibold" id="directionBadge">--</span>
-                    <span class="text-slate-500 text-xs font-mono" id="leverageText">L_cohort_total: --</span>
+                    <span class="text-slate-500 text-xs font-mono" id="leverageText">Total Leverage: --</span>
                 </div>
             </div>
 
@@ -189,7 +190,7 @@
         <div class="bg-white/[0.03] rounded-xl p-4 sm:p-6 border border-white/[0.06]">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
                 <div>
-                    <h2 class="text-base font-semibold mb-0.5">Screened Cohort Positioning</h2>
+                    <h2 class="text-base font-semibold mb-0.5">The 100: Positioning</h2>
                     <p class="text-xs text-slate-500">Hourly positioning snapshots with 90-day context</p>
                 </div>
                 <div class="flex flex-col lg:flex-row gap-2 lg:items-center">
@@ -217,7 +218,7 @@
         <div class="bg-white/[0.03] rounded-xl p-4 sm:p-6 border border-white/[0.06]">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
                 <div>
-                    <h2 class="text-base font-semibold mb-0.5">Screened Cohort Distribution</h2>
+                    <h2 class="text-base font-semibold mb-0.5">The 100: Distribution</h2>
                     <p class="text-xs text-slate-500" id="distributionSubtitle">Per-wallet net notional — sorted by absolute size</p>
                 </div>
                 <div class="flex items-center gap-3">
@@ -289,7 +290,7 @@
             <div class="max-w-2xl mb-8">
                 <div class="text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-400 mb-3">The edge</div>
                 <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mb-3">A cleaner read on Hyperliquid positioning.</h2>
-                <p class="text-sm sm:text-base text-slate-400 leading-relaxed">Other tools make you inspect wallets one by one. HyperIndex answers a narrower question: what is a proprietary cohort built for directional signal doing as a group, and what changed enough to matter?</p>
+                <p class="text-sm sm:text-base text-slate-400 leading-relaxed">Other tools make you inspect wallets one by one. HyperIndex answers a narrower question: what are 100 screened directional traders doing as a group, and what changed enough to matter?</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="bg-white/[0.03] rounded-xl p-5 border border-white/[0.06]">
@@ -300,7 +301,7 @@
                 <div class="bg-white/[0.03] rounded-xl p-5 border border-white/[0.06]">
                     <div class="text-blue-400 font-mono text-xs mb-4">02 / DISTILL</div>
                     <h3 class="font-semibold mb-2">Collapse 100 books into one read</h3>
-                    <p class="text-sm text-slate-500 leading-relaxed">The HEAT Score summarizes cohort direction. Asset tilt, net leverage, conviction, and trader counts show where the agreement is concentrated.</p>
+                    <p class="text-sm text-slate-500 leading-relaxed">The HEAT Score summarizes the aggregate direction. Asset tilt, net leverage, conviction, and trader counts show where the agreement is concentrated.</p>
                 </div>
                 <div class="bg-white/[0.03] rounded-xl p-5 border border-white/[0.06]">
                     <div class="text-blue-400 font-mono text-xs mb-4">03 / ALERT</div>
@@ -309,10 +310,10 @@
                 </div>
             </div>
             <div class="mt-5 bg-amber-500/5 border border-amber-500/10 rounded-xl p-4 text-xs text-amber-100/70 leading-relaxed">
-                HyperIndex measures positioning, not future returns. A cohort can be early, wrong, hedged elsewhere, or caught in a squeeze. Use it as context alongside price, funding, liquidity, and your own risk process.
+                HyperIndex measures positioning, not future returns. The 100 can be early, wrong, hedged elsewhere, or caught in a squeeze. Use the read as context alongside price, funding, liquidity, and your own risk process.
             </div>
             <div class="mt-4 text-sm">
-                <a href="methodology.html" class="text-blue-400 hover:text-blue-300 transition-colors">See our approach and latest cohort status →</a>
+                <a href="methodology.html" class="text-blue-400 hover:text-blue-300 transition-colors">See our approach and latest tracker status →</a>
             </div>
         </div>
     </section>
@@ -324,7 +325,7 @@
                 <div>
                     <div class="text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-400 mb-3">A real historical alert replay</div>
                     <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mb-3">See exactly what earns an interruption.</h2>
-                    <p class="text-sm sm:text-base text-slate-400 leading-relaxed mb-4">This is a replay of an actual same-cohort move measured between 11:00 and 12:01 ET on July 14. The values are historical; the format is the concise alert Core uses now.</p>
+                    <p class="text-sm sm:text-base text-slate-400 leading-relaxed mb-4">This is a replay of an actual move measured with the same 100-trader set between 11:00 and 12:01 ET on July 14. The values are historical; the format is the concise alert Core uses now.</p>
                     <div class="space-y-2.5 text-sm text-slate-300 mb-5">
                         <div class="flex gap-2"><span class="text-emerald-400">✓</span><span>The time window and aggregate change are explicit.</span></div>
                         <div class="flex gap-2"><span class="text-emerald-400">✓</span><span>Breadth and conviction stay visible beside the headline move.</span></div>
@@ -385,8 +386,8 @@
         <div class="max-w-3xl mx-auto px-4 sm:px-6 py-12">
             <h2 class="text-xl font-bold mb-6">Questions serious traders ask</h2>
             <div class="space-y-5">
-                <div><h3 class="text-sm font-semibold mb-1.5">How is this different from a whale tracker?</h3><p class="text-sm text-slate-500 leading-relaxed">Whale trackers help you inspect individual wallets. HyperIndex maintains one proprietary cohort and measures its aggregate positioning, reducing single-wallet noise and making regime changes easier to see.</p></div>
-                <div><h3 class="text-sm font-semibold mb-1.5">Why pay when other Hyperliquid trackers are free?</h3><p class="text-sm text-slate-500 leading-relaxed">Free trackers are useful for lookup, raw activity, and alerts you configure yourself. Core is a maintained monitor for one proprietary directional cohort: no wallet list to build, no rules to tune, and no interruption unless the aggregate state materially changes. It is designed to tell you when it is worth opening the other tools.</p></div>
+                <div><h3 class="text-sm font-semibold mb-1.5">How is this different from a whale tracker?</h3><p class="text-sm text-slate-500 leading-relaxed">Whale trackers help you inspect individual wallets. HyperIndex maintains the same screened 100 and measures their aggregate positioning, reducing single-wallet noise and making regime changes easier to see.</p></div>
+                <div><h3 class="text-sm font-semibold mb-1.5">Why pay when other Hyperliquid trackers are free?</h3><p class="text-sm text-slate-500 leading-relaxed">Free trackers are useful for lookup, raw activity, and alerts you configure yourself. Core monitors the 100 for you: no wallet list to build, no rules to tune, and no interruption unless the aggregate state materially changes. It is designed to tell you when it is worth opening the other tools.</p></div>
                 <div><h3 class="text-sm font-semibold mb-1.5">Is the data actually real-time?</h3><p class="text-sm text-slate-500 leading-relaxed">The dashboard refreshes hourly. We say hourly because that is the current production cadence. Core evaluates the full universe immediately after each successful refresh.</p></div>
                 <div><h3 class="text-sm font-semibold mb-1.5">How is Core different from free HyperIndex Signals?</h3><p class="text-sm text-slate-500 leading-relaxed">Signals publishes two scheduled public snapshots per day. Core checks every tracked asset after each hourly refresh and privately interrupts you only when a regime, net exposure, tilt, or conviction change clears a materiality threshold. Same measurement system; much faster monitoring and broader coverage.</p></div>
                 <div><h3 class="text-sm font-semibold mb-1.5">Does HyperIndex tell me what to trade?</h3><p class="text-sm text-slate-500 leading-relaxed">No. It reports aggregated positioning and changes. It does not provide personalized recommendations, execute trades, connect to your wallet, or promise returns.</p></div>
@@ -400,7 +401,7 @@
         <div class="text-center mb-5">
             <div class="text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-400 mb-2">Free weekly brief</div>
             <h2 class="text-xl font-bold mb-1">Read the HEAT Check</h2>
-            <p class="text-sm text-slate-500">One weekly explanation of what changed across the cohort and why it matters.</p>
+            <p class="text-sm text-slate-500">One weekly explanation of what changed across the 100 and why it matters.</p>
         </div>
         <div class="bg-white/[0.03] rounded-xl p-6 sm:p-8 border border-white/[0.06]">
             <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="1d1ff819-ff11-4947-87b4-0b02c90973b5"></script>
@@ -469,9 +470,10 @@
     <!-- Footer -->
     <footer class="border-t border-white/5 mt-8 py-8 text-center text-slate-600 text-xs">
         <p class="font-semibold text-slate-400 mb-0.5">HyperIndex</p>
-        <p>Hourly proprietary-cohort positioning on Hyperliquid</p>
+        <p>Hourly positioning from 100 screened Hyperliquid traders</p>
         <div class="mt-3 flex flex-wrap items-center justify-center gap-4">
             <a href="https://t.me/HyperIndexSignals" target="_blank" rel="noopener" class="hover:text-slate-300">Free Signals</a>
+            <a href="proof.html" class="hover:text-slate-300">Proof</a>
             <a href="methodology.html" class="hover:text-slate-300">Approach</a>
             <a href="mailto:hyperindexapp@proton.me?subject=HyperIndex%20support" class="hover:text-slate-300">Support</a>
             <a href="#newsletter" class="hover:text-slate-300">HEAT Check</a>
@@ -1050,8 +1052,8 @@
                     document.getElementById('shiftTimeframe').textContent = 'resumes after refresh';
                     container.innerHTML = `
                         <div class="border border-blue-500/10 bg-blue-500/5 rounded-lg p-4">
-                            <div class="text-sm font-semibold text-blue-200 mb-1">Cohort refreshed today</div>
-                            <p class="text-xs text-slate-500 leading-relaxed">24-hour movement comparisons are paused across the rebalance boundary so a change in cohort membership is never mislabeled as trader activity.</p>
+                            <div class="text-sm font-semibold text-blue-200 mb-1">The 100 refreshed today</div>
+                            <p class="text-xs text-slate-500 leading-relaxed">24-hour movement comparisons are paused across the rebalance boundary so a change in the tracked set is never mislabeled as trader activity.</p>
                         </div>
                     `;
                     return;
@@ -1210,7 +1212,7 @@
                 if (daysSinceRebal <= 30) {
                     rebalBadge.classList.remove('hidden');
                 }
-                rebalDateEl.textContent = `Cohort rebalanced ${rebalDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
+                rebalDateEl.textContent = `The 100 refreshed ${rebalDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
             }
 
             // Last updated + freshness check

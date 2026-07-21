@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HyperIndex Proof Ledger — Timestamped Hyperliquid Positioning</title>
+    <meta name="description" content="A timestamped archive of positioning snapshots from 100 screened Hyperliquid traders and delayed Core material-change alerts. Descriptive data, not prediction.">
+    <link rel="canonical" href="https://hyperindex.io/proof.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hyperindex.io/proof.html">
+    <meta property="og:title" content="100 traders. Every read. Timestamped.">
+    <meta property="og:description" content="Twice-daily HyperIndex positioning snapshots plus 48-hour-delayed Core alert examples. No cherry-picking or outcome claims.">
+    <meta property="og:image" content="https://hyperindex.io/images/logo-wordmark.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="HyperIndex Proof Ledger">
+    <meta name="twitter:description" content="100 screened traders. Every aggregate read, timestamped. Positioning data only.">
+    <meta name="twitter:image" content="https://hyperindex.io/images/logo-wordmark.jpg">
+    <link rel="icon" type="image/jpeg" href="images/logo-icon.jpg">
+    <link rel="apple-touch-icon" href="images/logo-icon.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Dataset",
+      "name": "HyperIndex Proof Ledger",
+      "description": "Timestamped aggregate positioning snapshots from 100 screened Hyperliquid traders, with delayed material-change alert examples.",
+      "url": "https://hyperindex.io/proof.html",
+      "creator": {"@type": "Organization", "name": "HyperIndex", "url": "https://hyperindex.io/"},
+      "temporalCoverage": "2026-04-22/..",
+      "isAccessibleForFree": true
+    }
+    </script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #06090f;
+        }
+        .mono { font-variant-numeric: tabular-nums; }
+        .ledger-table th {
+            text-transform: uppercase;
+            letter-spacing: .07em;
+            font-size: .65rem;
+            white-space: nowrap;
+        }
+        .ledger-table td { font-variant-numeric: tabular-nums; white-space: nowrap; }
+        .range-button[aria-pressed="true"] {
+            background: rgba(59, 130, 246, .18);
+            border-color: rgba(96, 165, 250, .4);
+            color: #bfdbfe;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-white">
+    <header class="border-b border-white/5 bg-[#06090f]/95 backdrop-blur-md sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
+            <a href="/" class="flex items-center gap-3" aria-label="HyperIndex home">
+                <img src="images/logo-icon.jpg" alt="" class="w-9 h-9 rounded-lg">
+                <span class="text-lg font-semibold tracking-tight">Hyper<em class="italic text-blue-400">Index</em></span>
+            </a>
+            <nav class="hidden md:flex items-center gap-5 text-xs font-medium text-slate-400" aria-label="Primary navigation">
+                <a href="/" class="hover:text-white transition-colors">Dashboard</a>
+                <a href="proof.html" aria-current="page" class="text-white">Proof</a>
+                <a href="methodology.html" class="hover:text-white transition-colors">Approach</a>
+                <a href="https://t.me/HyperIndexSignals" target="_blank" rel="noopener" class="hover:text-white transition-colors">Free Signals</a>
+            </nav>
+            <a href="/?utm_source=proof-ledger&utm_medium=owned&utm_campaign=core" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-sm font-semibold transition-colors">See Core · $14/mo</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="border-b border-white/5">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 py-14 md:py-20 text-center">
+                <div class="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[.16em] text-blue-300 mb-5">
+                    Public proof ledger
+                </div>
+                <h1 class="text-3xl sm:text-5xl font-bold tracking-tight leading-tight">100 traders. Every read. Timestamped.</h1>
+                <p class="mt-5 max-w-2xl mx-auto text-base sm:text-lg text-slate-400 leading-relaxed">
+                    Two aggregate positioning snapshots every day. Real Core alerts appear after a 48-hour delay. No cherry-picking. No outcome claims.
+                </p>
+                <div class="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[11px] text-slate-500">
+                    <span>10:00 + 18:00 ET snapshots</span>
+                    <span>48h Core delay</span>
+                    <span>Positioning data only</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 py-7">
+            <div id="loadError" class="hidden rounded-xl border border-rose-500/25 bg-rose-500/10 px-4 py-3 text-sm text-rose-200" role="alert">
+                The ledger could not be loaded. The live dashboard remains available.
+            </div>
+
+            <div id="ledgerContent" class="hidden space-y-6">
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                    <div class="rounded-xl border border-white/[.07] bg-white/[.025] p-4">
+                        <div class="text-[10px] uppercase tracking-[.14em] text-slate-500 font-semibold">Latest HEAT</div>
+                        <div id="latestHeat" class="mt-2 text-2xl sm:text-3xl font-bold font-mono mono">--</div>
+                        <div id="latestRegime" class="mt-1 text-xs text-slate-400">--</div>
+                    </div>
+                    <div class="rounded-xl border border-white/[.07] bg-white/[.025] p-4">
+                        <div class="text-[10px] uppercase tracking-[.14em] text-slate-500 font-semibold">Net exposure</div>
+                        <div id="latestNet" class="mt-2 text-xl sm:text-2xl font-bold font-mono mono">--</div>
+                        <div id="latestTime" class="mt-1 text-xs text-slate-500">--</div>
+                    </div>
+                    <div class="rounded-xl border border-white/[.07] bg-white/[.025] p-4">
+                        <div class="text-[10px] uppercase tracking-[.14em] text-slate-500 font-semibold">Recorded snapshots</div>
+                        <div id="snapshotCount" class="mt-2 text-xl sm:text-2xl font-bold font-mono mono">--</div>
+                        <div id="oldestTime" class="mt-1 text-xs text-slate-500">--</div>
+                    </div>
+                    <div class="rounded-xl border border-white/[.07] bg-white/[.025] p-4">
+                        <div class="text-[10px] uppercase tracking-[.14em] text-slate-500 font-semibold">Delayed Core examples</div>
+                        <div id="alertCount" class="mt-2 text-xl sm:text-2xl font-bold font-mono mono">--</div>
+                        <div class="mt-1 text-xs text-slate-500">Published after 48h</div>
+                    </div>
+                </div>
+
+                <div class="rounded-xl border border-amber-500/15 bg-amber-500/[.05] p-4">
+                    <div class="text-xs font-semibold text-amber-200 mb-1">Read this honestly</div>
+                    <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                        Records before July 21, 2026 are labeled as backfilled from saved hourly aggregate history. A timestamp proves how the 100 were positioned—not what price would do next. The ledger includes uncomfortable reads as well as useful ones.
+                    </p>
+                </div>
+
+                <section aria-labelledby="snapshotsHeading" class="rounded-xl border border-white/[.07] bg-white/[.02] overflow-hidden">
+                    <div class="p-4 sm:p-5 border-b border-white/[.06] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                        <div>
+                            <h2 id="snapshotsHeading" class="text-lg font-semibold">Positioning snapshots</h2>
+                            <p class="text-xs text-slate-500 mt-1">Aggregate state near each scheduled public Signals slot.</p>
+                        </div>
+                        <div class="flex items-center gap-2" aria-label="Snapshot range">
+                            <button type="button" class="range-button rounded-md border border-white/10 px-3 py-1.5 text-xs text-slate-400" data-limit="14" aria-pressed="true">7d</button>
+                            <button type="button" class="range-button rounded-md border border-white/10 px-3 py-1.5 text-xs text-slate-400" data-limit="60" aria-pressed="false">30d</button>
+                            <button type="button" class="range-button rounded-md border border-white/10 px-3 py-1.5 text-xs text-slate-400" data-limit="all" aria-pressed="false">All</button>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="ledger-table w-full text-left text-xs">
+                            <thead class="text-slate-500 bg-black/20">
+                                <tr>
+                                    <th class="px-4 py-3">Observed ET</th>
+                                    <th class="px-4 py-3">HEAT</th>
+                                    <th class="px-4 py-3">Regime</th>
+                                    <th class="px-4 py-3">Net</th>
+                                    <th class="px-4 py-3">Gross</th>
+                                    <th class="px-4 py-3">Short share</th>
+                                    <th class="px-4 py-3">BTC net</th>
+                                    <th class="px-4 py-3">ETH net</th>
+                                    <th class="px-4 py-3">SOL net</th>
+                                    <th class="px-4 py-3">HYPE net</th>
+                                </tr>
+                            </thead>
+                            <tbody id="snapshotRows" class="divide-y divide-white/[.05]"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section aria-labelledby="alertsHeading" class="rounded-xl border border-white/[.07] bg-white/[.02] overflow-hidden">
+                    <div class="p-4 sm:p-5 border-b border-white/[.06]">
+                        <h2 id="alertsHeading" class="text-lg font-semibold">Delayed Core alerts</h2>
+                        <p class="text-xs text-slate-500 mt-1">Only alerts actually delivered to Core, published after the fixed delay.</p>
+                    </div>
+                    <div id="alertRows" class="divide-y divide-white/[.05]"></div>
+                    <div id="alertEmpty" class="hidden p-6 sm:p-8 text-center">
+                        <p class="text-sm text-slate-300">No Core alert has cleared the 48-hour delay yet.</p>
+                        <p class="text-xs text-slate-500 mt-2">Quiet is expected. Core is designed to interrupt only on material aggregate change.</p>
+                    </div>
+                </section>
+
+                <section class="rounded-xl border border-blue-500/20 bg-blue-500/[.06] p-6 sm:p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+                    <div>
+                        <div class="text-[10px] uppercase tracking-[.16em] font-semibold text-blue-300">Signals shows the state. Core watches the change.</div>
+                        <h2 class="text-xl sm:text-2xl font-bold mt-2">One useful interruption—not another feed.</h2>
+                        <p class="text-sm text-slate-400 mt-2 max-w-2xl">Core checks every tracked asset after each hourly refresh and stays quiet until aggregate positioning changes enough to matter.</p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-2 flex-shrink-0">
+                        <a href="https://t.me/HyperIndexSignals" target="_blank" rel="noopener" class="px-4 py-2.5 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 text-sm font-semibold text-center">Follow free Signals</a>
+                        <a href="/?utm_source=proof-ledger&utm_medium=owned&utm_campaign=core&utm_content=bottom-cta" class="px-4 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-sm font-semibold text-center">See Core · $14/mo</a>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-white/5 mt-6 py-8 text-center text-slate-600 text-xs">
+        <p class="font-semibold text-slate-400">HyperIndex</p>
+        <p class="mt-1">Aggregate Hyperliquid positioning, updated hourly.</p>
+        <div class="mt-3 flex flex-wrap items-center justify-center gap-4">
+            <a href="/" class="hover:text-slate-300">Dashboard</a>
+            <a href="methodology.html" class="hover:text-slate-300">Approach</a>
+            <a href="https://t.me/HyperIndexSignals" target="_blank" rel="noopener" class="hover:text-slate-300">Free Signals</a>
+            <a href="mailto:hyperindexapp@proton.me?subject=HyperIndex%20support" class="hover:text-slate-300">Support</a>
+            <a href="terms.html" class="hover:text-slate-300">Terms</a>
+            <a href="privacy.html" class="hover:text-slate-300">Privacy</a>
+        </div>
+        <p class="mt-3 text-slate-700">Positioning data only. Not financial advice. Use at your own risk.</p>
+    </footer>
+
+    <script>
+        const fmtUSD = (value) => {
+            if (value === null || value === undefined || Number.isNaN(Number(value))) return '--';
+            const number = Number(value);
+            const abs = Math.abs(number);
+            const sign = number < 0 ? '-' : '';
+            if (abs >= 1e9) return sign + '$' + (abs / 1e9).toFixed(2) + 'B';
+            if (abs >= 1e6) return sign + '$' + (abs / 1e6).toFixed(1) + 'M';
+            if (abs >= 1e3) return sign + '$' + (abs / 1e3).toFixed(1) + 'K';
+            return sign + '$' + abs.toFixed(0);
+        };
+
+        const fmtTime = (value) => new Intl.DateTimeFormat('en-US', {
+            timeZone: 'America/New_York',
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric',
+            hour: 'numeric',
+            minute: '2-digit',
+            timeZoneName: 'short'
+        }).format(new Date(value));
+
+        const heatClass = (score) => {
+            if (score > 0.05) return 'text-emerald-400';
+            if (score < -0.05) return 'text-rose-400';
+            return 'text-amber-300';
+        };
+
+        const cell = (text, className = 'px-4 py-3 text-slate-300') => {
+            const td = document.createElement('td');
+            td.className = className;
+            td.textContent = text;
+            return td;
+        };
+
+        let snapshots = [];
+
+        function renderSnapshots(limit) {
+            const body = document.getElementById('snapshotRows');
+            body.replaceChildren();
+            const visible = limit === 'all' ? snapshots : snapshots.slice(0, Number(limit));
+            visible.forEach((row) => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-white/[.025] transition-colors';
+
+                const timeCell = document.createElement('td');
+                timeCell.className = 'px-4 py-3 text-slate-300';
+                const time = document.createElement('div');
+                time.textContent = fmtTime(row.observed_at);
+                timeCell.appendChild(time);
+                if (row.backfilled) {
+                    const badge = document.createElement('span');
+                    badge.className = 'inline-block mt-1 rounded border border-amber-500/20 bg-amber-500/10 px-1.5 py-0.5 text-[9px] uppercase tracking-wider text-amber-300';
+                    badge.textContent = 'Backfilled';
+                    timeCell.appendChild(badge);
+                }
+                tr.appendChild(timeCell);
+                tr.appendChild(cell(Number(row.heat_score).toFixed(4), 'px-4 py-3 font-mono font-semibold ' + heatClass(Number(row.heat_score))));
+                tr.appendChild(cell(row.regime));
+                tr.appendChild(cell(fmtUSD(row.net_usd), 'px-4 py-3 font-mono text-slate-200'));
+                tr.appendChild(cell(fmtUSD(row.gross_usd), 'px-4 py-3 font-mono text-slate-400'));
+                tr.appendChild(cell((Number(row.short_share) * 100).toFixed(1) + '%', 'px-4 py-3 font-mono text-slate-400'));
+                ['btc_net_usd', 'eth_net_usd', 'sol_net_usd', 'hype_net_usd'].forEach((key) => {
+                    tr.appendChild(cell(fmtUSD(row[key]), 'px-4 py-3 font-mono text-slate-400'));
+                });
+                body.appendChild(tr);
+            });
+        }
+
+        function renderAlerts(alerts) {
+            const container = document.getElementById('alertRows');
+            const empty = document.getElementById('alertEmpty');
+            container.replaceChildren();
+            empty.classList.toggle('hidden', alerts.length !== 0);
+            alerts.forEach((alert) => {
+                const article = document.createElement('article');
+                article.className = 'p-5 sm:p-6';
+                const header = document.createElement('div');
+                header.className = 'flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2';
+                const title = document.createElement('h3');
+                title.className = 'text-sm font-semibold';
+                title.textContent = 'Material aggregate change · ' + fmtTime(alert.observed_at);
+                const delay = document.createElement('span');
+                delay.className = 'text-[10px] uppercase tracking-wider text-slate-500';
+                delay.textContent = 'Released after 48h';
+                header.append(title, delay);
+                article.appendChild(header);
+
+                const list = document.createElement('div');
+                list.className = 'mt-4 grid gap-2';
+                alert.assets.forEach((asset) => {
+                    const row = document.createElement('div');
+                    row.className = 'rounded-lg border border-white/[.06] bg-black/20 p-3 text-xs text-slate-400';
+                    row.textContent = asset.asset + ': ' + fmtUSD(asset.net_delta_usd) + ' net change · tilt ' +
+                        (asset.previous_tilt * 100).toFixed(0) + '% → ' + (asset.tilt * 100).toFixed(0) +
+                        '% · ' + asset.traders + ' traders';
+                    list.appendChild(row);
+                });
+                article.appendChild(list);
+                container.appendChild(article);
+            });
+        }
+
+        function setRange(button) {
+            document.querySelectorAll('.range-button').forEach((candidate) => {
+                candidate.setAttribute('aria-pressed', candidate === button ? 'true' : 'false');
+            });
+            renderSnapshots(button.dataset.limit);
+        }
+
+        async function loadLedger() {
+            try {
+                const response = await fetch('data/proof_ledger.json', {cache: 'no-store'});
+                if (!response.ok) throw new Error('ledger request failed');
+                const ledger = await response.json();
+                if (!Array.isArray(ledger.snapshots) || ledger.snapshots.length === 0) {
+                    throw new Error('ledger is empty');
+                }
+                snapshots = ledger.snapshots;
+                const latest = snapshots[0];
+                const oldest = snapshots[snapshots.length - 1];
+                const latestHeat = document.getElementById('latestHeat');
+                latestHeat.textContent = Number(latest.heat_score).toFixed(4);
+                latestHeat.className = 'mt-2 text-2xl sm:text-3xl font-bold font-mono mono ' + heatClass(Number(latest.heat_score));
+                document.getElementById('latestRegime').textContent = latest.regime;
+                document.getElementById('latestNet').textContent = fmtUSD(latest.net_usd);
+                document.getElementById('latestTime').textContent = fmtTime(latest.observed_at);
+                document.getElementById('snapshotCount').textContent = String(snapshots.length);
+                document.getElementById('oldestTime').textContent = 'Since ' + fmtTime(oldest.observed_at);
+                document.getElementById('alertCount').textContent = String(ledger.delayed_core_alerts.length);
+                renderSnapshots(14);
+                renderAlerts(ledger.delayed_core_alerts);
+                document.getElementById('ledgerContent').classList.remove('hidden');
+            } catch (error) {
+                document.getElementById('loadError').classList.remove('hidden');
+            }
+        }
+
+        document.querySelectorAll('.range-button').forEach((button) => {
+            button.addEventListener('click', () => setRange(button));
+        });
+        loadLedger();
+    </script>
+</body>
+</html>
