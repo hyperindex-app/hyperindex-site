@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-22T09:01:06-04:00",
+  "generated_at": "2026-07-22T10:00:38-04:00",
   "ledger_launched_at": "2026-07-21T10:00:00-04:00",
   "timezone": "America/New_York",
   "snapshot_hours_et": [
@@ -10,6 +10,19 @@
   "core_delay_hours": 48,
   "disclosure": "Snapshots before the ledger launch are backfilled from recorded hourly aggregate history. Core examples appear only after the fixed delay. Positioning data is descriptive, not predictive.",
   "snapshots": [
+    {
+      "observed_at": "2026-07-22T10:00:38-04:00",
+      "backfilled": false,
+      "heat_score": -0.266805,
+      "regime": "Net Short",
+      "net_usd": -523865673.87,
+      "gross_usd": 1971674873.79,
+      "short_share": 0.6328,
+      "btc_net_usd": -182591409.32,
+      "eth_net_usd": -75724778.41,
+      "sol_net_usd": -45504442.24,
+      "hype_net_usd": -147895621.2
+    },
     {
       "observed_at": "2026-07-21T18:00:43-04:00",
       "backfilled": false,
