@@ -1,40 +1,40 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T13:01:19-04:00",
-  "heat_score": -0.274125,
+  "generated_at": "2026-07-23T14:00:49-04:00",
+  "heat_score": -0.275227,
   "regime": "Net Short",
   "screened_traders": 100,
-  "net_usd": -529882877.71,
-  "gross_usd": 1958457477.15,
-  "short_share": 0.635281,
+  "net_usd": -528215126.18,
+  "gross_usd": 1951170765.68,
+  "short_share": 0.635359,
   "assets": [
     {
       "asset": "BTC",
-      "net_usd": -202418044.71,
-      "tilt": -0.357,
-      "conviction": -0.2875,
-      "traders": 55
+      "net_usd": -204212433.16,
+      "tilt": -0.3586,
+      "conviction": -0.2796,
+      "traders": 54
     },
     {
       "asset": "ETH",
-      "net_usd": -60634154.98,
-      "tilt": -0.0796,
-      "conviction": -0.0731,
+      "net_usd": -60430983.83,
+      "tilt": -0.0798,
+      "conviction": -0.0587,
       "traders": 52
     },
     {
       "asset": "SOL",
-      "net_usd": -43777783.97,
-      "tilt": -0.5344,
-      "conviction": -0.3584,
+      "net_usd": -43519651.3,
+      "tilt": -0.5338,
+      "conviction": -0.3504,
       "traders": 32
     },
     {
       "asset": "HYPE",
-      "net_usd": -154784895.07,
-      "tilt": -0.3944,
-      "conviction": -0.5061,
-      "traders": 56
+      "net_usd": -152442403.79,
+      "tilt": -0.3924,
+      "conviction": -0.495,
+      "traders": 57
     }
   ],
   "disclosure": "Aggregate positioning is descriptive, not predictive or investment advice.",
