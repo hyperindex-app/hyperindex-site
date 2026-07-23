@@ -1,26 +1,8 @@
 {
-  "generated_at": "2026-07-23T04:01:14.561071",
+  "generated_at": "2026-07-23T05:00:47.622079",
   "source": "trading_cycles_detailed.csv",
   "total_raw_points": 2000,
   "hourly": [
-    {
-      "timestamp": "2026-04-23T19:01:31.477994",
-      "cohort_net_usd": 242758398.55,
-      "gross_long_usd": 722162417.31,
-      "gross_short_usd": 479404018.76,
-      "L_cohort_total": 2.7284,
-      "cohort_total_equity": 440392723.34,
-      "cohort_num_wallets": 100,
-      "btc_net_usd": 227324549.37,
-      "eth_net_usd": 45157032.5,
-      "sol_net_usd": 27646034.18,
-      "hype_net_usd": -47554326.67,
-      "btc_conv": 0.4414,
-      "eth_conv": 0.0626,
-      "sol_conv": 0.3518,
-      "hype_conv": -0.1846,
-      "index_score": 0.199433
-    },
     {
       "timestamp": "2026-04-23T20:01:07.221367",
       "cohort_net_usd": 246017706.87,
@@ -36128,27 +36110,29 @@
       "sol_conv": -0.3781,
       "hype_conv": -0.4429,
       "index_score": -0.272547
+    },
+    {
+      "timestamp": "2026-07-23T05:00:47-04:00",
+      "cohort_rebalanced_at": "2026-07-20",
+      "cohort_rebalanced_timestamp": "2026-07-20T01:26:32-04:00",
+      "cohort_net_usd": -529509570.53,
+      "gross_long_usd": 733427947.78,
+      "gross_short_usd": 1262937518.3,
+      "L_cohort_total": 4.7306,
+      "cohort_total_equity": 422009969.15,
+      "cohort_num_wallets": 100,
+      "btc_net_usd": -194570314.48,
+      "eth_net_usd": -77799091.63,
+      "sol_net_usd": -44999826.97,
+      "hype_net_usd": -143651933.96,
+      "btc_conv": -0.3355,
+      "eth_conv": -0.1777,
+      "sol_conv": -0.3855,
+      "hype_conv": -0.4534,
+      "index_score": -0.277375
     }
   ],
   "recent_24h": [
-    {
-      "timestamp": "2026-07-19T08:00:57.251793",
-      "cohort_net_usd": -399735782.7,
-      "gross_long_usd": 932406219.81,
-      "gross_short_usd": 1332142002.5,
-      "L_cohort_total": 4.6806,
-      "cohort_total_equity": 483813774.32,
-      "cohort_num_wallets": 100,
-      "btc_net_usd": -297012266.12,
-      "eth_net_usd": -65820087.33,
-      "sol_net_usd": -41629914.4,
-      "hype_net_usd": 14726605.02,
-      "btc_conv": -0.511,
-      "eth_conv": -0.0759,
-      "sol_conv": -0.4017,
-      "hype_conv": -0.0578,
-      "index_score": -0.186285
-    },
     {
       "timestamp": "2026-07-19T09:00:35.476348",
       "cohort_net_usd": -398913565.39,
@@ -37990,10 +37974,30 @@
       "sol_conv": -0.3781,
       "hype_conv": -0.4429,
       "index_score": -0.272547
+    },
+    {
+      "timestamp": "2026-07-23T05:00:47-04:00",
+      "cohort_rebalanced_at": "2026-07-20",
+      "cohort_rebalanced_timestamp": "2026-07-20T01:26:32-04:00",
+      "cohort_net_usd": -529509570.53,
+      "gross_long_usd": 733427947.78,
+      "gross_short_usd": 1262937518.3,
+      "L_cohort_total": 4.7306,
+      "cohort_total_equity": 422009969.15,
+      "cohort_num_wallets": 100,
+      "btc_net_usd": -194570314.48,
+      "eth_net_usd": -77799091.63,
+      "sol_net_usd": -44999826.97,
+      "hype_net_usd": -143651933.96,
+      "btc_conv": -0.3355,
+      "eth_conv": -0.1777,
+      "sol_conv": -0.3855,
+      "hype_conv": -0.4534,
+      "index_score": -0.277375
     }
   ],
   "date_range": {
-    "start": "2026-04-23T19:01:31.477994",
-    "end": "2026-07-23T04:01:14-04:00"
+    "start": "2026-04-23T20:01:07.221367",
+    "end": "2026-07-23T05:00:47-04:00"
   }
 }
