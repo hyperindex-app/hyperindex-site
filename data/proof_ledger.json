@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-27T05:00:37-04:00",
+  "generated_at": "2026-07-27T06:01:10-04:00",
   "ledger_launched_at": "2026-07-21T10:00:00-04:00",
   "timezone": "America/New_York",
   "snapshot_hours_et": [
@@ -2193,19 +2193,6 @@
       "eth_net_usd": 77435766.85,
       "sol_net_usd": 22682638.28,
       "hype_net_usd": -83678249.48
-    },
-    {
-      "observed_at": "2026-04-27T19:01:03-04:00",
-      "backfilled": true,
-      "heat_score": 0.097279,
-      "regime": "Net Long",
-      "net_usd": 129116705.03,
-      "gross_usd": 1079293376.77,
-      "short_share": 0.4402,
-      "btc_net_usd": 136647149.39,
-      "eth_net_usd": 25591582.71,
-      "sol_net_usd": 24984772.57,
-      "hype_net_usd": -82763561.64
     }
   ],
   "delayed_core_alerts": []
