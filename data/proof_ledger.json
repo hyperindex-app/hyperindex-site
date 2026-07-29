@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-29T04:00:50-04:00",
+  "generated_at": "2026-07-29T05:00:25-04:00",
   "ledger_launched_at": "2026-07-21T10:00:00-04:00",
   "timezone": "America/New_York",
   "snapshot_hours_et": [
@@ -2195,17 +2195,17 @@
       "hype_net_usd": -96977246.68
     },
     {
-      "observed_at": "2026-04-29T18:00:41-04:00",
+      "observed_at": "2026-04-29T19:01:21-04:00",
       "backfilled": true,
-      "heat_score": 0.20724,
+      "heat_score": 0.207875,
       "regime": "Net Long",
-      "net_usd": 275319952.38,
-      "gross_usd": 1184755352.9,
-      "short_share": 0.3838,
-      "btc_net_usd": 192363346.59,
-      "eth_net_usd": 132069434.45,
-      "sol_net_usd": 11820832.77,
-      "hype_net_usd": -83743649.43
+      "net_usd": 276851195.43,
+      "gross_usd": 1185052014.11,
+      "short_share": 0.3832,
+      "btc_net_usd": 193326874.58,
+      "eth_net_usd": 132207595.7,
+      "sol_net_usd": 11800267.49,
+      "hype_net_usd": -83510534.64
     }
   ],
   "delayed_core_alerts": []
