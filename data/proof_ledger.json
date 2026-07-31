@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-31T15:00:50-04:00",
+  "generated_at": "2026-07-31T16:00:37-04:00",
   "ledger_launched_at": "2026-07-21T10:00:00-04:00",
   "timezone": "America/New_York",
   "snapshot_hours_et": [
@@ -2260,5 +2260,24 @@
       "hype_net_usd": -96977246.68
     }
   ],
-  "delayed_core_alerts": []
+  "delayed_core_alerts": [
+    {
+      "observed_at": "2026-07-29T15:01:18-04:00",
+      "published_after": "2026-07-31T15:01:18-04:00",
+      "heat_score": -0.045265,
+      "regime": "Neutral",
+      "assets": [
+        {
+          "asset": "BTC",
+          "net_delta_usd": 47034657.71,
+          "net_usd": 35838024.05,
+          "previous_tilt": -0.0171,
+          "tilt": 0.0551,
+          "previous_conviction": 0.043,
+          "conviction": 0.0884,
+          "traders": 52
+        }
+      ]
+    }
+  ]
 }
