@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-05T15:00:43-04:00",
+  "generated_at": "2026-08-05T16:01:22-04:00",
   "ledger_launched_at": "2026-07-21T10:00:00-04:00",
   "timezone": "America/New_York",
   "snapshot_hours_et": [
@@ -2391,6 +2391,24 @@
     }
   ],
   "delayed_core_alerts": [
+    {
+      "observed_at": "2026-08-03T15:01:22-04:00",
+      "published_after": "2026-08-05T15:01:22-04:00",
+      "heat_score": 0.126376,
+      "regime": "Net Long",
+      "assets": [
+        {
+          "asset": "SOL",
+          "net_delta_usd": 7469843.89,
+          "net_usd": 1266923.01,
+          "previous_tilt": -0.1411,
+          "tilt": 0.0349,
+          "previous_conviction": -0.13,
+          "conviction": 0.1894,
+          "traders": 21
+        }
+      ]
+    },
     {
       "observed_at": "2026-08-03T02:00:50-04:00",
       "published_after": "2026-08-05T02:00:50-04:00",
